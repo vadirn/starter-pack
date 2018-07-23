@@ -1,0 +1,35 @@
+{
+  "name": "starter-pack-next",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn run clear && yarn run config:dev && yarn run webpack:watch",
+    "clear": "rm -rf build/assets/** && rm -f build/serve.json",
+    "config:dev": "export NODE_ENV=development && export WEBPACK_MODE=development && cp serve_configs/development.json build/serve.json",
+    "webpack:watch": "webpack --config=webpack.config.js --watch",
+    "server:start": "serve ./build"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "eslint": "^5.2.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "history": "^4.7.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "serve": "^9.3.0",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0"
+  }
+}
