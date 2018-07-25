@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractCSSPlugin = require('./webpack/ExtractCSSPlugin');
 
 const mode = process.env.WEBPACK_MODE || 'development';
 const filename = mode === 'development' ? '[name]' : '[name].[chunkhash]';
@@ -26,9 +27,6 @@ module.exports = {
         },
       },
     },
-    runtimeChunk: {
-      name: 'runtime',
-    },
   },
   resolve: {
     modules: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'external_modules')],
@@ -50,6 +48,44 @@ module.exports = {
         include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'external_modules')],
         loader: 'babel-loader',
       },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: require.resolve('./webpack/extractCSSLoader'),
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: 'sp[hash:hex:6]__[local]',
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                require('postcss-smart-import')({
+                  addDependencyTo: webpack,
+                  root: path.resolve(__dirname),
+                  path: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src')],
+                }),
+                require('postcss-custom-media')({}),
+                require('postcss-custom-properties')({ preserve: false }),
+                require('postcss-calc')({}),
+                require('postcss-color-function')({}),
+                require('postcss-discard-comments')({}),
+                require('postcss-remove-root')({}),
+                require('autoprefixer')({
+                  browsers: ['last 2 versions'],
+                }),
+                require('postcss-clean')({}),
+              ],
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -58,5 +94,6 @@ module.exports = {
         NODE_ENV: JSON.stringify(mode),
       },
     }),
+    new ExtractCSSPlugin(),
   ],
 };

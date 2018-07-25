@@ -1,3 +1,4 @@
+import 'assets/css/global.css';
 import 'babel-polyfill';
 import controllers from 'controllers';
 import Router from 'router';

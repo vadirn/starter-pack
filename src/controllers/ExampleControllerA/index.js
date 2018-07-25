@@ -1,5 +1,6 @@
 import React from 'react';
 import { withDeps } from 'main';
+import styles from './styles.css';
 
 function filter(context) {
   console.log(context);
