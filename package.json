@@ -11,16 +11,22 @@
     "server:start": "serve ./build",
     "prettier": "prettier --config .prettierrc.json --write ./src/**/*.js ./external_modules/**/*.js",
     "lint": "eslint . --ext .js --quiet",
-    "precommit": "pretty-quick --staged && yarn run lint"
+    "commit": "git-cz"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && yarn run lint"
+    }
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
+    "commitizen": "^2.10.1",
     "eslint": "^5.2.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.10.0",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0-rc.13",
     "prettier": "^1.13.7",
     "pretty-quick": "^1.6.0"
   },
