@@ -86,7 +86,7 @@ export class App extends React.Component {
   }
 }
 
-export function filterProps(props) {
+export function filterProps({ children, iteratee, ...props }) {
   return React.Children.map(children, child => React.cloneElement(child, iteratee(props)));
 }
 
