@@ -14,7 +14,7 @@ function extractCSSLoader(content) {
   const callback = this.async();
   const publicPath = getPublicPath({}, this);
   const dependencies = [];
-  const name = '[name].[hash].[ext]';
+  const name = '[name].[ext]';
   const outputPath = loaderUtils.interpolateName(this, name, {
     context: this.rootContext,
     content,

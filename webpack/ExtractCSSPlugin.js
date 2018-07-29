@@ -1,16 +1,19 @@
 const { RawSource, ConcatSource } = require('webpack-sources');
-// const crypto = require('crypto');
+const crypto = require('crypto');
 const plugin = 'ExtractCSSPlugin';
 
 module.exports = class ExrtactCSSPlugin {
+  constructor(options = {}) {
+    this.options = Object.assign(
+      {
+        filename: '[name].[chunkhash].css',
+      },
+      options
+    );
+  }
   apply(compiler) {
     compiler.hooks.thisCompilation.tap(plugin, compilation => {
-      let extractedChunks = '';
       compilation.hooks.optimizeAssets.tapAsync(plugin, (assets, cb) => {
-        // console.log({ chunks, modules });
-        // const newAssets =Object.entries(assets).reduce((accum, [filename, source]) => {
-        //   console.log(filename);
-        // }, {});
         const accum = new ConcatSource();
         Object.entries(assets).forEach(([filename, source]) => {
           if (filename.endsWith('.css')) {
@@ -20,11 +23,11 @@ module.exports = class ExrtactCSSPlugin {
             delete assets[filename];
           }
         });
-        // const hash = require('crypto').createHash('sha256');
-        // accum.updateHash(hash);
-        // const digest = hash.digest('hex');
-        // console.log({ source: accum.source, name: `bundle.${digest}.css` });
-        assets['bundle.css'] = accum;
+        const hash = crypto.createHash('md5');
+        accum.updateHash(hash);
+        const digest = hash.digest('hex');
+        const accumFilename = this.options.filename.replace('[name]', 'bundle').replace('[chunkhash]', digest);
+        assets[accumFilename] = accum;
         cb();
       });
     });

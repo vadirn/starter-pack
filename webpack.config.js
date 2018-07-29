@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractCSSPlugin = require('./webpack/ExtractCSSPlugin');
+const ExtractStatsPlugin = require('./webpack/ExtractStatsPlugin');
 
 const mode = process.env.WEBPACK_MODE || 'development';
 const filename = mode === 'development' ? '[name]' : '[name].[chunkhash]';
@@ -94,6 +95,9 @@ module.exports = {
         NODE_ENV: JSON.stringify(mode),
       },
     }),
-    new ExtractCSSPlugin(),
+    new ExtractCSSPlugin({
+      filename: `${filename}.css`,
+    }),
+    new ExtractStatsPlugin(),
   ],
 };
