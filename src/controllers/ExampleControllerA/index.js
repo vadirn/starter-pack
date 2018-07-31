@@ -1,32 +1,30 @@
 import React from 'react';
-import { withDeps } from 'main';
+import { withConsumer } from 'main';
 import styles from './styles.css';
 
-function filter(context) {
-  console.log(context);
+function filter({ plugins }) {
+  const router = plugins.router;
+  const href = router.serializeLocationData('example2');
   return {
     onClick: evt => {
       evt.preventDefault();
-      context.router._history.push('/2');
+      // console.log({ context });
+      // window.history.pushState(null, null, '/2');
+      router.assignLocation(href);
     },
-    text: context.data.foo,
+    href,
   };
 }
 
-class LinkBody extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    return nextProps.text !== this.props.text;
-  }
-  render() {
-    return (
-      <a href="/2" onClick={this.props.onClick}>
-        {this.props.text} {this.props.a}
-      </a>
-    );
-  }
+function LinkBody(props) {
+  return (
+    <a href={props.href} onClick={props.onClick}>
+      Hello!
+    </a>
+  );
 }
 
-const Link = withDeps(LinkBody, filter);
+const Link = withConsumer(LinkBody, filter);
 
 class View extends React.Component {
   render() {
@@ -34,7 +32,7 @@ class View extends React.Component {
       <div>
         <div>Hello world from ExampleControllerA</div>
         <div>
-          <Link a={'a'} />
+          <Link />
         </div>
       </div>
     );
@@ -42,9 +40,6 @@ class View extends React.Component {
 }
 
 export default class ExampleControllerA {
-  constructor(context) {
-    this.context = context;
-  }
   get View() {
     return View;
   }

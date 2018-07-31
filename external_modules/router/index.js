@@ -1,42 +1,89 @@
-import createHistory from 'history/createBrowserHistory';
+import Emitter from 'events';
+import getInstance from 'get-instance';
+
+export class History extends Emitter {
+  constructor() {
+    super();
+    this._handlePopstate = this._handlePopstate.bind(this);
+    window.addEventListener('popstate', this._handlePopstate);
+  }
+  _handlePopstate() {
+    this.emit('change', new URL(window.location.href));
+  }
+  push(urlString) {
+    this.emit('change', new URL(urlString));
+    window.history.pushState(null, null, urlString);
+  }
+  replace(urlString) {
+    this.emit('change', new URL(urlString));
+    window.history.replaceState(null, null, urlString);
+  }
+}
 
 export default class Router {
-  constructor(routes = [], helpers = {}) {
-    this._helpers = helpers;
+  constructor(routes = []) {
     this._routes = routes;
-    this._history = createHistory();
-    this._history.listen((location, action) => {
-      this.handleLocationChange(location, action);
-    });
+    this._history = getInstance('history', History);
+
+    this.handleLocationChange = this.handleLocationChange.bind(this);
+
+    this._history.on('change', this.handleLocationChange);
   }
-  set helpers(helpers) {
-    this._helpers = helpers;
+  push(...routes) {
+    this._routes.push(...routes);
   }
-  handleLocationChange(location, action) {
+  handleLocationChange(url) {
+    console.log('location change!', url);
     // match location.pathname with route
     // call corresponding action
     // pass parsed location and action
-    const route = findRoute(location, this._routes);
+    const route = findRoute(url, this._routes);
     if (route) {
-      route.handler(this._helpers, route, action);
+      route.handler(route);
     } else {
       throw new Error('404');
     }
   }
+  serializeLocationData(routeName, { params, query } = {}) {
+    // Find matching route first
+    const route = findRouteByName(routeName, this._routes);
+    if (!route) {
+      return '';
+    }
+    return `${window.location.protocol}//${window.location.host}${serializeLocationData(route.pattern, {
+      params,
+      query,
+    })}`;
+  }
+  assignLocation(urlString) {
+    this._history.push(urlString);
+  }
+  replaceLocation(urlString) {
+    this._history.replace(urlString);
+  }
+}
+
+export function findRouteByName(routeName, routes) {
+  for (const route of routes) {
+    if (route.name === routeName) {
+      return route;
+    }
+  }
+  return;
 }
 
 export function findRoute(location, routes) {
   for (const route of routes) {
-    const locationData = decomposeLocation(location, route.pattern);
+    const locationData = parseLocation(location, route.pattern);
     if (locationData !== undefined) {
       return { ...route, data: locationData };
     }
   }
-  return undefined;
+  return;
 }
 
 // Returns an object, representing querystring
-export function decomposeQuery(querystring) {
+export function parseQuerystring(querystring) {
   return querystring
     .slice(1)
     .split('&')
@@ -53,7 +100,7 @@ export function decomposeQuery(querystring) {
 }
 
 // Create a querystring from an object representation
-export function composeQuery(query) {
+export function serializeQuery(query) {
   const keys = Object.keys(query);
   if (keys.length === 0) {
     return '';
@@ -67,7 +114,7 @@ export function composeQuery(query) {
 }
 
 // Returns an array of pathname parts
-export function splitPathname(pathname) {
+export function parsePathname(pathname) {
   let uri = decodeURIComponent(pathname);
   if (uri[0] === '/') {
     uri = uri.substr(1);
@@ -80,27 +127,27 @@ export function splitPathname(pathname) {
 
 // Returns an object representation of location
 // Note: route is a pattern
-export function decomposeLocation({ pathname, search }, route) {
-  const routeComponents = splitPathname(route);
-  const pathnameComponents = splitPathname(pathname);
-  const query = decomposeQuery(search);
+export function parseLocation({ pathname, search }, route) {
+  const routeComponents = parsePathname(route);
+  const pathnameComponents = parsePathname(pathname);
+  const query = parseQuerystring(search);
   if (routeComponents.length !== pathnameComponents.length) {
-    return undefined;
+    return;
   }
   let accum = { params: {}, query };
   for (const [routeComponentIdx, routeComponent] of routeComponents.entries()) {
     if (routeComponent[0] === ':') {
       accum.params[routeComponent.slice(1)] = pathnameComponents[routeComponentIdx];
     } else if (routeComponent !== pathnameComponents[routeComponentIdx]) {
-      return undefined;
+      return;
     }
   }
   return accum;
 }
 
 // Composes a url from provided route pattern, params and query objects
-export function composeURL(route, { params = {}, query = {} } = {}) {
-  const routeComponents = splitPathname(route);
+export function serializeLocationData(route, { params = {}, query = {} } = {}) {
+  const routeComponents = parsePathname(route);
   let url = '';
   for (const routeComponent of routeComponents) {
     if (routeComponent[0] === ':') {
@@ -109,6 +156,6 @@ export function composeURL(route, { params = {}, query = {} } = {}) {
       url += `/${routeComponent}`;
     }
   }
-  url += composeQuery(query);
+  url += serializeQuery(query);
   return url;
 }

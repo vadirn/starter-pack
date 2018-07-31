@@ -7,9 +7,6 @@ class View extends React.Component {
 }
 
 export default class ExampleControllerB {
-  constructor(context) {
-    this.context = context;
-  }
   get View() {
     return View;
   }
