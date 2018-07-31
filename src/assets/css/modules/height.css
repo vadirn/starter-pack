@@ -1,0 +1,21 @@
+@import '../variables.css';
+
+:global .h-u {
+  height: var(--box-u);
+}
+
+:global .h-s {
+  height: var(--box-s);
+}
+
+:global .h-m {
+  height: var(--box-m);
+}
+
+:global .h-l {
+  height: var(--box-l);
+}
+
+:global .h-xl {
+  height: var(--box-xl);
+}

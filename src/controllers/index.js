@@ -1,4 +1,3 @@
 export default {
-  ExampleControllerA: () => import('./ExampleControllerA'),
-  ExampleControllerB: () => import('./ExampleControllerB'),
+  Playground: () => import('./Playground'),
 };

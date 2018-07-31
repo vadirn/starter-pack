@@ -1,0 +1,22 @@
+:global .button {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  border: 0;
+  border-radius: inherit;
+  background-color: transparent;
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+:global .button:focus {
+  outline: 0;
+}

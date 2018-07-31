@@ -1,0 +1,54 @@
+:root {
+  /* Font-families */
+  --ff-system: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+  --ff-heading: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+  --ff-mono: Hack, Consolas, 'Lucida Console', monospace;
+
+  /* Font sizes */
+  --unit: calc(8 / 16 * 1rem); /* 8 */
+
+  --fs-s: calc(12 / 16 * 1rem);
+  --lh-s: calc(2 * var(--unit)); /* 16 */
+
+  --fs-m: calc(18 / 16 * 1rem);
+  --lh-m: calc(3 * var(--unit)); /* 24 */
+
+  --fs-l: calc(24 / 16 * 1rem);
+  --lh-l: calc(4 * var(--unit)); /* 32 */
+
+  --fs-xl: calc(36 / 16 * 1rem);
+  --lh-xl: calc(5 * var(--unit)); /* 40 */
+
+  /* Spacing presets */
+  --box-u: var(--unit);
+  --box-s: var(--lh-s);
+  --box-m: var(--lh-m);
+  --box-l: var(--lh-l);
+  --box-xl: var(--lh-xl);
+
+  /* Colors */
+  --color-neutral-0: #ffffff;
+  --color-neutral-1: #f1f1f1;
+  --color-neutral-2: #e3e4e4;
+  --color-neutral-3: #c7c8c9;
+  --color-neutral-4: #919294;
+  --color-neutral-5: #323233;
+
+  --color-accent-1: #fa355b;
+
+  /* Shadows */
+  --shadow-1: 0 2px 4px 1px rgba(0, 0, 0, 0.4);
+
+  /* Border radii */
+  --radius-m: 3px;
+}
+
+@custom-media --mobile-s (min-width: 320px);
+@custom-media --mobile-m (min-width: 375px);
+@custom-media --mobile-l (min-width: 425px);
+@custom-media --tablet (min-width: 768px);
+@custom-media --laptop (min-width: 1024px);
+@custom-media --laptop-l (min-width: 1440px);
+@custom-media --4k (min-width: 2560px);

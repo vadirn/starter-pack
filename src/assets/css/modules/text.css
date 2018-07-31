@@ -1,0 +1,169 @@
+@import '../variables.css';
+
+h1,
+h2,
+h3,
+h4,
+:global(.h1),
+:global(.h2),
+:global(.h3),
+:global(.h4) {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-family: var(--ff-heading);
+}
+
+:global .ff-system {
+  font-family: var(--ff-system);
+}
+
+:global .ff-heading {
+  font-family: var(--ff-heading);
+}
+
+:global .ff-mono {
+  font-family: var(--ff-mono);
+}
+
+h4,
+:global(.fs-s),
+:global(.h4) {
+  font-size: var(--fs-s);
+  line-height: var(--lh-s);
+}
+
+h3,
+:global(.fs-m),
+:global(.h3) {
+  font-size: var(--fs-m);
+  line-height: var(--lh-m);
+}
+
+h2,
+:global(.fs-l),
+:global(.h2) {
+  font-size: var(--fs-l);
+  line-height: var(--lh-l);
+}
+
+h1,
+:global(.fs-xl),
+:global(.h1) {
+  font-size: var(--fs-xl);
+  line-height: var(--lh-xl);
+}
+
+:global .lh-xl {
+  line-height: var(--lh-xl);
+}
+
+:global .lh-l {
+  line-height: var(--lh-l);
+}
+
+:global .lh-m {
+  line-height: var(--lh-m);
+}
+
+:global .lh-s {
+  line-height: var(--lh-s);
+}
+
+ul,
+p,
+ol,
+pre {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+:global .list-dash {
+  margin-left: 3ch;
+}
+
+:global .list-dash li:before {
+  content: '\2014';
+  position: absolute;
+  margin-left: -3ch;
+}
+
+:global .bold {
+  font-weight: bold;
+}
+:global .regular {
+  font-weight: normal;
+}
+:global .italic {
+  font-style: italic;
+}
+:global .normal {
+  font-style: normal;
+}
+
+:global .text-center {
+  text-align: center;
+}
+:global .text-justify {
+  text-align: justify;
+}
+:global .text-left {
+  text-align: left;
+}
+:global .text-right {
+  text-align: right;
+}
+
+:global .line-through {
+  text-decoration: line-through;
+}
+:global .overline {
+  text-decoration: overline;
+}
+:global .underline {
+  text-decoration: underline;
+}
+
+:global .capitalize {
+  text-transform: capitalize;
+}
+:global .lowercase {
+  text-transform: lowercase;
+}
+:global .uppercase {
+  text-transform: uppercase;
+}
+
+:global .pre {
+  white-space: pre;
+}
+:global .pre-line {
+  white-space: pre-line;
+}
+:global .pre-wrap {
+  white-space: pre-wrap;
+}
+:global .nowrap {
+  white-space: nowrap;
+}
+
+:global .truncate {
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:global .valign-top {
+  vertical-align: top;
+}
+
+:global .valign-bottom {
+  vertical-align: bottom;
+}

@@ -1,0 +1,11 @@
+:global .cursor-pointer {
+  cursor: pointer;
+}
+
+:global .cursor-auto {
+  cursor: auto;
+}
+
+:global .user-select-none {
+  user-select: none;
+}

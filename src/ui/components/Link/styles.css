@@ -1,0 +1,14 @@
+@import 'assets/css/variables.css';
+
+.container {
+  color: inherit;
+  text-decoration: none;
+}
+
+.backdrop {
+  border-bottom: 1px solid currentColor;
+}
+
+.container:hover .backdrop {
+  border-bottom-width: 2px;
+}

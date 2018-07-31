@@ -26,6 +26,7 @@ export default class Router {
     this._history = getInstance('history', History);
 
     this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.serializeLocationData = this.serializeLocationData.bind(this);
 
     this._history.on('change', this.handleLocationChange);
   }
@@ -33,13 +34,12 @@ export default class Router {
     this._routes.push(...routes);
   }
   handleLocationChange(url) {
-    console.log('location change!', url);
-    // match location.pathname with route
+    // match url with route
     // call corresponding action
     // pass parsed location and action
     const route = findRoute(url, this._routes);
     if (route) {
-      route.handler(route);
+      route.handler(route.data);
     } else {
       throw new Error('404');
     }

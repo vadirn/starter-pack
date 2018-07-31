@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Router from 'router';
+import FocusObserver from 'focus-observer';
 import controllers from 'controllers';
 import services from 'services';
 import { Session } from 'session';
@@ -23,17 +24,17 @@ class RouterComponent extends React.Component {
     const { plugins, mountController } = this.props;
     plugins.router.push(
       {
-        name: 'example1',
-        pattern: '/',
+        name: 'playground',
+        pattern: '/playground',
         handler() {
-          mountController('ExampleControllerA');
+          mountController('Playground');
         },
       },
       {
-        name: 'example2',
-        pattern: '/2',
-        handler() {
-          mountController('ExampleControllerB');
+        name: 'playground-component',
+        pattern: '/playground/:component',
+        handler({ params }) {
+          mountController('Playground', params);
         },
       }
     );
@@ -65,10 +66,11 @@ const App = session.withProvider(
 );
 
 const router = getInstance('router', Router);
+const focusObserver = getInstance('focus-observer', FocusObserver);
 
 ReactDOM.render(
-  <App modules={{ controllers, services }} plugins={{ router }} />,
+  <App modules={{ controllers, services }} plugins={{ router, focusObserver }} />,
   document.getElementById('mount-point')
 );
 
-export const withConsumer = session.withConsumer;
+export default session.withConsumer;

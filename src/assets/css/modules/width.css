@@ -1,0 +1,21 @@
+@import '../variables.css';
+
+:global .w-u {
+  width: var(--box-u);
+}
+
+:global .w-s {
+  width: var(--box-s);
+}
+
+:global .w-m {
+  width: var(--box-m);
+}
+
+:global .w-l {
+  width: var(--box-l);
+}
+
+:global .w-xl {
+  width: var(--box-xl);
+}

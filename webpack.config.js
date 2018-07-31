@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractCSSPlugin = require('./webpack/ExtractCSSPlugin');
 const ExtractStatsPlugin = require('./webpack/ExtractStatsPlugin');
+const getLocalIdent = require('css-loader/lib/getLocalIdent');
 
 const mode = process.env.WEBPACK_MODE || 'development';
 const filename = mode === 'development' ? '[name]' : '[name].[chunkhash]';
@@ -39,7 +40,7 @@ module.exports = {
       services: path.resolve(__dirname, 'src/services'),
       utils: path.resolve(__dirname, 'src/utils'),
       playground: path.resolve(__dirname, 'src/playground'),
-      main: path.resolve(__dirname, 'src/main'),
+      'with-consumer': path.resolve(__dirname, 'src/main'),
     },
   },
   module: {
@@ -60,7 +61,16 @@ module.exports = {
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: 'sp[hash:hex:6]__[local]',
+              localIdentName: '[hash:8]__[local]',
+              getLocalIdent: (context, localIdentName, localName, options) => {
+                let name = getLocalIdent(context, localIdentName, localName, options);
+                // Make sure classname doesn't start with underscore
+                // if it starts with underscore, than it was padded
+                if (name.startsWith('_')) {
+                  name = 'a' + name.slice(2);
+                }
+                return name;
+              },
             },
           },
           {

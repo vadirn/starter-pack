@@ -17,7 +17,7 @@ export class Session {
         this.passContext = this.passContext.bind(this);
       }
       passContext(value) {
-        return <Component {...Object.assign(filter(value), this.props)} />;
+        return <Component {...Object.assign(filter(value, this.props), this.props)} />;
       }
       render() {
         return <self._context.Consumer>{this.passContext}</self._context.Consumer>;

@@ -1,0 +1,33 @@
+@import '../variables.css';
+
+:global .b {
+  border: 1px solid currentColor;
+}
+
+:global .b-b {
+  border-bottom: 1px solid currentColor;
+}
+
+:global .b-t {
+  border-top: 1px solid currentColor;
+}
+
+:global .b-l {
+  border-left: 1px solid currentColor;
+}
+
+:global .b-r {
+  border-right: 1px solid currentColor;
+}
+
+:global .b-transparent {
+  border-color: transparent;
+}
+
+:global .r-m {
+  border-radius: var(--radius-m);
+}
+
+:global .r-inherit {
+  border-radius: inherit;
+}

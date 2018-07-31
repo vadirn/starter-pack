@@ -1,0 +1,43 @@
+:global .block {
+  display: block;
+}
+
+:global .inline-block {
+  display: inline-block;
+}
+
+:global .inline {
+  display: inline;
+}
+
+:global .flex {
+  display: flex;
+}
+
+:global .none {
+  display: none;
+}
+
+:global .max-content {
+  width: max-content;
+}
+
+:global .float-left {
+  float: left;
+}
+
+:global .float-right {
+  float: right;
+}
+
+:global .float-none {
+  float: none;
+}
+
+:global .overflow-hidden {
+  overflow: hidden;
+}
+
+:global .clear-both {
+  clear: both;
+}

@@ -1,0 +1,47 @@
+@import '../variables.css';
+
+:global .color-neutral-0 {
+  color: var(--color-neutral-0);
+}
+:global .color-neutral-1 {
+  color: var(--color-neutral-1);
+}
+:global .color-neutral-2 {
+  color: var(--color-neutral-2);
+}
+:global .color-neutral-3 {
+  color: var(--color-neutral-3);
+}
+:global .color-neutral-4 {
+  color: var(--color-neutral-4);
+}
+:global .color-neutral-5 {
+  color: var(--color-neutral-5);
+}
+
+:global .color-accent-1 {
+  color: var(--color-accent-1);
+}
+
+:global .bg-neutral-0 {
+  background-color: var(--color-neutral-0);
+}
+:global .bg-neutral-1 {
+  background-color: var(--color-neutral-1);
+}
+:global .bg-neutral-2 {
+  background-color: var(--color-neutral-2);
+}
+:global .bg-neutral-3 {
+  background-color: var(--color-neutral-3);
+}
+:global .bg-neutral-4 {
+  background-color: var(--color-neutral-4);
+}
+:global .bg-neutral-5 {
+  background-color: var(--color-neutral-5);
+}
+
+:global .bg-accent-1 {
+  background-color: var(--color-accent-1);
+}

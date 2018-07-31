@@ -1,0 +1,50 @@
+input,
+textarea,
+button,
+select {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  border: 0;
+  border-radius: inherit;
+  background-color: transparent;
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+}
+
+textarea {
+  max-width: 100%;
+  min-width: 100%;
+}
+
+input::placeholder {
+  color: var(--color-neutral-4);
+}
+
+input:focus,
+textarea:focus,
+button:focus,
+select:focus {
+  outline: 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  animation-name: autofill;
+  animation-fill-mode: both;
+}
+
+@keyframes autofill {
+  to {
+    background-color: transparent;
+  }
+}

@@ -1,0 +1,11 @@
+:global .link {
+  position: relative;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+}
+
+:global .link:focus {
+  outline: 0;
+}

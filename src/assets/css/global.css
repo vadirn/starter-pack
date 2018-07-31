@@ -1,4 +1,23 @@
-.red {
-  color: red;
-  border: 1px solid black;
-}
+@import 'normalize.css';
+@import './modules/box-sizing.css';
+@import './modules/html-body-reset.css';
+
+@import './modules/form.css';
+@import './modules/link.css';
+
+@import './modules/display.css';
+@import './modules/flex.css';
+@import './modules/position.css';
+
+@import './modules/text.css';
+@import './modules/border.css';
+
+@import './modules/padding.css';
+@import './modules/margin.css';
+
+@import './modules/width.css';
+@import './modules/height.css';
+
+@import './modules/color.css';
+@import './modules/opacity.css';
+@import './modules/decoration.css';

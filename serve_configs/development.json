@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/playground/**",
-      "destination": "pages/playground.html"
-    },
-    {
       "source": "/**",
       "destination": "pages/index.html"
     }

@@ -1,0 +1,71 @@
+@import '../variables.css';
+
+:global .m-u-b {
+  margin-bottom: var(--box-u);
+}
+:global .m-u-t {
+  margin-top: var(--box-u);
+}
+:global .m-u-r {
+  margin-right: var(--box-u);
+}
+:global .m-u-l {
+  margin-left: var(--box-u);
+}
+
+:global .m-s-b {
+  margin-bottom: var(--box-s);
+}
+:global .m-s-t {
+  margin-top: var(--box-s);
+}
+:global .m-s-r {
+  margin-right: var(--box-s);
+}
+:global .m-s-l {
+  margin-left: var(--box-s);
+}
+
+:global .m-m-b {
+  margin-bottom: var(--box-m);
+}
+:global .m-m-t {
+  margin-top: var(--box-m);
+}
+:global .m-m-r {
+  margin-right: var(--box-m);
+}
+:global .m-m-l {
+  margin-left: var(--box-m);
+}
+
+:global .m-l-b {
+  margin-bottom: var(--box-l);
+}
+:global .m-l-t {
+  margin-top: var(--box-l);
+}
+:global .m-l-r {
+  margin-right: var(--box-l);
+}
+:global .m-l-l {
+  margin-left: var(--box-l);
+}
+
+:global .m-xl-b {
+  margin-bottom: var(--box-xl);
+}
+:global .m-xl-t {
+  margin-top: var(--box-xl);
+}
+:global .m-xl-r {
+  margin-right: var(--box-xl);
+}
+:global .m-xl-l {
+  margin-left: var(--box-xl);
+}
+
+:global .m-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
