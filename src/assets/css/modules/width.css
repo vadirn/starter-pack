@@ -1,5 +1,9 @@
 @import '../variables.css';
 
+:global .w-content {
+  width: max-content;
+}
+
 :global .w-u {
   width: var(--box-u);
 }

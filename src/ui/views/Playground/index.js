@@ -1,5 +1,5 @@
 import React from 'react';
-// import c from 'classnames';
+import c from 'classnames';
 import s from './styles.css';
 import Link from 'components/Link';
 import components from './components';
@@ -11,13 +11,13 @@ function Playground({ component }) {
   return (
     <div className={s.container}>
       <div className={s.heading}>
-        <h1 className="uppercase text-center">Playground</h1>
+        <h1>PLAYGROUND</h1>
       </div>
       <div>
         <ul>
           {components.order.map(name => {
             return (
-              <li key={name}>
+              <li key={name} className={c('m-u-b', { bold: component === name })}>
                 <Link page="playground-component" params={{ component: name }}>
                   {name}
                 </Link>

@@ -5,10 +5,19 @@
   text-decoration: none;
 }
 
+.container:focus {
+  outline: none;
+}
+
 .backdrop {
   border-bottom: 1px solid currentColor;
 }
 
 .container:hover .backdrop {
+  bottom: -1px;
   border-bottom-width: 2px;
+}
+
+:global(.with-focus-ring) .container:focus .backdrop {
+  background-color: var(--color-neutral-2);
 }

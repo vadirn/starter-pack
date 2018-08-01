@@ -1,0 +1,14 @@
+@import 'assets/css/variables.css';
+
+.backdrop {
+  background-color: var(--color-neutral-0);
+  border: 1px solid currentColor;
+}
+
+input:focus + .backdrop {
+  border: 2px solid currentColor;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+}

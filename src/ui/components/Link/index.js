@@ -6,9 +6,11 @@ import withConsumer from 'with-consumer';
 
 export function Link({ onClick, href, children }) {
   return (
-    <a className={c('relative', s.container)} href={href} onClick={onClick}>
-      <span className="relative z1">{children}</span>
-      <div className={c('absolute top-0 left-0 right-0 bottom-0', s.backdrop)} />
+    <a className={s.container} href={href} onClick={onClick}>
+      <div className="relative inline-block">
+        <div className="relative z1">{children}</div>
+        <div className={c('absolute top-0 left-0 right-0 bottom-0', s.backdrop)} />
+      </div>
     </a>
   );
 }
