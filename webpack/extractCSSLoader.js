@@ -82,7 +82,13 @@ function runModule(src, filename, publicPath = '') {
 function loadModule(request) {
   return new Promise((resolve, reject) => {
     // LoaderContext.loadModule automatically calls LoaderContext.addDependency for all requested modules
-    this.loadModule(request, (err, src) => (err ? reject(err) : resolve(src)));
+    this.loadModule(request, (err, src) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(src);
+      }
+    });
   });
 }
 

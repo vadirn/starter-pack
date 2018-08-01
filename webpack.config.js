@@ -5,7 +5,10 @@ const ExtractStatsPlugin = require('./webpack/ExtractStatsPlugin');
 const getLocalIdent = require('css-loader/lib/getLocalIdent');
 
 const mode = process.env.WEBPACK_MODE || 'development';
-const filename = mode === 'development' ? '[name]' : '[name].[chunkhash]';
+let filename = '[name]';
+if (mode === 'production') {
+  filename = '[name].[chunkhash]';
+}
 
 module.exports = {
   mode,

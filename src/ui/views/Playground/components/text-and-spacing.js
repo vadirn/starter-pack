@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => {
+export default function PlaygroundItem() {
   return (
     <div>
       <h1 className="m-s-b" style={{ backgroundColor: 'rgba(232,58,48,.2)' }}>
@@ -29,16 +29,13 @@ export default () => {
             unit
           </div>
           <div className="fs-s m-u-b">
-            <div className="inline-block valign-top h-s w-s m-u-r" style={{ backgroundColor: 'rgba(232,58,48,.2)' }} />
-            s
+            <div className="inline-block valign-top h-s w-s m-u-r" style={{ backgroundColor: 'rgba(232,58,48,.2)' }} />s
           </div>
           <div className="fs-s m-u-b">
-            <div className="inline-block valign-top h-m w-m m-u-r" style={{ backgroundColor: 'rgba(232,58,48,.2)' }} />
-            m
+            <div className="inline-block valign-top h-m w-m m-u-r" style={{ backgroundColor: 'rgba(232,58,48,.2)' }} />m
           </div>
           <div className="fs-s m-u-b">
-            <div className="inline-block valign-top h-l w-l m-u-r" style={{ backgroundColor: 'rgba(232,58,48,.2)' }} />
-            l
+            <div className="inline-block valign-top h-l w-l m-u-r" style={{ backgroundColor: 'rgba(232,58,48,.2)' }} />l
           </div>
           <div className="fs-s m-u-b">
             <div
@@ -68,4 +65,4 @@ export default () => {
       </div>
     </div>
   );
-};
+}

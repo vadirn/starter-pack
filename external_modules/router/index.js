@@ -91,7 +91,10 @@ export function parseQuerystring(querystring) {
       const queryItem = item.split('=');
       const nextResult = result;
       const key = decodeURIComponent(queryItem[0]);
-      const value = queryItem[1] ? decodeURIComponent(queryItem[1]) : null;
+      let value = null;
+      if (queryItem[1]) {
+        value = decodeURIComponent(queryItem[1]);
+      }
       if (key.length > 0) {
         nextResult[key] = value || key;
       }

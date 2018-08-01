@@ -1,5 +1,5 @@
 function wrap(str, width) {
-  if (str == null) {
+  if (str === null) {
     return str;
   }
   const regexString = `.{1,${width}}([\\s\u200B]+|$)|[^\\s\u200B]+?([\\s\u200B]+|$)`;

@@ -9,7 +9,10 @@ function assign(accum, key, value) {
 
 export function applyDescription(value, description, pathToValue = [], shouldApplyDefaultValues = () => true) {
   // description: { __type, __value, __nullable, __item }
-  const providedType = value === undefined ? 'undefined' : getJsonType(value);
+  let providedType = 'undefined';
+  if (value !== undefined) {
+    providedType = getJsonType(value);
+  }
   const describedValue = description.__value;
   const describedType = description.__type;
   const describedNullability = description.__nullable;
@@ -105,9 +108,9 @@ export default class JsonModel {
   }
   applyTo(value, existingValue) {
     if (existingValue !== undefined) {
-      function shouldApplyDefaultValues(pathToValue) {
+      const shouldApplyDefaultValues = function shouldApplyDefaultValues(pathToValue) {
         return !(existingValue && get(existingValue, pathToValue) !== undefined);
-      }
+      };
       return applyDescription(value, this._description, [], shouldApplyDefaultValues);
     }
     return applyDescription(value, this._description);
