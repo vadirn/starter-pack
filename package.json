@@ -1,8 +1,9 @@
 {
-  "name": "starter-pack-next",
-  "version": "1.0.0",
+  "name": "starter-pack",
+  "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
+  "description": "React app build configuration and design system starter",
   "scripts": {
     "start": "yarn run clear && yarn run config:dev && yarn run webpack:watch",
     "clear": "rm -rf build/assets/** && rm -f build/serve.json",
