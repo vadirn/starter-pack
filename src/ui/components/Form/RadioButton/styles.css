@@ -1,0 +1,54 @@
+@import 'assets/css/variables.css';
+
+.icon-container {
+  width: var(--lh-m);
+  height: var(--lh-m);
+  display: inline-block;
+  vertical-align: top;
+}
+.icon-circle {
+  width: var(--lh-s);
+  height: var(--lh-s);
+  margin-top: calc(3 * var(--px));
+  margin-left: 0;
+}
+.icon-circle-backdrop {
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+
+[type='radio'] {
+  width: auto;
+  height: auto;
+  opacity: 0;
+}
+
+.container:hover .icon-circle-backdrop,
+:global(.with-focus-ring) [type='radio']:focus + .label .icon-circle-backdrop {
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  border-width: 2px;
+}
+
+.icon-circle-fill {
+  border-radius: 50%;
+  transform: scale(0, 0);
+  transition-property: transform;
+  transition-duration: 100ms;
+  transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  background-color: currentColor;
+}
+
+[type='radio']:checked + .label .icon-circle-fill {
+  transform: scale(1, 1);
+}
+
+:global(.with-focus-ring) .container:focus-within .backdrop {
+  background-color: var(--color-neutral-2);
+  top: -1px;
+  bottom: 1px;
+  right: -1px;
+  left: -1px;
+}

@@ -6,7 +6,8 @@
     'Helvetica Neue', sans-serif;
   --ff-mono: Hack, Consolas, 'Lucida Console', monospace;
 
-  /* Font sizes */
+  /* Size units and font sizes */
+  --px: calc(1 / 16 * 1rem); /* 1 */
   --unit: calc(8 / 16 * 1rem); /* 8 */
 
   --fs-s: calc(12 / 16 * 1rem);

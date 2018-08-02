@@ -1,0 +1,18 @@
+@import 'assets/css/variables.css';
+
+.textarea {
+  min-height: calc(var(--lh-m) + 2 * var(--unit));
+}
+
+.backdrop {
+  background-color: var(--color-neutral-0);
+  border: 1px solid currentColor;
+}
+
+textarea:focus + .backdrop {
+  border: 2px solid currentColor;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+}

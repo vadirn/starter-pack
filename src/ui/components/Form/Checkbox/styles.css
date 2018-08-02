@@ -1,0 +1,57 @@
+@import 'assets/css/variables.css';
+
+.icon-container {
+  width: var(--lh-m);
+  height: var(--lh-m);
+  display: inline-block;
+  vertical-align: top;
+}
+.icon-square {
+  width: var(--lh-s);
+  height: var(--lh-s);
+  margin-top: calc(3 * var(--px));
+  margin-left: 0;
+}
+.icon-square-backdrop {
+  border: 1px solid currentColor;
+}
+
+[type='checkbox'] {
+  width: auto;
+  height: auto;
+  opacity: 0;
+}
+
+.container:hover .icon-square-backdrop,
+:global(.with-focus-ring) [type='checkbox']:focus + .label .icon-square-backdrop {
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  border-width: 2px;
+}
+
+.icon-square-tick {
+  transform: scale(0, 0) rotate(0deg);
+  transition-property: transform;
+  transition-duration: 100ms;
+  transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  top: calc(3 * var(--px));
+  left: calc(2 * var(--px));
+  height: calc(6 * var(--px));
+  width: calc(12 * var(--px));
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+}
+
+[type='checkbox']:checked + .label .icon-square-tick {
+  transform: scale(1, 1) rotate(-45deg);
+}
+
+:global(.with-focus-ring) .container:focus-within .backdrop {
+  background-color: var(--color-neutral-2);
+  top: -1px;
+  bottom: 1px;
+  right: -1px;
+  left: -1px;
+}

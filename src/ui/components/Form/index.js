@@ -21,11 +21,24 @@ export default class Form extends React.Component {
   isFieldModified(name) {
     return this.state[name] !== this.props.defaultValues[name];
   }
+  isAnyFieldModified(iteratee) {
+    if (typeof iteratee !== 'function') {
+      throw new Error('isAnyFieldModified expects a function as an argument');
+    }
+    for (const field of Object.keys(this.state)) {
+      if (iteratee(field)) {
+        if (this.isFieldModified(field)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
   handleChange(evt) {
     const { type, name, value, checked } = evt.target;
     if (type === 'checkbox') {
       this.setState(() => {
-        return { [`${name}[${value}]`]: checked };
+        return { [`${name}`]: checked };
       });
     } else {
       this.setState(() => {
