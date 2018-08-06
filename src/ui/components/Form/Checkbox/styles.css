@@ -9,7 +9,7 @@
 .icon-square {
   width: var(--lh-s);
   height: var(--lh-s);
-  margin-top: calc(3 * var(--px));
+  margin-top: calc(4 * var(--px));
   margin-left: 0;
 }
 .icon-square-backdrop {
@@ -51,7 +51,7 @@
 :global(.with-focus-ring) .container:focus-within .backdrop {
   background-color: var(--color-neutral-2);
   top: -1px;
-  bottom: 1px;
+  bottom: -1px;
   right: -1px;
   left: -1px;
 }

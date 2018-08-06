@@ -5,11 +5,15 @@
   "license": "MIT",
   "description": "React app build configuration and design system starter",
   "scripts": {
-    "start": "yarn run clear && yarn run config:dev && yarn run webpack:watch",
-    "clear": "rm -rf build/assets/** && rm -f build/serve.json",
-    "config:dev": "export NODE_ENV=development && export WEBPACK_MODE=development && cp serve_configs/development.json build/serve.json",
+    "start": "yarn run clear && yarn run config:dev && env NODE_ENV=development env WEBPACK_MODE=development yarn run webpack:watch",
+    "build": "yarn run clear && yarn run config:prod && env NODE_ENV=production env WEBPACK_MODE=production yarn run webpack:build && yarn run html:index",
+    "clear": "rm -rf build/assets/** && rm -f build/serve.json && rm -f build/now.json && rm -f build/serve.json",
+    "config:dev": "cp serve_configs/development.json build/serve.json",
+    "config:prod": "cp serve_configs/production.json build/now.json",
     "webpack:watch": "webpack --config=webpack.config.js --watch",
+    "webpack:build": "webpack --config=webpack.config.js",
     "server:start": "serve ./build",
+    "html:index": "node ./ssr/render-index.js",
     "prettier": "prettier --config .prettierrc.json --write ./src/**/*.js ./external_modules/**/*.js",
     "lint": "eslint . --ext .js --quiet",
     "commit": "git-cz"
@@ -22,7 +26,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "commitizen": "^2.10.1",
-    "eslint": "^5.2.0",
+    "eslint": "^5.3.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^2.6.2",
@@ -32,7 +36,7 @@
     "pretty-quick": "^1.6.0"
   },
   "dependencies": {
-    "autoprefixer": "^9.0.2",
+    "autoprefixer": "^9.1.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -48,15 +52,15 @@
     "postcss-custom-media": "^6.0.0",
     "postcss-custom-properties": "^7.0.0",
     "postcss-discard-comments": "^4.0.0",
-    "postcss-import": "^11.1.0",
+    "postcss-import": "^12.0.0",
     "postcss-loader": "^2.1.6",
     "postcss-remove-root": "^0.0.2",
     "postcss-smart-import": "^0.7.6",
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "serve": "^9.4.0",
-    "webpack": "^4.16.3",
+    "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0"
   }
 }

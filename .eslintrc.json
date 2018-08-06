@@ -57,6 +57,12 @@
       }
     ],
     "no-unused-expressions": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "ignoreRestSiblings": true
+      }
+    ],
     "no-use-before-define": [
       "error",
       {
@@ -84,7 +90,12 @@
     "no-ternary": "error",
     "no-plusplus": "error",
     "no-tabs": "error",
-    "react/jsx-no-bind": "error",
+    "react/jsx-no-bind": [
+      "error",
+      {
+        "allowArrowFunctions": true
+      }
+    ],
     "react/jsx-no-target-blank": "error",
     "react/prop-types": "error",
     "react/jsx-pascal-case": "warn",

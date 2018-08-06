@@ -10,17 +10,17 @@
   --px: calc(1 / 16 * 1rem); /* 1 */
   --unit: calc(8 / 16 * 1rem); /* 8 */
 
-  --fs-s: calc(12 / 16 * 1rem);
   --lh-s: calc(2 * var(--unit)); /* 16 */
+  --fs-s: calc(var(--lh-s) - var(--unit) / 2);
 
-  --fs-m: calc(18 / 16 * 1rem);
   --lh-m: calc(3 * var(--unit)); /* 24 */
+  --fs-m: calc(var(--lh-m) - var(--unit));
 
-  --fs-l: calc(24 / 16 * 1rem);
   --lh-l: calc(4 * var(--unit)); /* 32 */
+  --fs-l: calc(var(--lh-l) - var(--unit));
 
-  --fs-xl: calc(36 / 16 * 1rem);
   --lh-xl: calc(5 * var(--unit)); /* 40 */
+  --fs-xl: calc(var(--lh-xl) - var(--unit));
 
   /* Spacing presets */
   --box-u: var(--unit);

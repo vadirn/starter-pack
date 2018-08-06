@@ -15,7 +15,6 @@ export class History extends Emitter {
     window.history.pushState(null, null, urlString);
   }
   replace(urlString) {
-    this.emit('change', new URL(urlString));
     window.history.replaceState(null, null, urlString);
   }
 }

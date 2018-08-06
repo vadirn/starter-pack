@@ -1,0 +1,14 @@
+{
+  "name": "starter-pack",
+  "alias": "starter-pack",
+  "type": "static",
+  "static": {
+    "cleanUrls": true,
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "pages/index.html"
+      }
+    ]
+  }
+}
