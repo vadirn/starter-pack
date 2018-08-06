@@ -10,7 +10,7 @@ export default function Checkbox({ value: val, label, ...props }) {
   }
   return (
     <label className={c('block w-content relative', s.container)}>
-      <input type="checkbox" value={value} {...props} />
+      <input className={s.checkbox} type="checkbox" value={value} {...props} />
       <div className={c('relative z1', s.label)}>
         <div className={s['icon-container']}>
           <div className={c('relative', s['icon-square'])}>

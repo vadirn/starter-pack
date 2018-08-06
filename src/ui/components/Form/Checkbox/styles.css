@@ -16,14 +16,15 @@
   border: 1px solid currentColor;
 }
 
-[type='checkbox'] {
+.checkbox {
+  position: absolute;
   width: auto;
   height: auto;
   opacity: 0;
 }
 
 .container:hover .icon-square-backdrop,
-:global(.with-focus-ring) [type='checkbox']:focus + .label .icon-square-backdrop {
+:global(.with-focus-ring) .checkbox:focus + .label .icon-square-backdrop {
   top: -1px;
   bottom: -1px;
   left: -1px;
@@ -44,7 +45,7 @@
   border-bottom: 2px solid currentColor;
 }
 
-[type='checkbox']:checked + .label .icon-square-tick {
+.checkbox:checked + .label .icon-square-tick {
   transform: scale(1, 1) rotate(-45deg);
 }
 

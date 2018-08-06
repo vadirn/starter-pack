@@ -6,7 +6,6 @@ select {
   display: block;
   margin: 0;
   padding: 0;
-  width: 100%;
   height: auto;
   border: 0;
   border-radius: inherit;
@@ -17,6 +16,16 @@ select {
   font-weight: inherit;
   line-height: inherit;
   -webkit-appearance: none;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+}
+
+button {
+  display: inline;
 }
 
 textarea {

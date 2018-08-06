@@ -4,6 +4,7 @@ import TextField from 'components/Form/TextField';
 import TextareaField from 'components/Form/TextareaField';
 import RadioButton from 'components/Form/RadioButton';
 import Checkbox from 'components/Form/Checkbox';
+import Button from 'components/Form/Button';
 import Errors from 'components/Form/Errors';
 import c from 'classnames';
 
@@ -80,6 +81,7 @@ class ExampleForm extends Form {
             onChange={this.handleChange}
           />
         </div>
+        <Button type="button">Example button</Button>
       </form>
     );
   }

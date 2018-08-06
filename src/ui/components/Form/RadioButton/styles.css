@@ -17,14 +17,15 @@
   border: 1px solid currentColor;
 }
 
-[type='radio'] {
+.radio {
+  position: absolute;
   width: auto;
   height: auto;
   opacity: 0;
 }
 
 .container:hover .icon-circle-backdrop,
-:global(.with-focus-ring) [type='radio']:focus + .label .icon-circle-backdrop {
+:global(.with-focus-ring) .radio:focus + .label .icon-circle-backdrop {
   top: -1px;
   bottom: -1px;
   left: -1px;
@@ -41,7 +42,7 @@
   background-color: currentColor;
 }
 
-[type='radio']:checked + .label .icon-circle-fill {
+.radio:checked + .label .icon-circle-fill {
   transform: scale(1, 1);
 }
 

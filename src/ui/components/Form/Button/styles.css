@@ -1,0 +1,18 @@
+@import 'assets/css/variables.css';
+
+.backdrop {
+  border: 1px solid currentColor;
+}
+
+.container:hover .backdrop {
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  border-width: 2px;
+}
+
+:global(.with-focus-ring) .container:focus .backdrop {
+  background-color: var(--color-neutral-2);
+  border-width: 2px;
+}

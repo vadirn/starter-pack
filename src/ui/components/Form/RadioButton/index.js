@@ -10,7 +10,7 @@ export default function RadioButton({ value: val, label, ...props }) {
   }
   return (
     <label className={c('block w-content relative', s.container)}>
-      <input type="radio" value={value} {...props} />
+      <input className={s.radio} type="radio" value={value} {...props} />
       <div className={c('relative z1', s.label)}>
         <div className={s['icon-container']}>
           <div className={c('relative', s['icon-circle'])}>
