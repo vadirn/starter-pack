@@ -1,5 +1,3 @@
-import { merge } from 'object-state-storage';
-
 import JsonModel from '../index.js';
 
 describe('object-state-model', () => {
@@ -45,7 +43,6 @@ describe('object-state-model', () => {
     expect(() => model.applyTo({ array: { 0: 'some value' } }, {})).toThrow();
     expect(model.applyTo({ array: { 0: {} } }, {})).toEqual({ array: { 0: { a: 'default value' } } });
     expect(model.applyTo({ array: { 0: {} } }, { array: [] })).toEqual({ array: { 0: { a: 'default value' } } });
-    expect(merge({ array: [] }, model.applyTo({ array: { 0: {} } }, {}))).toEqual({ array: [{ a: 'default value' }] });
   });
   test('array of arrays', () => {
     const model = new JsonModel({
@@ -70,11 +67,6 @@ describe('object-state-model', () => {
     });
     expect(model.applyTo({ nestedArray: { 0: { 0: {} } } }, {})).toEqual({
       nestedArray: { 0: { 0: { foo: 'bar' } } },
-    });
-    expect(
-      merge({ nestedArray: [[]] }, model.applyTo({ nestedArray: { 0: { 0: {} } } }, { nestedArray: [[]] }))
-    ).toEqual({
-      nestedArray: [[{ foo: 'bar' }]],
     });
   });
   test('readme example', () => {

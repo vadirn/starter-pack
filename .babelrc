@@ -6,7 +6,11 @@
         "useBuiltIns": "entry",
         "debug": false,
         "targets": {
-          "browsers": [">0.25%", "not ie 11", "not op_mini all"]
+          "browsers": [
+            ">0.25%",
+            "not ie 11",
+            "not op_mini all"
+          ]
         },
         "modules": false,
         "loose": true
@@ -14,5 +18,18 @@
     ],
     "react"
   ],
-  "plugins": ["transform-object-rest-spread", "syntax-dynamic-import"]
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "env"
+        ],
+        "react"
+      ]
+    }
+  },
+  "plugins": [
+    "transform-object-rest-spread",
+    "syntax-dynamic-import"
+  ]
 }

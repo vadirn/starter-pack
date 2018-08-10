@@ -16,12 +16,23 @@
     "html:index": "node ./ssr/render-index.js",
     "prettier": "prettier --config .prettierrc.json --write ./src/**/*.js ./external_modules/**/*.js",
     "lint": "eslint . --ext .js --quiet",
+    "test": "jest",
     "commit": "git-cz"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged && yarn run lint"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --config .prettierrc.json --write",
+      "git add"
+    ],
+    "*.js": [
+      "eslint --quiet",
+      "git add"
+    ]
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
@@ -32,8 +43,8 @@
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.10.0",
     "husky": "^1.0.0-rc.13",
-    "prettier": "^1.14.0",
-    "pretty-quick": "^1.6.0"
+    "jest": "^23.4.2",
+    "prettier": "^1.14.0"
   },
   "dependencies": {
     "autoprefixer": "^9.1.0",
@@ -45,6 +56,8 @@
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.6",
     "css-loader": "^1.0.0",
+    "lint-staged": "^7.2.0",
+    "lodash.get": "^4.4.2",
     "normalize.css": "^8.0.0",
     "postcss-calc": "^6.0.1",
     "postcss-clean": "^1.1.0",

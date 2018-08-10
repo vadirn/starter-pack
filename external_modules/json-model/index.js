@@ -1,5 +1,20 @@
 import get from 'lodash.get';
-import { getJsonType } from 'object-state-storage';
+
+// get json type of an object
+// string, number, object, array, boolean, null
+export function getJsonType(obj) {
+  if (Array.isArray(obj)) {
+    return 'array';
+  } else if (obj === null) {
+    return 'null';
+  } else {
+    const type = (typeof obj).toLowerCase();
+    if (['string', 'number', 'object', 'boolean'].indexOf(type) < 0) {
+      throw new Error(`${type} is not a JSON-compatible type`);
+    }
+    return type;
+  }
+}
 
 function assign(accum, key, value) {
   if (value !== undefined) {
