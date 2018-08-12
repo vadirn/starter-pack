@@ -107,6 +107,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(mode),
       },
+      USE_LOG: JSON.stringify(true),
     }),
     new ExtractCSSPlugin({
       filename: `${filename}.css`,

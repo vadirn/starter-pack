@@ -90,6 +90,7 @@
     "no-ternary": "error",
     "no-plusplus": "error",
     "no-tabs": "error",
+    "no-var": "error",
     "react/jsx-no-bind": [
       "error",
       {
