@@ -1,3 +1,4 @@
+/* global APP_VERSION */
 import 'assets/css/global.css';
 import 'babel-polyfill';
 import React from 'react';
@@ -9,10 +10,14 @@ import controllers from 'controllers';
 import services from 'services';
 import { Session } from 'session';
 import getInstance from 'get-instance';
+import log from 'pretty-log';
 
 if (window.history && 'scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
 }
+
+log(`Good luck, have fun
+build v${APP_VERSION}`);
 
 const session = getInstance('session', Session, {
   container: document.getElementById('mount-point'),

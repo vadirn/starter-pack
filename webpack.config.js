@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ExtractCSSPlugin = require('./webpack/ExtractCSSPlugin');
 const ExtractStatsPlugin = require('./webpack/ExtractStatsPlugin');
 const getLocalIdent = require('css-loader/lib/getLocalIdent');
+const pkg = require('./package.json');
 
 const mode = process.env.WEBPACK_MODE || 'development';
 let filename = '[name]';
@@ -108,6 +109,7 @@ module.exports = {
         NODE_ENV: JSON.stringify(mode),
       },
       USE_LOG: JSON.stringify(true),
+      APP_VERSION: JSON.stringify(pkg.version),
     }),
     new ExtractCSSPlugin({
       filename: `${filename}.css`,

@@ -11,12 +11,17 @@ export default function log(_message, _label) {
   const tracer = new Error();
   const location = parseError(tracer)[1];
   if (location) {
-    logString = `${logString} at ${location.functionName} (${location.fileName}:${location.lineNumber})`;
+    logString = `${logString} at ${location.functionName} (${location.fileName}:${location.lineNumber}:${
+      location.columnNumber
+    })`;
   }
   // Check if _message looks like error
   if (_message && _message.message && (_message.stack || _message.stacktrace)) {
     const stack = parseError(_message)
-      .map(stackLine => `- at ${stackLine.functionName} (${stackLine.fileName}:${stackLine.lineNumber})`)
+      .map(
+        stackLine =>
+          `- at ${stackLine.functionName} (${stackLine.fileName}:${stackLine.lineNumber}:${stackLine.columnNumber})`
+      )
       .join('\n');
     logString = `${logString}\n\n${_message.message}\n\n${stack}\n\n`;
   } else if (typeof _message === 'string') {

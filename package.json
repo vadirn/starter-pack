@@ -43,8 +43,8 @@
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.10.0",
     "husky": "^1.0.0-rc.13",
-    "jest": "^23.4.2",
-    "prettier": "^1.14.0"
+    "jest": "^23.5.0",
+    "prettier": "^1.14.2"
   },
   "dependencies": {
     "autoprefixer": "^9.1.0",
@@ -66,13 +66,13 @@
     "postcss-custom-properties": "^7.0.0",
     "postcss-discard-comments": "^4.0.0",
     "postcss-import": "^12.0.0",
-    "postcss-loader": "^2.1.6",
+    "postcss-loader": "^3.0.0",
     "postcss-remove-root": "^0.0.2",
     "postcss-smart-import": "^0.7.6",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "serve": "^9.4.0",
+    "serve": "^9.4.2",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0"
   }
