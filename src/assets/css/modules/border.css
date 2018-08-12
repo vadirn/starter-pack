@@ -25,7 +25,7 @@
 }
 
 :global .r-m {
-  border-radius: var(--radius-m);
+  border-radius: var(--radius-input);
 }
 
 :global .r-inherit {

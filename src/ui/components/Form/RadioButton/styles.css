@@ -1,16 +1,19 @@
 @import 'assets/css/variables.css';
 
+.container {
+  margin-bottom: var(--unit);
+}
+
 .icon-container {
   width: var(--lh-m);
   height: var(--lh-m);
+  margin-right: var(--unit);
   display: inline-block;
   vertical-align: top;
 }
 .icon-circle {
-  width: var(--lh-s);
-  height: var(--lh-s);
-  margin-top: calc(4 * var(--px));
-  margin-left: 0;
+  width: var(--lh-m);
+  height: var(--lh-m);
 }
 .icon-circle-backdrop {
   border-radius: 50%;

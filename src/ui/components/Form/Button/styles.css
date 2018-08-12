@@ -2,6 +2,7 @@
 
 .backdrop {
   border: 1px solid currentColor;
+  border-radius: var(--radius-input);
 }
 
 .container:hover .backdrop {

@@ -3,6 +3,7 @@
 .backdrop {
   background-color: var(--color-neutral-0);
   border: 1px solid currentColor;
+  border-radius: var(--radius-input);
 }
 
 input:focus + .backdrop {

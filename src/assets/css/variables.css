@@ -43,7 +43,8 @@
   --shadow-1: 0 2px 4px 1px rgba(0, 0, 0, 0.4);
 
   /* Border radii */
-  --radius-m: 3px;
+  --radius-input: 0;
+  --radius-m: calc(4 * var(--px));
 }
 
 @custom-media --mobile-s (min-width: 320px);

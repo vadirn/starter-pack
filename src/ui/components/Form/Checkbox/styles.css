@@ -1,19 +1,23 @@
 @import 'assets/css/variables.css';
 
+.container {
+  margin-bottom: var(--unit);
+}
+
 .icon-container {
   width: var(--lh-m);
   height: var(--lh-m);
+  margin-right: var(--unit);
   display: inline-block;
   vertical-align: top;
 }
 .icon-square {
-  width: var(--lh-s);
-  height: var(--lh-s);
-  margin-top: calc(4 * var(--px));
-  margin-left: 0;
+  width: var(--lh-m);
+  height: var(--lh-m);
 }
 .icon-square-backdrop {
   border: 1px solid currentColor;
+  border-radius: var(--radius-input);
 }
 
 .checkbox {
@@ -37,10 +41,10 @@
   transition-property: transform;
   transition-duration: 100ms;
   transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
-  top: calc(3 * var(--px));
-  left: calc(2 * var(--px));
-  height: calc(6 * var(--px));
-  width: calc(12 * var(--px));
+  top: calc(6 * var(--px));
+  left: calc(3 * var(--px));
+  height: calc(7 * var(--px));
+  width: calc(18 * var(--px));
   border-left: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
 }
