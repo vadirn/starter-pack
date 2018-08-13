@@ -40,7 +40,12 @@ export default class Router {
     if (route) {
       route.handler(route.data);
     } else {
-      throw new Error('404');
+      const notFound = findRouteByName('404', this._routes);
+      if (notFound) {
+        notFound.handler(url);
+      } else {
+        throw new Error('404 route handler not found');
+      }
     }
   }
   serializeLocationData(routeName, { params, query } = {}) {

@@ -41,6 +41,13 @@ class RouterComponent extends React.Component {
         handler({ params }) {
           mountController('Playground', params);
         },
+      },
+      {
+        name: '404',
+        pattern: '/404',
+        handler(url) {
+          log(new Error(`No handler for "${url}"`), '❌ Error');
+        },
       }
     );
 

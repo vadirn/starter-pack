@@ -36,5 +36,9 @@ export default function log(_message, _label) {
   if (console && console.log && USE_LOG) {
     console.log(logString);
   }
-  return logString;
+  return {
+    timestamp,
+    label: _label,
+    message: logString,
+  };
 }
