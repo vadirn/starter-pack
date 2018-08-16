@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import c from 'classnames';
 import s from './styles.css';
-import withConsumer from 'with-consumer';
+import { withConsumer } from 'main';
 
 export function Link({ onClick, href, children }) {
   return (

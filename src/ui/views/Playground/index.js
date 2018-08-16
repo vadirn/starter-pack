@@ -4,7 +4,7 @@ import s from './styles.css';
 import Link from 'components/Link';
 import components from './components';
 import PropTypes from 'prop-types';
-import withConsumer from 'with-consumer';
+import { withConsumer } from 'main';
 
 function Playground({ component }) {
   const Component = components[component] || (() => 'Please select a component');
@@ -38,7 +38,7 @@ Playground.propTypes = {
 };
 
 function filter({ controller }) {
-  return { component: controller._component };
+  return { component: controller && controller._component };
 }
 
 export default withConsumer(Playground, filter);

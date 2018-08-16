@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import log from 'pretty-log';
 
 export class Session {
   constructor() {
     this._context = React.createContext();
 
     this.withConsumer = this.withConsumer.bind(this);
-    this.withContext = this.withProvider.bind(this);
+    this.withProvider = this.withProvider.bind(this);
   }
   // HOC, provides filtered data to a Component
   withConsumer(Component, filter) {
@@ -26,9 +27,11 @@ export class Session {
   }
   withProvider(Component) {
     const self = this;
+
     class WithProvider extends React.Component {
       constructor(props) {
         super(props);
+
         this.contextualize = this.contextualize.bind(this);
         this.mountController = this.mountController.bind(this);
         this.importService = this.importService.bind(this);
@@ -59,13 +62,14 @@ export class Session {
           throw new Error('State producer should be a function');
         }
         this.setState(state => {
+          // Creating a copy, because original state.data is also used by model
           const data = JSON.parse(JSON.stringify(state.data));
           if (model) {
             try {
               // Apply model to original data, in case producer will mutate data
               return { data: model.applyTo(producer(data), state.data) };
             } catch (err) {
-              console.error('State was not modified. Error while applying model: ', err);
+              log(err, '❌ Error while applying model');
               return null;
             }
           } else {

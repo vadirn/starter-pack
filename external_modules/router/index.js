@@ -1,3 +1,4 @@
+/* global IS_BROWSER */
 import Emitter from 'events';
 import getInstance from 'get-instance';
 
@@ -5,17 +6,27 @@ export class History extends Emitter {
   constructor() {
     super();
     this._handlePopstate = this._handlePopstate.bind(this);
-    window.addEventListener('popstate', this._handlePopstate);
+    if (IS_BROWSER) {
+      window.addEventListener('popstate', this._handlePopstate);
+    }
   }
   _handlePopstate() {
     this.emit('change', new URL(window.location.href));
   }
   push(urlString) {
-    this.emit('change', new URL(urlString));
-    window.history.pushState(null, null, urlString);
+    if (urlString.startsWith('/')) {
+      this.emit('change', new URL(window.location.origin + urlString));
+    } else {
+      this.emit('change', new URL(urlString));
+    }
+    if (IS_BROWSER) {
+      window.history.pushState(null, null, urlString);
+    }
   }
   replace(urlString) {
-    window.history.replaceState(null, null, urlString);
+    if (IS_BROWSER) {
+      window.history.replaceState(null, null, urlString);
+    }
   }
 }
 
@@ -32,17 +43,29 @@ export default class Router {
   push(...routes) {
     this._routes.push(...routes);
   }
+  update(...routes) {
+    for (const route of routes) {
+      const idx = this._routes.findIndex(_route => (_route.name = route.name));
+      if (idx > -1) {
+        Object.assign(this._routes[idx], route);
+      }
+    }
+  }
+  findRoute(url) {
+    return findRoute(url, this._routes);
+  }
   handleLocationChange(url) {
+    console.log(url);
     // match url with route
     // call corresponding action
     // pass parsed location and action
     const route = findRoute(url, this._routes);
-    if (route) {
-      route.handler(route.data);
+    if (route && route.handler) {
+      return route.handler(route.data);
     } else {
       const notFound = findRouteByName('404', this._routes);
       if (notFound) {
-        notFound.handler(url);
+        return notFound.handler(url);
       } else {
         throw new Error('404 route handler not found');
       }
@@ -54,10 +77,10 @@ export default class Router {
     if (!route) {
       return '';
     }
-    return `${window.location.protocol}//${window.location.host}${serializeLocationData(route.pattern, {
+    return serializeLocationData(route.pattern, {
       params,
       query,
-    })}`;
+    });
   }
   assignLocation(urlString) {
     this._history.push(urlString);
