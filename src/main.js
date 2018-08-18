@@ -26,14 +26,15 @@ export class RouterComponent extends React.Component {
     super(props);
     const { plugins, mountController } = props;
 
-    this._usePrerenderedComponent = IS_BROWSER;
-
     plugins.router.push(
       {
         name: 'playground',
         pattern: '/playground',
         handler() {
-          mountController('Playground');
+          mountController('Playground', data => {
+            data.component = '';
+            return data;
+          });
         },
       },
       {
@@ -66,10 +67,8 @@ export class RouterComponent extends React.Component {
   render() {
     if (this.props.controller) {
       return <this.props.controller.View />;
-    } else if (this._usePrerenderedComponent) {
-      return this.props.prerenderedHTML.value;
     }
-    return null;
+    return this.props.prerenderedHTML.value;
   }
 }
 
