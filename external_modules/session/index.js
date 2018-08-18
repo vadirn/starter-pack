@@ -57,27 +57,38 @@ export class Session {
           importService: this.importService,
         };
       }
-      _setState(producer, model) {
+      _produceData(state, producer, model) {
         if (typeof producer !== 'function') {
           throw new Error('State producer should be a function');
         }
-        this.setState(state => {
-          // Creating a copy, because original state.data is also used by model
-          const data = JSON.parse(JSON.stringify(state.data));
-          if (model) {
-            try {
-              // Apply model to original data, in case producer will mutate data
-              return { data: model.applyTo(producer(data), state.data) };
-            } catch (err) {
-              log(err, '❌ Error while applying model');
-              return null;
-            }
-          } else {
-            return { data: producer(data) };
+        // Creating a copy, because original state.data is also used by model
+        const data = JSON.parse(JSON.stringify(state.data));
+        const producedData = producer(data);
+        if (producedData === null) {
+          return null;
+        }
+        if (model) {
+          try {
+            // Apply model to original data, in case producer will mutate data
+            return model.applyTo(producedData, state.data);
+          } catch (err) {
+            log(err, '❌ Error while applying model');
+            return null;
           }
+        } else {
+          return producedData;
+        }
+      }
+      _setState(producer) {
+        this.setState(state => {
+          const producedData = this._produceData(state, producer, state.controller && state.controller.model);
+          if (producedData) {
+            return null;
+          }
+          return { data: producedData };
         });
       }
-      async mountController(name, ...args) {
+      async mountController(name, producer = () => null) {
         const mountIdxAtStart = this.state._mountIndex;
         const importModule = this.props.modules.controllers[name];
         try {
@@ -90,7 +101,14 @@ export class Session {
               if (state.controller) {
                 state.controller.dispose();
               }
-              return { controller: new Controller(this.contextualize(state), ...args) };
+              const controller = new Controller();
+              const data = this._produceData(state, producer, controller.model);
+
+              const newState = { controller };
+              if (data) {
+                newState.data = data;
+              }
+              return newState;
             }
             return null;
           });

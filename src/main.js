@@ -40,7 +40,10 @@ export class RouterComponent extends React.Component {
         name: 'playground-component',
         pattern: '/playground/:component',
         handler({ params }) {
-          mountController('Playground', params);
+          mountController('Playground', data => {
+            data.component = params.component;
+            return data;
+          });
         },
       },
       {
@@ -109,13 +112,11 @@ if (IS_BROWSER) {
     <div dangerouslySetInnerHTML={{ __html: mountPoint.cloneNode(true).innerHTML }} />
   );
   ReactDOM.render(
-    <React.StrictMode>
-      <App
-        prerenderedHTML={prerenderedHTML}
-        modules={{ controllers: _controllers, services: _services }}
-        plugins={{ router, focusObserver }}
-      />
-    </React.StrictMode>,
+    <App
+      prerenderedHTML={prerenderedHTML}
+      modules={{ controllers: _controllers, services: _services }}
+      plugins={{ router, focusObserver }}
+    />,
     mountPoint
   );
 }

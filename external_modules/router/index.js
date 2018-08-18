@@ -55,7 +55,6 @@ export default class Router {
     return findRoute(url, this._routes);
   }
   handleLocationChange(url) {
-    console.log(url);
     // match url with route
     // call corresponding action
     // pass parsed location and action

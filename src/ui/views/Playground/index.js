@@ -37,8 +37,8 @@ Playground.propTypes = {
   component: PropTypes.string,
 };
 
-function filter({ controller }) {
-  return { component: controller && controller._component };
+function filter({ data }) {
+  return { component: data.component };
 }
 
 export default withConsumer(Playground, filter);
