@@ -59,6 +59,7 @@ export class RouterComponent extends React.Component {
       this.props.prerenderedHTML.clear();
     }
   }
+  // TODO: waiting for React suspense
   render() {
     if (this.props.controller) {
       return <this.props.controller.View />;
@@ -75,6 +76,7 @@ RouterComponent.propTypes = {
   controller: PropTypes.shape({
     View: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   }),
+  prerenderedHTML: PropTypes.any,
 };
 
 export const App = session.withProvider(
@@ -107,11 +109,13 @@ if (IS_BROWSER) {
     <div dangerouslySetInnerHTML={{ __html: mountPoint.cloneNode(true).innerHTML }} />
   );
   ReactDOM.render(
-    <App
-      prerenderedHTML={prerenderedHTML}
-      modules={{ controllers: _controllers, services: _services }}
-      plugins={{ router, focusObserver }}
-    />,
+    <React.StrictMode>
+      <App
+        prerenderedHTML={prerenderedHTML}
+        modules={{ controllers: _controllers, services: _services }}
+        plugins={{ router, focusObserver }}
+      />
+    </React.StrictMode>,
     mountPoint
   );
 }
