@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import c from 'classnames';
 import s from './styles.css';
 
-export default function Errors({ value }) {
+export default function Errors({ value, className }) {
   if (value === undefined || (value && value.length === 0)) {
     return null;
   }
   return (
-    <ul className={c('fs-s m-u-t', s.list)}>
+    <ul className={c('text-caption m-u-t color-accent-1-dark', s.list, className)}>
       {value.map((err, idx) => (
         <li key={idx.toString()}>{err}</li>
       ))}
@@ -18,4 +18,5 @@ export default function Errors({ value }) {
 
 Errors.propTypes = {
   value: PropTypes.arrayOf(PropTypes.string),
+  className: PropTypes.string,
 };

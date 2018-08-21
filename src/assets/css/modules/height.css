@@ -19,3 +19,7 @@
 :global .h-xl {
   height: var(--box-xl);
 }
+
+:global .h-xxl {
+  height: var(--box-xxl);
+}

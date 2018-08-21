@@ -48,24 +48,24 @@
   flex: none;
 }
 
-:global .grow-1 {
+:global .flex-grow-1 {
   flex-grow: 1;
   flex-basis: 0;
 }
-:global .grow-2 {
+:global .flex-grow-2 {
   flex-grow: 1;
   flex-basis: 0;
 }
 
-:global .self-center {
+:global .flex-self-center {
   align-self: center;
 }
-:global .self-start {
+:global .flex-self-start {
   align-self: flex-start;
 }
-:global .self-end {
+:global .flex-self-end {
   align-self: flex-end;
 }
-:global .self-baseline {
+:global .flex-self-baseline {
   align-self: baseline;
 }

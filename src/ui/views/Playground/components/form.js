@@ -1,11 +1,11 @@
 import React from 'react';
-import Form from 'components/Form';
-import TextField from 'components/Form/TextField';
-import TextareaField from 'components/Form/TextareaField';
-import RadioButton from 'components/Form/RadioButton';
-import Checkbox from 'components/Form/Checkbox';
-import Button from 'components/Form/Button';
-import Errors from 'components/Form/Errors';
+import Form from 'components/Controls/Form';
+import TextField from 'components/Controls/TextField';
+import TextareaField from 'components/Controls/TextareaField';
+import RadioButton from 'components/Controls/RadioButton';
+import Checkbox from 'components/Controls/Checkbox';
+import Button from 'components/Controls/Button';
+import Errors from 'components/Controls/Errors';
 import c from 'classnames';
 
 class ExampleForm extends Form {
@@ -21,9 +21,9 @@ class ExampleForm extends Form {
     // const { defaultValues } = this.props;
     return (
       <form onSubmit={this.handleSubmit} style={{ width: '320px' }}>
-        <div className="m-s-b">
-          <label htmlFor="example-form-text">
-            <span className={c({ bold: this.isFieldModified('text') })}>Text input</span>
+        <div className="m-m-b bg-debug">
+          <label htmlFor="example-form-text" className="bg-debug">
+            <div className={c('m-u-b bg-debug')}>Text input</div>
             <TextField
               id="example-form-text"
               name="text"
@@ -32,11 +32,11 @@ class ExampleForm extends Form {
               autoComplete="off"
             />
           </label>
-          <Errors value={this.props.fieldErrors['text']} />
+          <Errors className="bg-debug" value={this.props.fieldErrors['text']} />
         </div>
-        <div className="m-s-b">
+        <div className="m-m-b">
           <label htmlFor="example-form-textarea">
-            <span className={c({ bold: this.isFieldModified('textarea') })}>Textarea</span>
+            <div className={c('m-u-b')}>Textarea</div>
             <TextareaField
               id="example-form-textarea"
               name="textarea"
@@ -45,8 +45,8 @@ class ExampleForm extends Form {
             />
           </label>
         </div>
-        <div className="m-s-b">
-          <span className={c({ bold: this.isFieldModified('radio') })}>Radio</span>
+        <div className="m-m-b">
+          <div className={c('m-u-b')}>Radio</div>
           <RadioButton
             name="radio"
             value="one"
@@ -62,10 +62,8 @@ class ExampleForm extends Form {
             onChange={this.handleChange}
           />
         </div>
-        <div className="m-s-b">
-          <span className={c({ bold: this.isAnyFieldModified(fieldName => fieldName.startsWith('checkbox')) })}>
-            Checkbox
-          </span>
+        <div className="m-m-b">
+          <div className={c('m-u-b')}>Checkbox</div>
           <Checkbox
             name="checkbox[one]"
             value="one"

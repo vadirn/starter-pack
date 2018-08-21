@@ -22,12 +22,16 @@
   --lh-xl: calc(5 * var(--unit)); /* 40 */
   --fs-xl: calc(var(--lh-xl) - var(--unit));
 
+  --lh-xxl: calc(6 * var(--unit)); /* 48 */
+  --fs-xxl: calc(var(--lh-xxl) - var(--unit));
+
   /* Spacing presets */
   --box-u: var(--unit);
   --box-s: var(--lh-s);
   --box-m: var(--lh-m);
   --box-l: var(--lh-l);
   --box-xl: var(--lh-xl);
+  --box-xxl: var(--lh-xxl);
 
   /* Colors */
   --color-neutral-0: #ffffff;
@@ -37,7 +41,9 @@
   --color-neutral-4: #919294;
   --color-neutral-5: #323233;
 
-  --color-accent-1: #fa355b;
+  --color-accent-1-light: #ff5b4c;
+  --color-accent-1: #f24130;
+  --color-accent-1-dark: #d92616;
 
   /* Shadows */
   --shadow-1: 0 2px 4px 1px rgba(0, 0, 0, 0.4);

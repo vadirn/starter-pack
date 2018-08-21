@@ -83,9 +83,9 @@ export class Session {
         this.setState(state => {
           const producedData = this._produceData(state, producer, state.controller && state.controller.model);
           if (producedData) {
-            return null;
+            return { data: producedData };
           }
-          return { data: producedData };
+          return null;
         });
       }
       async mountController(name, producer = () => null) {

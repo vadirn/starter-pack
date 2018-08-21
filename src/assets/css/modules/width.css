@@ -23,3 +23,7 @@
 :global .w-xl {
   width: var(--box-xl);
 }
+
+:global .w-xxl {
+  width: var(--box-xxl);
+}

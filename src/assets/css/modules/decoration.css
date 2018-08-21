@@ -9,3 +9,13 @@
 :global .user-select-none {
   user-select: none;
 }
+
+:global .bg-grid {
+  background-size: 8px 8px;
+  background-image: linear-gradient(to right, transparent 7px, color(var(--color-accent-1-light) a(20%)) 7px),
+    linear-gradient(to bottom, transparent 7px, color(var(--color-accent-1-light) a(20%)) 7px);
+}
+
+:global .bg-debug {
+  background-color: color(var(--color-accent-1-light) a(20%));
+}

@@ -1,33 +1,60 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import c from 'classnames';
 import s from './styles.css';
-import Link from 'components/Link';
+import Link from 'components/controls/Link';
 import components from './components';
 import PropTypes from 'prop-types';
+import SwitchButton from 'components/Controls/SwitchButton';
+import Toolbar from 'components/Layout/Toolbar';
 import { withConsumer } from 'main';
 
-function Playground({ component }) {
-  const Component = components[component] || (() => 'Please select a component');
+function Playground({ component, displayGrid, toggleGrid, page }) {
+  let item;
+  for (const group of components) {
+    for (const _item of group.items) {
+      if (_item.key === component) {
+        item = _item;
+      }
+    }
+  }
+
+  let Component = () => 'Please select a component to display';
+  if (item) {
+    Component = item.component;
+  }
+
   return (
     <div className={s.container}>
-      <div className={s.heading}>
-        <h1>PLAYGROUND</h1>
+      <Toolbar
+        className={c(s.heading, 'p-u p-s-l p-s-r')}
+        middle={<h1 className="text-heading text-light">Playground</h1>}
+        right={<SwitchButton checked={!!displayGrid} onChange={toggleGrid} left="Grid" />}
+      />
+      <div className="p-s-l">
+        {components.map(group => {
+          return (
+            <Fragment key={group.key}>
+              <div className="text-caps text-medium color-neutral-4">{group.label}</div>
+              <ul className="m-s-b">
+                {group.items.map(item => {
+                  return (
+                    <li key={item.key}>
+                      <Link page="playground-component" params={{ component: item.key }} query={page.query}>
+                        <span className={c({ 'text-bold': item.key === component })}>{item.label}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Fragment>
+          );
+        })}
       </div>
-      <div>
-        <ul>
-          {components.order.map(name => {
-            return (
-              <li key={name} className={c('m-u-b', { bold: component === name })}>
-                <Link page="playground-component" params={{ component: name }}>
-                  {name}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className={s.grid}>
-        <Component />
+      <div className="relative p-s-r">
+        <div className={c({ 'bg-grid': displayGrid }, 'absolute', s.grid)} />
+        <div className="relative">
+          <Component />
+        </div>
       </div>
     </div>
   );
@@ -35,10 +62,21 @@ function Playground({ component }) {
 
 Playground.propTypes = {
   component: PropTypes.string,
+  displayGrid: PropTypes.bool,
+  toggleGrid: PropTypes.func,
+  page: PropTypes.object,
 };
 
-function filter({ data }) {
-  return { component: data.component };
+function filter({ data, controller, plugins, setState }) {
+  return {
+    page: data.page,
+    component: data.component,
+    displayGrid: data.displayGrid,
+    toggleGrid(evt) {
+      const { checked } = evt.target;
+      controller.actions.toggleGrid({ setState, plugins, page: data.page }, checked);
+    },
+  };
 }
 
 export default withConsumer(Playground, filter);

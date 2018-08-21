@@ -30,8 +30,14 @@ export class RouterComponent extends React.Component {
       {
         name: 'playground',
         pattern: '/playground',
-        handler() {
+        handler({ params, query }) {
+          let displayGrid = false;
+          if (query.grid === 'on') {
+            displayGrid = true;
+          }
           mountController('Playground', data => {
+            data.displayGrid = displayGrid;
+            data.page = { name: 'playground', params, query };
             data.component = '';
             return data;
           });
@@ -40,8 +46,14 @@ export class RouterComponent extends React.Component {
       {
         name: 'playground-component',
         pattern: '/playground/:component',
-        handler({ params }) {
+        handler({ params, query }) {
+          let displayGrid = false;
+          if (query.grid === 'on') {
+            displayGrid = true;
+          }
           mountController('Playground', data => {
+            data.displayGrid = displayGrid;
+            data.page = { name: 'playground-component', params, query };
             data.component = params.component;
             return data;
           });

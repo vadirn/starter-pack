@@ -1,0 +1,66 @@
+@import 'assets/css/variables.css';
+
+.icon-container {
+  width: var(--lh-xl);
+  height: var(--lh-m);
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+}
+.icon-container-backdrop {
+  background-color: var(--color-neutral-1);
+  border: 1px solid var(--color-neutral-2);
+  border-radius: 999em;
+}
+
+.icon-circle {
+  width: var(--lh-m);
+  height: var(--lh-m);
+  transform: translate(0, 0);
+  transition-property: transform;
+  transition-duration: 80ms;
+  transition-timing-function: linear;
+}
+
+.icon-circle-backdrop {
+  background-color: var(--color-neutral-0);
+  border: 1px solid var(--color-neutral-3);
+  border-radius: 50%;
+}
+
+.checkbox {
+  position: absolute;
+  width: auto;
+  height: auto;
+  opacity: 0;
+}
+
+.container:hover .icon-circle-backdrop,
+:global(.with-focus-ring) .checkbox:focus + .label .icon-circle-backdrop {
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  border-width: 2px;
+}
+
+.checkbox:checked + .label .icon-container-backdrop {
+  background-color: var(--color-accent-1-light);
+  border-color: var(--color-accent-1);
+}
+
+.checkbox:checked + .label .icon-circle-backdrop {
+  border-color: var(--color-accent-1-dark);
+}
+
+.checkbox:checked + .label .icon-circle {
+  transform: translateX(calc(var(--lh-xl) - var(--lh-m)));
+}
+
+:global(.with-focus-ring) .container:focus-within .backdrop {
+  background-color: var(--color-neutral-2);
+  top: -1px;
+  bottom: -1px;
+  right: -1px;
+  left: -1px;
+}

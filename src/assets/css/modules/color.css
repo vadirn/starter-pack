@@ -19,8 +19,14 @@
   color: var(--color-neutral-5);
 }
 
+:global .color-accent-1-light {
+  color: var(--color-accent-1-light);
+}
 :global .color-accent-1 {
   color: var(--color-accent-1);
+}
+:global .color-accent-1-dark {
+  color: var(--color-accent-1-dark);
 }
 
 :global .bg-neutral-0 {
