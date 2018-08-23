@@ -18,7 +18,7 @@
   height: var(--lh-m);
   transform: translate(0, 0);
   transition-property: transform;
-  transition-duration: 80ms;
+  transition-duration: 100ms;
   transition-timing-function: linear;
 }
 
@@ -35,7 +35,9 @@
   opacity: 0;
 }
 
-.container:hover .icon-circle-backdrop,
+.container:global(.--focus) .icon-circle-backdrop,
+.container:global(.--hover) .icon-circle-backdrop,
+.container:hover .checkbox:not(:disabled) + .label .icon-circle-backdrop,
 :global(.with-focus-ring) .checkbox:focus + .label .icon-circle-backdrop {
   top: -1px;
   bottom: -1px;
@@ -57,10 +59,15 @@
   transform: translateX(calc(var(--lh-xl) - var(--lh-m)));
 }
 
+.container:global(.--focus) .backdrop,
 :global(.with-focus-ring) .container:focus-within .backdrop {
   background-color: var(--color-neutral-2);
   top: -1px;
   bottom: -1px;
   right: -1px;
   left: -1px;
+}
+
+.checkbox:disabled + .label {
+  opacity: 0.25;
 }

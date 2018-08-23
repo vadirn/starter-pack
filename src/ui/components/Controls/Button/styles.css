@@ -5,7 +5,8 @@
   border-radius: var(--radius-input);
 }
 
-.container:hover .backdrop {
+.container:global(.--hover):not(:disabled) .backdrop,
+.container:hover:not(:disabled) .backdrop {
   top: -1px;
   bottom: -1px;
   left: -1px;
@@ -13,7 +14,12 @@
   border-width: 2px;
 }
 
+.container:global(.--focus) .backdrop,
 :global(.with-focus-ring) .container:focus .backdrop {
   background-color: var(--color-neutral-2);
   border-width: 2px;
+}
+
+.container:disabled {
+  opacity: 0.25;
 }

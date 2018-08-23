@@ -1,9 +1,5 @@
 @import 'assets/css/variables.css';
 
-.container {
-  margin-bottom: var(--unit);
-}
-
 .icon-container {
   width: var(--lh-m);
   height: var(--lh-m);
@@ -24,12 +20,16 @@
 
 .radio {
   position: absolute;
-  width: auto;
-  height: auto;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
   opacity: 0;
 }
 
-.container:hover .icon-circle-backdrop,
+.container:global(.--focus) .icon-circle-backdrop,
+.container:global(.--hover) .icon-circle-backdrop,
+.container:hover .radio:not(:disabled) + .label .icon-circle-backdrop,
 :global(.with-focus-ring) .radio:focus + .label .icon-circle-backdrop {
   top: -2px;
   bottom: -2px;
@@ -51,15 +51,22 @@
   transform: scale(1, 1);
 }
 
+.container:global(.--focus) .radio:checked + .label .icon-circle-backdrop,
+.container:global(.--hover) .radio:checked + .label .icon-circle-backdrop,
 .container:hover .radio:checked + .label .icon-circle-backdrop,
 :global(.with-focus-ring) .radio:checked:focus + .label .icon-circle-backdrop {
   border-color: var(--color-accent-1-dark);
 }
 
+.container:global(.--focus) .backdrop,
 :global(.with-focus-ring) .container:focus-within .backdrop {
   background-color: var(--color-neutral-2);
   top: -1px;
   bottom: -1px;
   right: -1px;
   left: -1px;
+}
+
+.radio:disabled + .label {
+  opacity: 0.25;
 }

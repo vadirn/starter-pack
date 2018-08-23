@@ -1,11 +1,11 @@
 import React from 'react';
-import Form from 'components/Controls/Form';
-import TextField from 'components/Controls/TextField';
-import TextareaField from 'components/Controls/TextareaField';
-import RadioButton from 'components/Controls/RadioButton';
-import Checkbox from 'components/Controls/Checkbox';
-import Button from 'components/Controls/Button';
-import Errors from 'components/Controls/Errors';
+import Form from 'components/controls/Form';
+import TextField from 'components/controls/TextField';
+import TextareaField from 'components/controls/TextareaField';
+import RadioButton from 'components/controls/RadioButton';
+import Checkbox from 'components/controls/Checkbox';
+import Button from 'components/controls/Button';
+import Errors from 'components/lists/Errors';
 import c from 'classnames';
 
 class ExampleForm extends Form {
@@ -48,6 +48,7 @@ class ExampleForm extends Form {
         <div className="m-m-b">
           <div className={c('m-u-b')}>Radio</div>
           <RadioButton
+            className="m-u-b"
             name="radio"
             value="one"
             checked={this.state['radio'] === 'one'}
@@ -55,6 +56,7 @@ class ExampleForm extends Form {
             onChange={this.handleChange}
           />
           <RadioButton
+            className="m-u-b"
             name="radio"
             value="two"
             checked={this.state['radio'] === 'two'}
@@ -65,6 +67,7 @@ class ExampleForm extends Form {
         <div className="m-m-b">
           <div className={c('m-u-b')}>Checkbox</div>
           <Checkbox
+            className="m-u-b"
             name="checkbox[one]"
             value="one"
             checked={!!this.state['checkbox[one]']}
@@ -72,6 +75,7 @@ class ExampleForm extends Form {
             onChange={this.handleChange}
           />
           <Checkbox
+            className="m-u-b"
             name="checkbox[two]"
             value="two"
             checked={!!this.state['checkbox[two]']}

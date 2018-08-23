@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function PlaygroundItem() {
+export default function VariationsAndSpacing() {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '40px 24px' }}>
       <div>

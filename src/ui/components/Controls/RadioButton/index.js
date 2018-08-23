@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import c from 'classnames';
 import s from './styles.css';
 
-export default function RadioButton({ value: val, label, ...props }) {
+export default function RadioButton({ value: _value, label, className, ...props }) {
   let value = '';
-  if (val) {
-    value = val;
+  if (_value) {
+    value = _value;
   }
   return (
-    <label className={c('block w-content relative', s.container)}>
+    <label className={c('block w-content relative', className, s.container)}>
       <input className={s.radio} type="radio" value={value} {...props} />
       <div className={c('relative z1', s.label)}>
         <div className={s['icon-container']}>

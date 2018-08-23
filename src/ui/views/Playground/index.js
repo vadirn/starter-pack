@@ -1,12 +1,58 @@
+/* global IS_SERVER */
 import React, { Fragment } from 'react';
 import c from 'classnames';
 import s from './styles.css';
 import Link from 'components/controls/Link';
 import components from './components';
 import PropTypes from 'prop-types';
-import SwitchButton from 'components/Controls/SwitchButton';
-import Toolbar from 'components/Layout/Toolbar';
+import SwitchButton from 'components/controls/SwitchButton';
+import Toolbar from 'components/layouts/Toolbar';
 import { withConsumer } from 'main';
+
+function Navigation({ components, component, page }) {
+  if (IS_SERVER) {
+    return (
+      <Fragment>
+        {components.map(group => {
+          return (
+            <Fragment key={group.key}>
+              <div className="text-caps text-medium color-neutral-4">{group.label}</div>
+              <div className="h-m bg-neutral-1 m-s-b" />
+            </Fragment>
+          );
+        })}
+      </Fragment>
+    );
+  }
+  return (
+    <Fragment>
+      {components.map(group => {
+        return (
+          <Fragment key={group.key}>
+            <div className="text-caps text-medium color-neutral-4">{group.label}</div>
+            <ul className="m-s-b">
+              {group.items.map(item => {
+                return (
+                  <li key={item.key}>
+                    <Link page="playground-component" params={{ component: item.key }} query={page.query}>
+                      <span className={c({ 'text-bold': item.key === component })}>{item.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </Fragment>
+        );
+      })}
+    </Fragment>
+  );
+}
+
+Navigation.propTypes = {
+  components: PropTypes.array,
+  component: PropTypes.string,
+  page: PropTypes.object,
+};
 
 function Playground({ component, displayGrid, toggleGrid, page }) {
   let item;
@@ -19,6 +65,9 @@ function Playground({ component, displayGrid, toggleGrid, page }) {
   }
 
   let Component = () => 'Please select a component to display';
+  if (IS_SERVER) {
+    Component = () => null;
+  }
   if (item) {
     Component = item.component;
   }
@@ -31,24 +80,7 @@ function Playground({ component, displayGrid, toggleGrid, page }) {
         right={<SwitchButton checked={!!displayGrid} onChange={toggleGrid} left="Grid" />}
       />
       <div className="p-s-l">
-        {components.map(group => {
-          return (
-            <Fragment key={group.key}>
-              <div className="text-caps text-medium color-neutral-4">{group.label}</div>
-              <ul className="m-s-b">
-                {group.items.map(item => {
-                  return (
-                    <li key={item.key}>
-                      <Link page="playground-component" params={{ component: item.key }} query={page.query}>
-                        <span className={c({ 'text-bold': item.key === component })}>{item.label}</span>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </Fragment>
-          );
-        })}
+        <Navigation page={page} components={components} component={component} />
       </div>
       <div className="relative p-s-r">
         <div className={c({ 'bg-grid': displayGrid }, 'absolute', s.grid)} />

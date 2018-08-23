@@ -1,4 +1,5 @@
-import textAndSpacing from './text-and-spacing';
+import controlsAndStates from './controls-and-states';
+import variationsAndSpacing from './variations-and-spacing';
 import form from './form';
 
 export default [
@@ -15,12 +16,19 @@ export default [
   {
     key: 'text',
     label: 'Text',
-    items: [{ key: 'text-and-spacing', label: 'Text and spacing', component: textAndSpacing }],
+    items: [{ key: 'variations-and-spacing', label: 'Variations and spacing', component: variationsAndSpacing }],
   },
   {
     key: 'controls',
     label: 'Controls',
-    items: [{ key: 'form', label: 'Form', component: form }],
+    items: [
+      {
+        key: 'controls-states',
+        label: 'Controls and states',
+        component: controlsAndStates,
+      },
+      { key: 'form', label: 'Form', component: form },
+    ],
   },
   {
     key: 'compound-elements',

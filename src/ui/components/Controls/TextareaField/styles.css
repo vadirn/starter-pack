@@ -11,10 +11,16 @@
   border-radius: var(--radius-input);
 }
 
+:global(.--focus) textarea + .backdrop,
 textarea:focus + .backdrop {
   border: 2px solid currentColor;
   top: -1px;
   right: -1px;
   bottom: -1px;
   left: -1px;
+}
+
+textarea:disabled,
+textarea:disabled + .backdrop {
+  opacity: 0.25;
 }
