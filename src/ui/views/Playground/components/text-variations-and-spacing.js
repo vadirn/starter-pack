@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function VariationsAndSpacing() {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '40px 24px' }}>
+    <div className="m-m-b" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '40px 24px' }}>
       <div>
         <h1 className="text-caps text-medium color-neutral-4 m-s-b">Text variations</h1>
         <div className="text-title m-s-b bg-debug">Title</div>

@@ -20,7 +20,7 @@ class ExampleForm extends Form {
   render() {
     // const { defaultValues } = this.props;
     return (
-      <form onSubmit={this.handleSubmit} style={{ width: '320px' }}>
+      <form className="m-m-b" onSubmit={this.handleSubmit} style={{ width: '320px' }}>
         <div className="m-m-b bg-debug">
           <label htmlFor="example-form-text" className="bg-debug">
             <div className={c('m-u-b bg-debug')}>Text input</div>

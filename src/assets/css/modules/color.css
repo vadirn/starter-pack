@@ -48,6 +48,12 @@
   background-color: var(--color-neutral-5);
 }
 
+:global .bg-accent-1-light {
+  background-color: var(--color-accent-1-light);
+}
 :global .bg-accent-1 {
   background-color: var(--color-accent-1);
+}
+:global .bg-accent-1-dark {
+  background-color: var(--color-accent-1-dark);
 }

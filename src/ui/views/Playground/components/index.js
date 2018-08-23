@@ -1,22 +1,24 @@
-import controlsAndStates from './controls-and-states';
-import variationsAndSpacing from './variations-and-spacing';
-import form from './form';
+import ControlsAndStates from './controls-and-states';
+import VariationsAndSpacing from './text-variations-and-spacing';
+import Colors from './colors';
+import Form from './controls-form';
+import Toolbar from './layouts-toolbar';
 
 export default [
   {
     key: 'colors',
     label: 'Colors',
-    items: [],
+    items: [{ key: 'colors', label: 'Colors', component: Colors }],
   },
   {
-    key: 'layout',
-    label: 'Layout',
-    items: [],
+    key: 'layouts',
+    label: 'Layouts',
+    items: [{ key: 'toolbar', label: 'Toolbar', component: Toolbar }],
   },
   {
     key: 'text',
     label: 'Text',
-    items: [{ key: 'variations-and-spacing', label: 'Variations and spacing', component: variationsAndSpacing }],
+    items: [{ key: 'variations-and-spacing', label: 'Variations and spacing', component: VariationsAndSpacing }],
   },
   {
     key: 'controls',
@@ -25,9 +27,9 @@ export default [
       {
         key: 'controls-states',
         label: 'Controls and states',
-        component: controlsAndStates,
+        component: ControlsAndStates,
       },
-      { key: 'form', label: 'Form', component: form },
+      { key: 'form', label: 'Form', component: Form },
     ],
   },
   {

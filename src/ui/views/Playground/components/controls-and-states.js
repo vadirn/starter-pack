@@ -10,6 +10,7 @@ import { Link } from 'components/controls/Link';
 export default function ControlsAndStates() {
   return (
     <div
+      className="m-m-b"
       style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr 1fr 1fr',
@@ -31,6 +32,44 @@ export default function ControlsAndStates() {
       </div>
       <div>
         <Button disabled>Button</Button>
+      </div>
+
+      <div>
+        <Button left={<div className="h-m w-m bg-neutral-4" />}>Button with icon</Button>
+      </div>
+      <div>
+        <Button left={<div className="h-m w-m bg-neutral-4" />} className="--hover">
+          Button with icon
+        </Button>
+      </div>
+      <div>
+        <Button left={<div className="h-m w-m bg-neutral-4" />} className="--focus">
+          Button with icon
+        </Button>
+      </div>
+      <div>
+        <Button left={<div className="h-m w-m bg-neutral-4" />} disabled>
+          Button with icon
+        </Button>
+      </div>
+
+      <div>
+        <Button right={<div className="h-m w-m bg-neutral-4" />}>Button with icon</Button>
+      </div>
+      <div>
+        <Button right={<div className="h-m w-m bg-neutral-4" />} className="--hover">
+          Button with icon
+        </Button>
+      </div>
+      <div>
+        <Button right={<div className="h-m w-m bg-neutral-4" />} className="--focus">
+          Button with icon
+        </Button>
+      </div>
+      <div>
+        <Button right={<div className="h-m w-m bg-neutral-4" />} disabled>
+          Button with icon
+        </Button>
       </div>
 
       <div>
