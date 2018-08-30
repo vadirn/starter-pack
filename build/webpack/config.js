@@ -36,9 +36,9 @@ function babelConfig({ isServer }) {
   return {
     presets: [
       [
-        'env',
+        '@babel/preset-env',
         {
-          useBuiltIns: 'entry',
+          useBuiltIns: 'usage',
           debug: false,
           targets: {
             browsers: ['>0.25%', 'not ie 11', 'not op_mini all'],
@@ -47,14 +47,14 @@ function babelConfig({ isServer }) {
           loose: true,
         },
       ],
-      'react',
+      '@babel/preset-react',
     ],
     env: {
       test: {
-        presets: [['env'], 'react'],
+        presets: [['@babel/preset-env'], '@babel/preset-react'],
       },
     },
-    plugins: ['transform-object-rest-spread', 'syntax-dynamic-import'],
+    plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/plugin-syntax-dynamic-import'],
   };
 }
 

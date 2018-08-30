@@ -1,8 +1,8 @@
 /* global IS_BROWSER */
-import Emitter from 'events';
+import EventTarget from 'event-target';
 import getInstance from 'get-instance';
 
-export class History extends Emitter {
+export class History extends EventTarget {
   constructor() {
     super();
     this._handlePopstate = this._handlePopstate.bind(this);
@@ -11,13 +11,13 @@ export class History extends Emitter {
     }
   }
   _handlePopstate() {
-    this.emit('change', new URL(window.location.href));
+    this.dispatchEvent(new CustomEvent('change', { detail: { url: new URL(window.location.href) } }));
   }
   push(urlString) {
     if (urlString.startsWith('/')) {
-      this.emit('change', new URL(window.location.origin + urlString));
+      this.dispatchEvent(new CustomEvent('change', { detail: { url: new URL(window.location.origin + urlString) } }));
     } else {
-      this.emit('change', new URL(urlString));
+      this.dispatchEvent(new CustomEvent('change', { detail: { url: new URL(urlString) } }));
     }
     if (IS_BROWSER) {
       window.history.pushState(null, null, urlString);
@@ -38,7 +38,7 @@ export default class Router {
     this.handleLocationChange = this.handleLocationChange.bind(this);
     this.serializeLocationData = this.serializeLocationData.bind(this);
 
-    this._history.on('change', this.handleLocationChange);
+    this._history.addEventListener('change', this.handleLocationChange);
   }
   push(...routes) {
     this._routes.push(...routes);
@@ -54,13 +54,16 @@ export default class Router {
   findRoute(url) {
     return findRoute(url, this._routes);
   }
-  handleLocationChange(url) {
+  handleLocationChange(evt) {
+    this.callHandler(evt.detail.url);
+  }
+  callHandler(url) {
     // match url with route
     // call corresponding action
     // pass parsed location and action
     const route = findRoute(url, this._routes);
     if (route && route.handler) {
-      return route.handler(route.data);
+      return route.handler.call(null, route.data);
     } else {
       const notFound = findRouteByName('404', this._routes);
       if (notFound) {

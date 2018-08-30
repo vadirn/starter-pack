@@ -1,9 +1,9 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
-        "useBuiltIns": "entry",
+        "useBuiltIns": "usage",
         "debug": false,
         "targets": {
           "browsers": [
@@ -16,20 +16,20 @@
         "loose": true
       }
     ],
-    "react"
+    "@babel/preset-react"
   ],
   "env": {
     "test": {
       "presets": [
         [
-          "env"
+          "@babel/preset-env"
         ],
-        "react"
+        "@babel/preset-react"
       ]
     }
   },
   "plugins": [
-    "transform-object-rest-spread",
-    "syntax-dynamic-import"
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-syntax-dynamic-import"
   ]
 }

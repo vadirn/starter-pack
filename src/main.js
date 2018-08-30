@@ -71,7 +71,7 @@ export class RouterComponent extends React.Component {
   componentDidMount() {
     if (IS_BROWSER) {
       const { plugins } = this.props;
-      plugins.router.handleLocationChange(window.location);
+      plugins.router.callHandler(window.location);
       this.props.prerenderedHTML.clear();
     }
   }
