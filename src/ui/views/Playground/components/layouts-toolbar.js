@@ -23,7 +23,8 @@ export default function LayoutsToolbar() {
         />
       </div>
       <div className="text-caption color-neutral-4">Container 120px width</div>
-      <div style={{ width: '120px' }}>
+      <div className="bg-debug" style={{ width: '120px' }}>
+        <div className="h-m" />
         <Toolbar
           className="bg-debug"
           left={<div className="bg-debug">Left</div>}

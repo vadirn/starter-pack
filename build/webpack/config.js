@@ -5,6 +5,7 @@ const ExtractStatsPlugin = require('./ExtractStatsPlugin');
 const getLocalIdent = require('css-loader/lib/getLocalIdent');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const { version } = require('../../package.json');
+const babelConfig = require('../../babel.config');
 
 function optimizationConfig({ isServer }) {
   if (isServer) {
@@ -25,36 +26,6 @@ function optimizationConfig({ isServer }) {
         },
       },
     },
-  };
-}
-
-function babelConfig({ isServer }) {
-  let modules = false;
-  if (isServer) {
-    modules = 'commonjs';
-  }
-  return {
-    presets: [
-      [
-        '@babel/preset-env',
-        {
-          useBuiltIns: 'usage',
-          debug: false,
-          targets: {
-            browsers: ['>0.25%', 'not ie 11', 'not op_mini all'],
-          },
-          modules,
-          loose: true,
-        },
-      ],
-      '@babel/preset-react',
-    ],
-    env: {
-      test: {
-        presets: [['@babel/preset-env'], '@babel/preset-react'],
-      },
-    },
-    plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/plugin-syntax-dynamic-import'],
   };
 }
 
@@ -93,24 +64,6 @@ module.exports = function getConfig({ isServer = false, watch = false, productio
   const rootDir = path.resolve(__dirname, '..', '..');
   const distDir = path.resolve(rootDir, 'dist');
 
-  const plugins = [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(mode),
-      },
-      USE_LOG: JSON.stringify(true),
-      APP_VERSION: JSON.stringify(version),
-      IS_SERVER: JSON.stringify(isServer),
-      IS_BROWSER: JSON.stringify(!isServer),
-    }),
-    new ExtractCSSPlugin({
-      filename: `${filename}.css`,
-      isServer,
-    }),
-    new ExtractStatsPlugin(),
-    new FriendlyErrorsWebpackPlugin({ clearConsole: false }),
-  ];
-
   const config = {
     mode,
     target,
@@ -141,8 +94,9 @@ module.exports = function getConfig({ isServer = false, watch = false, productio
         {
           test: /\.jsx?$/,
           include: [path.resolve(rootDir, 'src'), path.resolve(rootDir, 'external_modules')],
+          exclude: /(node_modules)/,
           loader: 'babel-loader',
-          options: babelConfig({ isServer }),
+          options: babelConfig(undefined, isServer),
         },
         {
           test: /\.css$/,
@@ -193,7 +147,23 @@ module.exports = function getConfig({ isServer = false, watch = false, productio
         },
       ],
     },
-    plugins,
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify(mode),
+        },
+        USE_LOG: JSON.stringify(true),
+        APP_VERSION: JSON.stringify(version),
+        IS_SERVER: JSON.stringify(isServer),
+        IS_BROWSER: JSON.stringify(!isServer),
+      }),
+      new ExtractCSSPlugin({
+        filename: `${filename}.css`,
+        isServer,
+      }),
+      new ExtractStatsPlugin(),
+      new FriendlyErrorsWebpackPlugin({ clearConsole: false }),
+    ],
   };
   return config;
 };
