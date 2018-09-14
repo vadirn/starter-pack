@@ -8,30 +8,22 @@
 
   /* Size units and font sizes */
   --px: calc(1 / 16 * 1rem); /* 1 */
-  --unit: calc(8 / 16 * 1rem); /* 8 */
+  --u: calc(8 / 16 * 1rem); /* 8 */
 
-  --lh-s: calc(2 * var(--unit)); /* 16 */
-  --fs-s: calc(var(--lh-s) - var(--unit) / 2);
+  --s: calc(2 * var(--u)); /* 16 */
+  --fs-s: calc(var(--s) - var(--u) / 2);
 
-  --lh-m: calc(3 * var(--unit)); /* 24 */
-  --fs-m: calc(var(--lh-m) - var(--unit));
+  --m: calc(3 * var(--u)); /* 24 */
+  --fs-m: calc(var(--m) - var(--u));
 
-  --lh-l: calc(4 * var(--unit)); /* 32 */
-  --fs-l: calc(var(--lh-l) - var(--unit));
+  --l: calc(4 * var(--u)); /* 32 */
+  --fs-l: calc(var(--l) - var(--u));
 
-  --lh-xl: calc(5 * var(--unit)); /* 40 */
-  --fs-xl: calc(var(--lh-xl) - var(--unit));
+  --xl: calc(5 * var(--u)); /* 40 */
+  --fs-xl: calc(var(--xl) - var(--u));
 
-  --lh-xxl: calc(6 * var(--unit)); /* 48 */
-  --fs-xxl: calc(var(--lh-xxl) - var(--unit));
-
-  /* Spacing presets */
-  --box-u: var(--unit);
-  --box-s: var(--lh-s);
-  --box-m: var(--lh-m);
-  --box-l: var(--lh-l);
-  --box-xl: var(--lh-xl);
-  --box-xxl: var(--lh-xxl);
+  --xxl: calc(6 * var(--u)); /* 48 */
+  --fs-xxl: calc(var(--xxl) - var(--u));
 
   /* Colors */
   --color-neutral-0: #ffffff;
@@ -49,8 +41,7 @@
   --shadow-1: 0 2px 4px 1px rgba(0, 0, 0, 0.4);
 
   /* Border radii */
-  --radius-input: 0;
-  --radius-m: calc(4 * var(--px));
+  --radius-pill: 9999em;
 }
 
 @custom-media --mobile-s (min-width: 320px);

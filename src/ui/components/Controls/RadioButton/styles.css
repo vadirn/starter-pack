@@ -1,72 +1,64 @@
 @import 'assets/css/variables.css';
 
-.icon-container {
-  width: var(--lh-m);
-  height: var(--lh-m);
-  margin-right: var(--unit);
-  display: inline-block;
+.icon {
+  width: var(--m);
+  height: var(--m);
   vertical-align: top;
   cursor: default;
 }
-.icon-circle {
-  width: var(--lh-m);
-  height: var(--lh-m);
-}
-.icon-circle-backdrop {
+
+.icon-backdrop {
   border-radius: 50%;
-  border: 1px solid var(--color-neutral-2);
   background-color: var(--color-neutral-1);
+  border: 1px solid var(--color-neutral-2);
 }
 
-.radio {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-}
-
-.container:global(.--focus) .icon-circle-backdrop,
-.container:global(.--hover) .icon-circle-backdrop,
-.container:hover .radio:not(:disabled) + .label .icon-circle-backdrop,
-:global(.with-focus-ring) .radio:focus + .label .icon-circle-backdrop {
-  top: -2px;
-  bottom: -2px;
-  left: -2px;
-  right: -2px;
-  border: 2px solid var(--color-neutral-3);
-}
-
-.icon-circle-fill {
-  border-radius: 50%;
-  transform: scale(0, 0);
-  /* transition-property: transform;
-  transition-duration: 80ms; */
-  transition-timing-function: linear;
-  background-color: var(--color-accent-1-light);
-}
-
-.radio:checked + .label .icon-circle-fill {
-  transform: scale(1, 1);
-}
-
-.container:global(.--focus) .radio:checked + .label .icon-circle-backdrop,
-.container:global(.--hover) .radio:checked + .label .icon-circle-backdrop,
-.container:hover .radio:checked + .label .icon-circle-backdrop,
-:global(.with-focus-ring) .radio:checked:focus + .label .icon-circle-backdrop {
+.radio:checked + .label .icon-backdrop {
+  background-color: var(--color-accent-1);
   border-color: var(--color-accent-1-dark);
 }
 
+/* HOVER */
+.container:global(.--hover) .icon-backdrop,
+.container:hover .icon-backdrop {
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border-color: var(--color-neutral-3);
+  border-width: 2px;
+}
+
+/* FOCUS */
+.container:global(.--focus) .icon-backdrop,
+:global(.with-focus-ring) .radio:focus + .label .icon-backdrop {
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border-color: var(--color-neutral-3);
+  border-width: 2px;
+}
+:global(.with-focus-ring) .radio:checked:focus + .label .icon-backdrop {
+  border-color: var(--color-accent-1-dark);
+}
 .container:global(.--focus) .backdrop,
 :global(.with-focus-ring) .container:focus-within .backdrop {
   background-color: var(--color-neutral-2);
-  top: -1px;
-  bottom: -1px;
-  right: -1px;
-  left: -1px;
 }
 
+/* DISABLED */
 .radio:disabled + .label {
-  opacity: 0.25;
+  opacity: 0.3;
+}
+.container:hover .radio:disabled + .label .icon-backdrop {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-color: var(--color-neutral-2);
+  border-width: 1px;
+}
+.container:hover .radio:checked:disabled + .label .icon-backdrop {
+  border-color: var(--color-accent-1-dark);
 }

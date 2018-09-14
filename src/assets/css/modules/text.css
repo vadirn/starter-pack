@@ -40,51 +40,51 @@ ol {
 :global .text-title {
   font-family: var(--ff-heading);
   font-size: var(--fs-xxl);
-  line-height: var(--lh-xxl);
+  line-height: var(--xxl);
 }
 
 :global .text-heading {
   font-family: var(--ff-heading);
   font-size: var(--fs-xl);
-  line-height: var(--lh-xl);
+  line-height: var(--xl);
 }
 
 :global .text-body-2 {
   font-size: var(--fs-l);
-  line-height: var(--lh-l);
+  line-height: var(--l);
 }
 
 :global .text-body-1 {
   font-size: var(--fs-m);
-  line-height: var(--lh-m);
+  line-height: var(--m);
 }
 
 :global .text-caption {
   font-size: var(--fs-s);
-  line-height: var(--lh-s);
+  line-height: var(--s);
 }
 
 :global .text-caps {
   font-size: var(--fs-s);
-  line-height: var(--lh-m);
+  line-height: var(--m);
   text-transform: uppercase;
   letter-spacing: var(--px);
 }
 
 :global .lh-xl {
-  line-height: var(--lh-xl);
+  line-height: var(--xl);
 }
 
 :global .lh-l {
-  line-height: var(--lh-l);
+  line-height: var(--l);
 }
 
 :global .lh-m {
-  line-height: var(--lh-m);
+  line-height: var(--m);
 }
 
 :global .lh-s {
-  line-height: var(--lh-s);
+  line-height: var(--s);
 }
 
 :global .list-dash {

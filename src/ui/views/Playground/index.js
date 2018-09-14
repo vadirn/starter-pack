@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import c from 'classnames';
 import s from './styles.css';
-import Link from 'components/controls/Link';
+import RouterLink from 'components/controls/RouterLink';
 import components from './components';
 import PropTypes from 'prop-types';
 import SwitchButton from 'components/controls/SwitchButton';
@@ -34,9 +34,13 @@ function Navigation({ components, component, page }) {
               {group.items.map(item => {
                 return (
                   <li key={item.key}>
-                    <Link page="playground-component" params={{ component: item.key }} query={page.query}>
+                    <RouterLink
+                      className="block"
+                      page="playground-component"
+                      params={{ component: item.key }}
+                      query={page.query}>
                       <span className={c({ 'text-bold': item.key === component })}>{item.label}</span>
-                    </Link>
+                    </RouterLink>
                   </li>
                 );
               })}
@@ -83,7 +87,7 @@ function Playground({ component, displayGrid, toggleGrid, page }) {
         <Navigation page={page} components={components} component={component} />
       </div>
       <div className="relative p-s-r">
-        <div className={c({ 'bg-grid': displayGrid }, 'absolute', s.grid)} />
+        <div className={c({ 'bg-grid z999': displayGrid }, 'absolute', s.grid)} />
         <div className="relative">
           <Component />
         </div>

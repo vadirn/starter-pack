@@ -5,7 +5,7 @@ import TextareaField from 'components/controls/TextareaField';
 import RadioButton from 'components/controls/RadioButton';
 import Checkbox from 'components/controls/Checkbox';
 import SwitchButton from 'components/controls/SwitchButton';
-import { Link } from 'components/controls/Link';
+import Link from 'components/controls/Link';
 
 export default function ControlsAndStates() {
   return (

@@ -29,6 +29,10 @@
   color: var(--color-accent-1-dark);
 }
 
+:global .color-transparent {
+  color: transparent;
+}
+
 :global .bg-neutral-0 {
   background-color: var(--color-neutral-0);
 }

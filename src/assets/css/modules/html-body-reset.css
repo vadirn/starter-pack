@@ -9,5 +9,5 @@ body {
   color: var(--color-neutral-5);
   font-size: var(--fs-m);
   font-family: var(--ff-system);
-  line-height: var(--lh-m);
+  line-height: var(--m);
 }

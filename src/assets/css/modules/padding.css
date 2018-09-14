@@ -1,81 +1,81 @@
 @import '../variables.css';
 
 :global .p-u {
-  padding: var(--box-u);
+  padding: var(--u);
 }
 :global .p-u-b {
-  padding-bottom: var(--box-u);
+  padding-bottom: var(--u);
 }
 :global .p-u-t {
-  padding-top: var(--box-u);
+  padding-top: var(--u);
 }
 :global .p-u-r {
-  padding-right: var(--box-u);
+  padding-right: var(--u);
 }
 :global .p-u-l {
-  padding-left: var(--box-u);
+  padding-left: var(--u);
 }
 
 :global .p-s {
-  padding: var(--box-s);
+  padding: var(--s);
 }
 :global .p-s-b {
-  padding-bottom: var(--box-s);
+  padding-bottom: var(--s);
 }
 :global .p-s-t {
-  padding-top: var(--box-s);
+  padding-top: var(--s);
 }
 :global .p-s-r {
-  padding-right: var(--box-s);
+  padding-right: var(--s);
 }
 :global .p-s-l {
-  padding-left: var(--box-s);
+  padding-left: var(--s);
 }
 
 :global .p-m {
-  padding: var(--box-m);
+  padding: var(--m);
 }
 :global .p-m-b {
-  padding-bottom: var(--box-m);
+  padding-bottom: var(--m);
 }
 :global .p-m-t {
-  padding-top: var(--box-m);
+  padding-top: var(--m);
 }
 :global .p-m-r {
-  padding-right: var(--box-m);
+  padding-right: var(--m);
 }
 :global .p-m-l {
-  padding-left: var(--box-m);
+  padding-left: var(--m);
 }
 
 :global .p-l {
-  padding: var(--box-l);
+  padding: var(--l);
 }
 :global .p-l-b {
-  padding-bottom: var(--box-l);
+  padding-bottom: var(--l);
 }
 :global .p-l-t {
-  padding-top: var(--box-l);
+  padding-top: var(--l);
 }
 :global .p-l-r {
-  padding-right: var(--box-l);
+  padding-right: var(--l);
 }
 :global .p-l-l {
-  padding-left: var(--box-l);
+  padding-left: var(--l);
 }
 
 :global .p-xl {
-  padding: var(--box-xl);
+  padding: var(--xl);
 }
 :global .p-xl-b {
-  padding-bottom: var(--box-xl);
+  padding-bottom: var(--xl);
 }
 :global .p-xl-t {
-  padding-top: var(--box-xl);
+  padding-top: var(--xl);
 }
 :global .p-xl-r {
-  padding-right: var(--box-xl);
+  padding-right: var(--xl);
 }
 :global .p-xl-l {
-  padding-left: var(--box-xl);
+  padding-left: var(--xl);
 }

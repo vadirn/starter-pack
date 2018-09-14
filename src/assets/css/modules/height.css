@@ -1,25 +1,25 @@
 @import '../variables.css';
 
 :global .h-u {
-  height: var(--box-u);
+  height: var(--u);
 }
 
 :global .h-s {
-  height: var(--box-s);
+  height: var(--s);
 }
 
 :global .h-m {
-  height: var(--box-m);
+  height: var(--m);
 }
 
 :global .h-l {
-  height: var(--box-l);
+  height: var(--l);
 }
 
 :global .h-xl {
-  height: var(--box-xl);
+  height: var(--xl);
 }
 
 :global .h-xxl {
-  height: var(--box-xxl);
+  height: var(--xxl);
 }

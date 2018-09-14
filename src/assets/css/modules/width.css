@@ -5,25 +5,25 @@
 }
 
 :global .w-u {
-  width: var(--box-u);
+  width: var(--u);
 }
 
 :global .w-s {
-  width: var(--box-s);
+  width: var(--s);
 }
 
 :global .w-m {
-  width: var(--box-m);
+  width: var(--m);
 }
 
 :global .w-l {
-  width: var(--box-l);
+  width: var(--l);
 }
 
 :global .w-xl {
-  width: var(--box-xl);
+  width: var(--xl);
 }
 
 :global .w-xxl {
-  width: var(--box-xxl);
+  width: var(--xxl);
 }

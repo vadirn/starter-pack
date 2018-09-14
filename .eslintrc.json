@@ -100,7 +100,12 @@
     "react/jsx-no-target-blank": "error",
     "react/prop-types": "error",
     "react/jsx-pascal-case": "warn",
-    "react/prefer-stateless-function": "warn",
+    "react/prefer-stateless-function": [
+      "warn",
+      {
+        "ignorePureComponents": true
+      }
+    ],
     "react/style-prop-object": "error",
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/label-has-associated-control": [

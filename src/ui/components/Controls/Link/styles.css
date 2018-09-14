@@ -3,25 +3,20 @@
 .container {
   color: inherit;
   text-decoration: none;
+  background-image: linear-gradient(to top, color(var(--color-neutral-5) a(30%)) 1px, transparent 1px);
+}
+
+.container:hover,
+.container:global(.--hover) {
+  background-image: linear-gradient(to top, color(var(--color-neutral-5) a(100%)) 1px, transparent 1px);
 }
 
 .container:focus {
   outline: none;
 }
 
-.backdrop {
-  border-bottom: 1px solid currentColor;
-}
-
-.container:global(.--hover) .backdrop,
-.container:hover .backdrop {
-  bottom: -1px;
-  border-bottom-width: 2px;
-}
-
-.container:global(.--focus) .backdrop,
-:global(.with-focus-ring) .container:focus .backdrop {
+:global(.with-focus-ring) .container:focus,
+.container:global(.--focus) {
   background-color: var(--color-neutral-2);
-  bottom: -1px;
-  border-bottom-width: 2px;
+  background-image: linear-gradient(to top, color(var(--color-neutral-5) a(100%)) 1px, transparent 1px);
 }

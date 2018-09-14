@@ -1,0 +1,30 @@
+@import 'assets/css/variables.css';
+
+.container {
+  pointer-events: none;
+}
+
+.s {
+  width: var(--s);
+  height: var(--s);
+}
+
+.m {
+  width: var(--m);
+  height: var(--m);
+}
+
+.l {
+  width: var(--l);
+  height: var(--l);
+}
+
+.xl {
+  width: var(--xl);
+  height: var(--xl);
+}
+
+.xxl {
+  width: var(--xxl);
+  height: var(--xxl);
+}

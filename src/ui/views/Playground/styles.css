@@ -6,7 +6,7 @@
   min-height: 100vh;
   grid-template-rows: auto 1fr;
   grid-template-columns: 256px 1fr;
-  grid-gap: var(--box-m);
+  grid-gap: var(--m);
 }
 
 .heading {
@@ -16,8 +16,8 @@
 }
 
 .grid {
-  top: calc(-1 * var(--box-m));
+  top: calc(-1 * var(--m));
   bottom: 0;
   right: 0;
-  left: calc(-1 * var(--box-m));
+  left: calc(-1 * var(--m));
 }

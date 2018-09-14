@@ -1,7 +1,7 @@
 @import 'assets/css/variables.css';
 
 .textarea {
-  min-height: calc(var(--lh-m) + 2 * var(--unit));
+  min-height: calc(var(--m) + 2 * var(--u));
   border-radius: var(--radius-input);
 }
 
@@ -22,5 +22,5 @@ textarea:focus + .backdrop {
 
 textarea:disabled,
 textarea:disabled + .backdrop {
-  opacity: 0.25;
+  opacity: 0.3;
 }
