@@ -16,6 +16,7 @@
   background-color: var(--color-neutral-1);
   border: 1px solid var(--color-neutral-2);
   border-radius: var(--radius-pill);
+  user-select: none;
 }
 .icon {
   top: -1px;
@@ -68,6 +69,30 @@
 .container:global(.--focus) .backdrop,
 :global(.with-focus-ring) .container:focus-within .backdrop {
   background-color: var(--color-neutral-2);
+}
+
+/* ACTIVE */
+.checkbox:not(:disabled):active + .label .icon-container,
+.container:global(.--active) .checkbox:not(:disabled) + .label .icon-container {
+  background-color: var(--color-neutral-2);
+}
+.checkbox:checked:not(:disabled):active + .label .icon-container,
+.container:global(.--active) .checkbox:checked:not(:disabled) + .label .icon-container {
+  background-color: var(--color-accent-1-light);
+}
+
+.checkbox:not(:disabled):active + .label .icon-backdrop,
+.container:global(.--active) .checkbox:not(:disabled) + .label .icon-backdrop {
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border-color: var(--color-neutral-3);
+  border-width: 2px;
+}
+.checkbox:checked:not(:disabled):active + .label .icon-backdrop,
+.container:global(.--active) .checkbox:checked:not(:disabled) + .label .icon-backdrop {
+  border-color: var(--color-accent-1-dark);
 }
 
 /* DISABLED */

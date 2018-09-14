@@ -5,6 +5,7 @@
   height: var(--m);
   vertical-align: top;
   cursor: default;
+  user-select: none;
 }
 
 .icon-backdrop {
@@ -45,6 +46,23 @@
 .container:global(.--focus) .backdrop,
 :global(.with-focus-ring) .container:focus-within .backdrop {
   background-color: var(--color-neutral-2);
+}
+
+/* ACTIVE */
+.radio:not(:disabled):active + .label .icon-backdrop,
+.container:global(.--active) .radio:not(:disabled) + .label .icon-backdrop {
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border-color: var(--color-neutral-3);
+  border-width: 2px;
+  background-color: var(--color-neutral-2);
+}
+.radio:checked:not(:disabled):active + .label .icon-backdrop,
+.container:global(.--active) .radio:checked:not(:disabled) + .label .icon-backdrop {
+  border-color: var(--color-accent-1-dark);
+  background-color: var(--color-accent-1-light);
 }
 
 /* DISABLED */

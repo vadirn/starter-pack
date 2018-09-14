@@ -24,6 +24,12 @@
   border-width: 2px;
 }
 
+.container:active:not(:disabled) .backdrop,
+.container:global(.--active):not(:disabled) .backdrop,
+:global(.with-focus-ring) .container:active .backdrop {
+  background-color: var(--color-neutral-1);
+}
+
 .container:disabled {
   opacity: 0.3;
 }
