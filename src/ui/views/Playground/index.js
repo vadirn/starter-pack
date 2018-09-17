@@ -58,42 +58,50 @@ Navigation.propTypes = {
   page: PropTypes.object,
 };
 
-function Playground({ component, displayGrid, toggleGrid, page }) {
-  let item;
-  for (const group of components) {
-    for (const _item of group.items) {
-      if (_item.key === component) {
-        item = _item;
-      }
+class Playground extends React.PureComponent {
+  componentDidUpdate(prevProps) {
+    if (prevProps.component !== this.props.component) {
+      window.scrollTo(0, 0);
     }
   }
+  render() {
+    const { component, displayGrid, toggleGrid, page } = this.props;
+    let item;
+    for (const group of components) {
+      for (const _item of group.items) {
+        if (_item.key === component) {
+          item = _item;
+        }
+      }
+    }
 
-  let Component = () => 'Please select a component to display';
-  if (IS_SERVER) {
-    Component = () => null;
-  }
-  if (item) {
-    Component = item.component;
-  }
+    let Component = () => 'Please select a component to display';
+    if (IS_SERVER) {
+      Component = () => null;
+    }
+    if (item) {
+      Component = item.component;
+    }
 
-  return (
-    <div className={s.container}>
-      <Toolbar
-        className={c(s.heading, 'p-u p-s-l p-s-r')}
-        middle={<h1 className="text-heading text-light">Playground</h1>}
-        right={<SwitchButton checked={!!displayGrid} onChange={toggleGrid} left="Grid" />}
-      />
-      <div className="p-s-l">
-        <Navigation page={page} components={components} component={component} />
-      </div>
-      <div className="relative p-s-r">
-        <div className={c({ 'bg-grid z999': displayGrid }, 'absolute', s.grid)} />
-        <div className="relative">
-          <Component />
+    return (
+      <div className={s.container}>
+        <Toolbar
+          className={c(s.heading, 'p-u p-s-l p-s-r')}
+          middle={<h1 className="text-heading text-light">Playground</h1>}
+          right={<SwitchButton checked={!!displayGrid} onChange={toggleGrid} left="Grid" />}
+        />
+        <div className="p-s-l">
+          <Navigation page={page} components={components} component={component} />
+        </div>
+        <div className="relative p-s-r">
+          <div className={c({ 'bg-grid z999': displayGrid }, 'absolute', s.grid)} />
+          <div className="relative">
+            <Component />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 Playground.propTypes = {

@@ -3,9 +3,9 @@ function wrap(str, width) {
     return str;
   }
   const regexString = `.{1,${width}}([\\s\u200B]+|$)|[^\\s\u200B]+?([\\s\u200B]+|$)`;
-  var re = new RegExp(regexString, 'g');
-  var lines = str.match(re) || [];
-  var result = lines
+  let re = new RegExp(regexString, 'g');
+  let lines = str.match(re) || [];
+  let result = lines
     .map(line => {
       return line.trim();
     })
