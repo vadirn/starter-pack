@@ -26,16 +26,18 @@
   --fs-xxl: calc(var(--xxl) - var(--u));
 
   /* Colors */
+  /* Neutrals: https://www.colorbox.io/#steps=6#hue_start=359#hue_end=359#hue_curve=easeInOutQuad#sat_start=0#sat_end=0#sat_curve=easeInOutQuad#sat_rate=130#lum_start=100#lum_end=16#lum_curve=easeOutQuad */
   --color-neutral-0: #ffffff;
-  --color-neutral-1: #f1f1f1;
-  --color-neutral-2: #e3e4e4;
-  --color-neutral-3: #c7c8c9;
-  --color-neutral-4: #919294;
-  --color-neutral-5: #323233;
+  --color-neutral-1: #f5f5f5;
+  --color-neutral-2: #dfdfdf;
+  --color-neutral-3: #b7b7b7;
+  --color-neutral-4: #787878;
+  --color-neutral-5: #292929;
 
-  --color-accent-1-light: #ff5b4c;
-  --color-accent-1: #f24130;
-  --color-accent-1-dark: #d92616;
+  /* Accent-1: https://www.colorbox.io/#steps=3#hue_start=4#hue_end=4#hue_curve=easeOutQuad#sat_start=50#sat_end=100#sat_curve=easeOutQuad#sat_rate=130#lum_start=100#lum_end=80#lum_curve=easeOutQuad */
+  --color-accent-1-light: #ff6459;
+  --color-accent-1: #f31000;
+  --color-accent-1-dark: #cc0e00;
 
   /* Shadows */
   --shadow-1: 0 2px 4px 1px rgba(0, 0, 0, 0.4);
