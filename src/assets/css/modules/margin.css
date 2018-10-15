@@ -1,5 +1,3 @@
-@import '../variables.css';
-
 :global .m-u-b {
   margin-bottom: var(--u);
 }

@@ -1,14 +1,11 @@
-@import 'assets/css/variables.css';
-
 .textarea {
   min-height: calc(var(--m) + 2 * var(--u));
-  border-radius: var(--radius-input);
 }
 
 .backdrop {
   background-color: var(--color-neutral-0);
   border: 1px solid currentColor;
-  border-radius: var(--radius-input);
+  border-radius: inherit;
 }
 
 :global(.--focus) textarea + .backdrop,

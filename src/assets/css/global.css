@@ -1,9 +1,10 @@
+@import './variables.css';
+
 @import 'normalize.css';
 @import './modules/box-sizing.css';
 @import './modules/html-body-reset.css';
 
 @import './modules/form.css';
-@import './modules/link.css';
 
 @import './modules/display.css';
 @import './modules/flex.css';

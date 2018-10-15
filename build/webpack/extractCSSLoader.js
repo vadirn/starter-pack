@@ -1,6 +1,5 @@
 const vm = require('vm');
 const path = require('path');
-const loaderUtils = require('loader-utils');
 
 const rndPlaceholder = '__EXTRACT_LOADER_PLACEHOLDER__' + rndNumber() + rndNumber();
 
@@ -14,11 +13,6 @@ function extractCSSLoader(content) {
   const callback = this.async();
   const publicPath = getPublicPath({}, this);
   const dependencies = [];
-  const name = '[name].[hash].[ext]';
-  const outputPath = loaderUtils.interpolateName(this, name, {
-    context: this.rootContext,
-    content,
-  });
   const script = new vm.Script(content, {
     filename: this.resourcePath,
     displayErrors: true,
@@ -57,11 +51,14 @@ function extractCSSLoader(content) {
     )
     .then(results => {
       const content = sandbox.module.exports.toString().replace(new RegExp(rndPlaceholder, 'g'), () => results.shift());
-      this.emitFile(outputPath, content);
+      this.emitFile(this.resourcePath + '_', content); // name should match imported module name, thus making the order predictable
       return `module.exports = ${JSON.stringify(sandbox.module.exports.locals)};`;
     })
     .then(content => callback(null, content))
-    .catch(callback);
+    .catch(err => {
+      console.log(err);
+      callback(err);
+    });
 }
 
 function runModule(src, filename, publicPath = '') {

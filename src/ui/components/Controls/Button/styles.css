@@ -1,8 +1,6 @@
-@import 'assets/css/variables.css';
-
 .backdrop {
   border: 1px solid currentColor;
-  border-radius: var(--radius-input);
+  border-radius: inherit;
 }
 
 .container:hover:not(:disabled) .backdrop,

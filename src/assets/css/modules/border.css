@@ -1,5 +1,3 @@
-@import '../variables.css';
-
 :global .b {
   border: 1px solid currentColor;
 }

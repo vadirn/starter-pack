@@ -2,19 +2,21 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractCSSPlugin = require('./ExtractCSSPlugin');
 const ExtractStatsPlugin = require('./ExtractStatsPlugin');
-const getLocalIdent = require('css-loader/lib/getLocalIdent');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const { version } = require('../../package.json');
 const babelConfig = require('../../babel.config');
 
-function optimizationConfig({ isServer }) {
+function optimizationConfig(options = {}) {
+  const { isServer = false } = options;
+
   if (isServer) {
     return {
-      splitChunks: false,
+      concatenateModules: true,
       minimize: false,
     };
   }
   return {
+    moduleIds: 'natural', // this helps with css order
     splitChunks: {
       cacheGroups: {
         // put all node modules into vendor chunk
@@ -29,7 +31,9 @@ function optimizationConfig({ isServer }) {
   };
 }
 
-function outputConfig({ isServer, distDir, filename }) {
+function outputConfig(options = {}) {
+  const { isServer = false, distDir, filename } = options;
+
   if (isServer) {
     return {
       path: path.resolve(distDir, 'node'),
@@ -45,7 +49,9 @@ function outputConfig({ isServer, distDir, filename }) {
   };
 }
 
-module.exports = function getConfig({ isServer = false, watch = false, production = false } = {}) {
+module.exports = function getConfig(options = {}) {
+  const { isServer = false, watch = false, production = false } = options;
+
   let mode = 'development';
   if (production) {
     mode = 'production';
@@ -110,15 +116,6 @@ module.exports = function getConfig({ isServer = false, watch = false, productio
                 modules: true,
                 importLoaders: 1,
                 localIdentName: '[hash:8]__[local]',
-                getLocalIdent: (context, localIdentName, localName, options) => {
-                  let name = getLocalIdent(context, localIdentName, localName, options);
-                  // Make sure classname doesn't start with underscore
-                  // if it starts with underscore, than it was padded
-                  if (name.startsWith('_')) {
-                    name = 'a' + name.slice(2);
-                  }
-                  return name;
-                },
               },
             },
             {
@@ -130,16 +127,6 @@ module.exports = function getConfig({ isServer = false, watch = false, productio
                     root: path.resolve(rootDir),
                     path: [path.resolve(rootDir, 'node_modules'), path.resolve(rootDir, 'src')],
                   }),
-                  require('postcss-custom-media')({}),
-                  require('postcss-custom-properties')({ preserve: false }),
-                  require('postcss-calc')({}),
-                  require('postcss-color-function')({}),
-                  require('postcss-discard-comments')({}),
-                  require('postcss-remove-root')({}),
-                  require('autoprefixer')({
-                    browsers: ['last 2 versions'],
-                  }),
-                  require('postcss-clean')({}),
                 ],
               },
             },

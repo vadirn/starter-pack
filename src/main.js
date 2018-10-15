@@ -1,19 +1,17 @@
 /* global APP_VERSION, IS_BROWSER */
 import 'assets/css/global.css';
-import 'babel-polyfill';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import Router from 'router';
-import FocusObserver from 'focus-observer';
 import _controllers from 'controllers';
-import _services from 'services';
-import { Session } from 'session';
+import FocusObserver from 'focus-observer';
 import getInstance from 'get-instance';
 import log from 'pretty-log';
+import PropTypes from 'prop-types';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Router from 'router';
+import _services from 'services';
+import { Session } from 'session';
 
-log(`Good luck, have fun
-build v${APP_VERSION}`);
+log(`Good luck, have fun\nv${APP_VERSION}`);
 
 const session = getInstance('session', Session);
 
