@@ -63,6 +63,13 @@ export class RouterComponent extends React.Component {
         handler(url) {
           log(new Error(`No handler for "${url}"`), '❌ Error');
         },
+      },
+      {
+        name: 'home',
+        pattern: '/',
+        handler() {
+          mountController('Home');
+        },
       }
     );
   }
