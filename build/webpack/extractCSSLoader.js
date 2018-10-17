@@ -1,5 +1,6 @@
 const vm = require('vm');
 const path = require('path');
+const { getOptions } = require('loader-utils');
 
 const rndPlaceholder = '__EXTRACT_LOADER_PLACEHOLDER__' + rndNumber() + rndNumber();
 
@@ -10,6 +11,8 @@ function rndNumber() {
 }
 
 function extractCSSLoader(content) {
+  const { isServer = false } = getOptions(this);
+  const options = { isServer };
   const callback = this.async();
   const publicPath = getPublicPath({}, this);
   const dependencies = [];
@@ -51,7 +54,9 @@ function extractCSSLoader(content) {
     )
     .then(results => {
       const content = sandbox.module.exports.toString().replace(new RegExp(rndPlaceholder, 'g'), () => results.shift());
-      this.emitFile(this.resourcePath + '_', content); // name should match imported module name, thus making the order predictable
+      if (!options.isServer) {
+        this.emitFile(this.resourcePath + '_', content); // name should match imported module name, thus making the order predictable
+      }
       return `module.exports = ${JSON.stringify(sandbox.module.exports.locals)};`;
     })
     .then(content => callback(null, content))

@@ -1,13 +1,11 @@
 const React = require('react');
 const { renderToStaticMarkup } = require('react-dom/server');
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
-const util = require('util');
-const readFile = util.promisify(fs.readFile);
-const writeFile = util.promisify(fs.writeFile);
 
 const rootDir = path.resolve(__dirname, '..');
 const distDir = path.resolve(rootDir, 'dist');
+const pagesDir = path.resolve(distDir, 'pages');
 
 // Note extra div around ${content}, that's because dangerouslySetInnerHTML is going to be used
 // to prevent flash of no content
@@ -42,33 +40,43 @@ function html(
 }
 
 module.exports = function render({ App, controllers, router, focusObserver, services }) {
-  for (const pageName of Object.keys(controllers)) {
-    const importController = controllers[pageName];
-    importController()
-      .then(({ default: Controller }) => {
-        readFile(path.join(distDir, 'assets', 'stats.json'), 'utf-8')
-          .then(_stats => {
-            const stats = JSON.parse(_stats);
-            const controller = new Controller();
-            return html(
-              renderToStaticMarkup(
-                React.createElement(App, { controller, controllers, services, plugins: { router, focusObserver } })
-              ),
-              stats
-            );
-          })
-          .then(txt => {
-            return writeFile(path.join(distDir, 'pages', `${pageName.toLowerCase()}.html`), txt, 'utf-8');
-          })
-          .then(() => {
-            console.log(`${path.join(distDir, 'pages', `${pageName.toLowerCase()}.html`)} ready`);
+  // clear the pages directory
+  fs.emptyDir(pagesDir)
+    .then(() => {
+      return fs.ensureFile(path.resolve(pagesDir, '.keep'));
+    })
+    .then(() => {
+      for (const pageName of Object.keys(controllers)) {
+        const importController = controllers[pageName];
+        importController()
+          .then(({ default: Controller }) => {
+            fs.readFile(path.join(distDir, 'assets', 'stats.json'), 'utf-8')
+              .then(_stats => {
+                const stats = JSON.parse(_stats);
+                const controller = new Controller();
+                return html(
+                  renderToStaticMarkup(
+                    React.createElement(App, { controller, controllers, services, plugins: { router, focusObserver } })
+                  ),
+                  stats
+                );
+              })
+              .then(txt => {
+                return fs.writeFile(path.join(distDir, 'pages', `${pageName.toLowerCase()}.html`), txt, 'utf-8');
+              })
+              .then(() => {
+                console.log(`${path.join(distDir, 'pages', `${pageName.toLowerCase()}.html`)} ready`);
+              })
+              .catch(err => {
+                throw err;
+              });
           })
           .catch(err => {
             throw err;
           });
-      })
-      .catch(err => {
-        throw err;
-      });
-  }
+      }
+    })
+    .catch(err => {
+      throw err;
+    });
 };

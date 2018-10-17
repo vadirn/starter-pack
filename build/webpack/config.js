@@ -11,7 +11,6 @@ function optimizationConfig(options = {}) {
 
   if (isServer) {
     return {
-      concatenateModules: true,
       minimize: false,
     };
   }
@@ -109,6 +108,9 @@ module.exports = function getConfig(options = {}) {
           use: [
             {
               loader: require.resolve('./extractCSSLoader'),
+              options: {
+                isServer,
+              },
             },
             {
               loader: 'css-loader',
