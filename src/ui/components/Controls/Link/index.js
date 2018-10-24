@@ -3,15 +3,12 @@ import PropTypes from 'prop-types';
 import c from 'classnames';
 import s from './styles.css';
 
-export default class Link extends React.PureComponent {
-  render() {
-    const { onClick, href, children, className, rel, download } = this.props;
-    return (
-      <a className={c(s.container, className)} href={href} onClick={onClick} rel={rel} download={download}>
-        {children}
-      </a>
-    );
-  }
+export function Link({ onClick, href, children, className, rel, download }) {
+  return (
+    <a className={c(s.container, className)} href={href} onClick={onClick} rel={rel} download={download}>
+      {children}
+    </a>
+  );
 }
 
 Link.propTypes = {
@@ -22,3 +19,5 @@ Link.propTypes = {
   rel: PropTypes.string,
   download: PropTypes.string,
 };
+
+export default React.memo(Link);
