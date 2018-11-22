@@ -1,30 +1,25 @@
 /* global APP_VERSION, IS_BROWSER */
 import 'assets/css/global.css';
-import _controllers from 'controllers';
+import React, { useEffect, useContext } from 'react';
+import ReactDOM from 'react-dom';
+import App from './app';
+import log from 'pretty-log';
 import FocusObserver from 'focus-observer';
 import getInstance from 'get-instance';
-import log from 'pretty-log';
-import PropTypes from 'prop-types';
-import React from 'react';
-import ReactDOM from 'react-dom';
 import Router from 'router';
-import _services from 'services';
-import { Session } from 'session';
+import { AppContext } from 'context';
+import controllers from 'controllers';
 
-log(`Good luck, have fun\nv${APP_VERSION}`);
+log(`Good luck, have fun ✌️\nv${APP_VERSION}`);
 
-const session = getInstance('session', Session);
+export function Controller(props = {}) {
+  const { prerenderedContent } = props;
+  const { getServiceInstance, controller, mountController } = useContext(AppContext);
 
-if (IS_BROWSER && window.history && 'scrollRestoration' in window.history) {
-  window.history.scrollRestoration = 'manual';
-}
+  useEffect(() => {
+    const router = getServiceInstance('router');
 
-export class RouterComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    const { plugins, mountController } = props;
-
-    plugins.router.push(
+    router.push(
       {
         name: 'playground',
         pattern: '/playground',
@@ -33,12 +28,8 @@ export class RouterComponent extends React.Component {
           if (query.grid === 'on') {
             displayGrid = true;
           }
-          mountController('Playground', data => {
-            data.displayGrid = displayGrid;
-            data.page = { name: 'playground', params, query };
-            data.component = '';
-            return data;
-          });
+          const page = { name: 'playground', params, query };
+          mountController('Playground', () => ({ page, Playground: { displayGrid, component: '' } }));
         },
       },
       {
@@ -49,12 +40,8 @@ export class RouterComponent extends React.Component {
           if (query.grid === 'on') {
             displayGrid = true;
           }
-          mountController('Playground', data => {
-            data.displayGrid = displayGrid;
-            data.page = { name: 'playground-component', params, query };
-            data.component = params.component;
-            return data;
-          });
+          const page = { name: 'playground', params, query };
+          mountController('Playground', () => ({ page, Playground: { displayGrid, component: params.component } }));
         },
       },
       {
@@ -67,49 +54,28 @@ export class RouterComponent extends React.Component {
       {
         name: 'home',
         pattern: '/',
-        handler() {
-          mountController('Home');
+        handler({ params, query }) {
+          const page = { name: 'home', params, query };
+          mountController('Home', () => ({ page }));
         },
       }
     );
-  }
-  componentDidMount() {
     if (IS_BROWSER) {
-      const { plugins } = this.props;
-      plugins.router.callHandler(window.location);
-      this.props.prerenderedHTML.clear();
+      router.callHandler(window.location);
     }
-  }
-  // TODO: waiting for React suspense
-  render() {
-    if (this.props.controller) {
-      return <this.props.controller.View />;
+    if (prerenderedContent && prerenderedContent.value) {
+      prerenderedContent.clear();
     }
-    return this.props.prerenderedHTML.value;
+  }, []);
+
+  if (controller) {
+    return <controller.View />;
   }
+
+  return prerenderedContent.value;
 }
 
-RouterComponent.propTypes = {
-  mountController: PropTypes.func.isRequired,
-  plugins: PropTypes.object,
-  controller: PropTypes.shape({
-    View: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-  }),
-  prerenderedHTML: PropTypes.any,
-};
-
-export const App = session.withProvider(
-  session.withConsumer(RouterComponent, ({ plugins, controller, mountController, prerenderedHTML }) => ({
-    prerenderedHTML,
-    plugins,
-    controller,
-    mountController,
-  }))
-);
-
-export const router = getInstance('router', Router);
-export const focusObserver = getInstance('focus-observer', FocusObserver);
-
+// a component, that allows to clear its rendered value, kind of a workaround for mutable render props
 class Clearable {
   constructor(value) {
     this._value = value;
@@ -123,21 +89,26 @@ class Clearable {
 }
 
 if (IS_BROWSER) {
+  if (window.history && 'scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual';
+  }
+  getInstance('focus-observer', FocusObserver);
   const mountPoint = document.getElementById('mount-point');
-  const prerenderedHTML = new Clearable(
+  // prerendered content helps to avoid a flash of no content
+  // when the page is loaded the first time
+  const prerenderedContent = new Clearable(
     <div dangerouslySetInnerHTML={{ __html: mountPoint.cloneNode(true).innerHTML }} />
   );
+
   ReactDOM.render(
-    <App
-      prerenderedHTML={prerenderedHTML}
-      modules={{ controllers: _controllers, services: _services }}
-      plugins={{ router, focusObserver }}
-    />,
+    <App initialServices={{ router: new Router() }}>
+      <Controller prerenderedContent={prerenderedContent} />
+    </App>,
     mountPoint
   );
 }
 
-export const withProvider = session.withProvider;
-export const withConsumer = session.withConsumer;
-export const controllers = _controllers;
-export const services = _services;
+export default {
+  controllers,
+  App,
+};

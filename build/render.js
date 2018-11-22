@@ -39,44 +39,21 @@ function html(
 `;
 }
 
-module.exports = function render({ App, controllers, router, focusObserver, services }) {
-  // clear the pages directory
-  fs.emptyDir(pagesDir)
-    .then(() => {
-      return fs.ensureFile(path.resolve(pagesDir, '.keep'));
-    })
-    .then(() => {
-      for (const pageName of Object.keys(controllers)) {
-        const importController = controllers[pageName];
-        importController()
-          .then(({ default: Controller }) => {
-            fs.readFile(path.join(distDir, 'assets', 'stats.json'), 'utf-8')
-              .then(_stats => {
-                const stats = JSON.parse(_stats);
-                const controller = new Controller();
-                return html(
-                  renderToStaticMarkup(
-                    React.createElement(App, { controller, controllers, services, plugins: { router, focusObserver } })
-                  ),
-                  stats
-                );
-              })
-              .then(txt => {
-                return fs.writeFile(path.join(distDir, 'pages', `${pageName.toLowerCase()}.html`), txt, 'utf-8');
-              })
-              .then(() => {
-                console.log(`${path.join(distDir, 'pages', `${pageName.toLowerCase()}.html`)} ready`);
-              })
-              .catch(err => {
-                throw err;
-              });
-          })
-          .catch(err => {
-            throw err;
-          });
-      }
-    })
-    .catch(err => {
-      throw err;
-    });
+module.exports = async function render({ controllers, App }) {
+  try {
+    await fs.emptyDir(pagesDir);
+    await fs.ensureFile(path.resolve(pagesDir, '.keep'));
+    for (const controllerName of Object.keys(controllers)) {
+      const module = await controllers[controllerName]();
+      const Controller = module.default;
+      const controller = new Controller();
+      const rawStats = await fs.readFile(path.join(distDir, 'assets', 'stats.json'), 'utf-8');
+      const stats = JSON.parse(rawStats);
+      const text = html(renderToStaticMarkup(React.createElement(App, { initialController: controller })), stats);
+      await fs.writeFile(path.join(distDir, 'pages', `${controllerName.toLowerCase()}.html`), text, 'utf-8');
+      console.log(`${path.join(distDir, 'pages', `${controllerName.toLowerCase()}.html`)} ready`);
+    }
+  } catch (err) {
+    throw err;
+  }
 };

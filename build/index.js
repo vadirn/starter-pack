@@ -17,24 +17,18 @@ const argv = parseArgs(process.argv.slice(2), {
 const rootDir = path.resolve(__dirname, '..');
 const distDir = path.resolve(rootDir, 'dist');
 
-// Copy serve configs
-const serveConfigPath = path.join(rootDir, 'serve_configs', 'now.json');
-fs.copyFile(serveConfigPath, path.join(distDir, 'now.json'), err => {
-  if (err) throw err;
-});
-
-const isServer = argv.server;
-if (isServer) {
-  // clear the node directory
-  fs.emptyDir(path.resolve(distDir, 'node'))
-    .then(() => {
-      return fs.ensureFile(path.resolve(distDir, 'node', '.keep'));
-    })
-    .then(() => {
+async function main() {
+  const isServer = argv.server;
+  try {
+    if (isServer) {
+      // Copy serve configs
+      const serveConfigPath = path.join(rootDir, 'serve_configs', 'now.json');
+      await fs.copyFile(serveConfigPath, path.join(distDir, 'now.json'));
+      await fs.emptyDir(path.resolve(distDir, 'node'));
+      await fs.ensureFile(path.resolve(distDir, 'node', '.keep'));
       webpack(getConfig({ isServer, watch: argv.watch, production: argv.production }), (err, _stats) => {
         if (err) {
-          console.log(err);
-          process.exit(0);
+          throw err;
         } else if (_stats.hasErrors()) {
           const jsonStats = _stats.toJson('errors-only');
           for (const _err of jsonStats.errors) {
@@ -44,35 +38,31 @@ if (isServer) {
         }
         const stats = _stats.toJson({ assets: true });
         try {
-          render(require(path.join(stats.outputPath, stats.assetsByChunkName.main)));
+          render(require(path.join(stats.outputPath, stats.assetsByChunkName.main)).default);
         } catch (err) {
-          console.log(err);
-          process.exit(0);
+          throw err;
         }
       });
-    })
-    .catch(err => {
-      console.log(err);
-      process.exit(0);
-    });
-} else {
-  // clear the assets directory
-  fs.emptyDir(path.resolve(distDir, 'assets'))
-    .then(() => {
-      return fs.ensureFile(path.resolve(distDir, 'assets', '.keep'));
-    })
-    .then(() => {
-      webpack(getConfig({ isServer, watch: argv.watch, production: argv.production }), (err, stats) => {
+    } else {
+      await fs.emptyDir(path.resolve(distDir, 'assets'));
+      await fs.ensureFile(path.resolve(distDir, 'assets', '.keep'));
+      webpack(getConfig({ isServer, watch: argv.watch, production: argv.production }), (err, _stats) => {
         if (err) {
-          console.log(err);
-          process.exit(0);
-        } else if (!argv.watch && stats.hasErrors()) {
+          throw err;
+        } else if (_stats.hasErrors()) {
+          const stats = _stats.toJson({ assets: true });
+          const jsonStats = stats.toJson('errors-only');
+          for (const _err of jsonStats.errors) {
+            console.log(_err);
+          }
           process.exit(0);
         }
       });
-    })
-    .catch(err => {
-      console.log(err);
-      process.exit(0);
-    });
+    }
+  } catch (err) {
+    console.log(err);
+    process.exit(0);
+  }
 }
+
+main();

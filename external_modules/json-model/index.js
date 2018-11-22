@@ -22,11 +22,11 @@ function assign(accum, key, value) {
   }
 }
 
-export function applyDescription(value, description, pathToValue = [], shouldApplyDefaultValues = () => true) {
+export function applyDescription(patch, description, path = [], shouldApplyDefaults = () => true) {
   // description: { __type, __value, __nullable, __item }
   let providedType = 'undefined';
-  if (value !== undefined) {
-    providedType = getJsonType(value);
+  if (patch !== undefined) {
+    providedType = getJsonType(patch);
   }
   const describedValue = description.__value;
   const describedType = description.__type;
@@ -34,9 +34,9 @@ export function applyDescription(value, description, pathToValue = [], shouldApp
   const describedItem = description.__item;
 
   if (providedType === 'undefined') {
-    if (shouldApplyDefaultValues(pathToValue)) {
+    if (shouldApplyDefaults(path)) {
       if (describedType === 'object') {
-        return applyDescription({}, description, pathToValue, shouldApplyDefaultValues);
+        return applyDescription({}, description, path, shouldApplyDefaults);
       } else {
         return describedValue;
       }
@@ -45,7 +45,7 @@ export function applyDescription(value, description, pathToValue = [], shouldApp
     if (describedType === 'object') {
       const accum = {};
       // modifierKeys
-      const modifierKeys = new Set(Object.keys(value));
+      const modifierKeys = new Set(Object.keys(patch));
       // run through definitionValue keys
       for (const definitionKey of Object.keys(describedValue)) {
         if (definitionKey !== '*') {
@@ -53,10 +53,10 @@ export function applyDescription(value, description, pathToValue = [], shouldApp
             accum,
             definitionKey,
             applyDescription(
-              value[definitionKey],
+              patch[definitionKey],
               describedValue[definitionKey],
-              [...pathToValue, definitionKey],
-              shouldApplyDefaultValues
+              [...path, definitionKey],
+              shouldApplyDefaults
             )
           );
           modifierKeys.delete(definitionKey);
@@ -68,52 +68,47 @@ export function applyDescription(value, description, pathToValue = [], shouldApp
           assign(
             accum,
             modifierKey,
-            applyDescription(
-              value[modifierKey],
-              describedValue['*'],
-              [...pathToValue, modifierKey],
-              shouldApplyDefaultValues
-            )
+            applyDescription(patch[modifierKey], describedValue['*'], [...path, modifierKey], shouldApplyDefaults)
           );
           modifierKeys.delete(modifierKey);
         }
       }
       if (modifierKeys.size > 0) {
-        throw new Error(`No definition for "${pathToValue.join('.')}[${modifierKeys.join(', ')}]"`);
+        throw new Error(`No definition for "${path.join('.')}[${Array.from(modifierKeys).join(', ')}]"`);
       }
       return accum;
     } else if (describedType === 'array') {
       // run through modifier items if definitionItem exists
       if (describedItem !== undefined) {
         const accum = [];
-        for (const [idx, modifierItem] of value.entries()) {
-          accum.push(applyDescription(modifierItem, describedItem, [...pathToValue, idx], shouldApplyDefaultValues));
+        for (const [idx, modifierItem] of patch.entries()) {
+          accum.push(applyDescription(modifierItem, describedItem, [...path, idx], shouldApplyDefaults));
         }
         return accum;
       }
-      return value;
+      return patch;
     }
     // just return modifier
-    return value;
+    return patch;
   } else {
     // types do not match
     // check if modifier allows this
     // otherwise throw an error
     if ((providedType === 'null' && describedNullability === true) || describedType === '*') {
-      return value;
+      return patch;
     } else if (providedType === 'object' && describedType === 'array' && describedItem !== undefined) {
-      const childKeys = new Set(Object.keys(value));
+      const childKeys = new Set(Object.keys(patch));
       const accum = {};
       for (const childKey of childKeys) {
         assign(
           accum,
           childKey,
-          applyDescription(value[childKey], describedItem, [...pathToValue, childKey], shouldApplyDefaultValues)
+          applyDescription(patch[childKey], describedItem, [...path, childKey], shouldApplyDefaults)
         );
       }
       return accum;
     }
-    throw new Error(`Types do not match at "${pathToValue.join('.')}" (${providedType} - ${describedType})`);
+    throw new Error(`Types do not match at "${path.join('.')}" (${providedType} - ${describedType})`);
   }
 }
 
@@ -121,39 +116,14 @@ export default class JsonModel {
   constructor(description) {
     this._description = description;
   }
-  applyTo(value, existingValue) {
-    if (existingValue !== undefined) {
-      const shouldApplyDefaultValues = function shouldApplyDefaultValues(pathToValue) {
-        return !(existingValue && get(existingValue, pathToValue) !== undefined);
+  apply(patch, source) {
+    if (source !== undefined) {
+      // source is only required to check if it is necessary to use default value for patch at path or not
+      const shouldApplyDefaultValues = function shouldApplyDefaultValues(path) {
+        return !(source && get(source, path) !== undefined);
       };
-      return applyDescription(value, this._description, [], shouldApplyDefaultValues);
+      return applyDescription(patch, this._description, [], shouldApplyDefaultValues);
     }
-    return applyDescription(value, this._description);
+    return applyDescription(patch, this._description);
   }
-}
-
-export function compose(...models) {
-  // test if all of provided models are of type "object"
-  for (const model of models) {
-    if (model._description.__type !== 'object') {
-      throw new Error('Only models of "object" type are composable');
-    }
-  }
-  const allKeys = [];
-  for (const model of models) {
-    for (const key of Object.keys(model._description.__value)) {
-      if (allKeys.includes(key)) {
-        throw new Error('No duplicate keys are allowed when composing models');
-      }
-      allKeys.push(key);
-    }
-  }
-  const __value = models.reduce((accum, model) => {
-    Object.assign(accum, model._description.__value);
-    return accum;
-  }, {});
-  return new JsonModel({
-    __type: 'object',
-    __value,
-  });
 }

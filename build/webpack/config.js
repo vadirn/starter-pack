@@ -52,13 +52,16 @@ module.exports = function getConfig(options = {}) {
   const { isServer = false, watch = false, production = false } = options;
 
   let mode = 'development';
+  let devtool = 'eval';
   if (production) {
     mode = 'production';
+    devtool = 'none';
   }
 
   let target = 'web';
   if (isServer) {
     target = 'node';
+    devtool = 'none';
   }
 
   let filename = '[name]';
@@ -72,6 +75,7 @@ module.exports = function getConfig(options = {}) {
   const config = {
     mode,
     target,
+    devtool,
     entry: {
       main: path.resolve(rootDir, 'src', 'main.js'),
     },
@@ -91,7 +95,6 @@ module.exports = function getConfig(options = {}) {
         services: path.resolve(rootDir, 'src', 'services'),
         utils: path.resolve(rootDir, 'src', 'utils'),
         playground: path.resolve(rootDir, 'src', 'playground'),
-        main: path.resolve(rootDir, 'src', 'main'),
       },
     },
     module: {

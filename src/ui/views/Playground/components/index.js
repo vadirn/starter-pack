@@ -2,6 +2,7 @@ import ControlsAndStates from './controls-and-states';
 import VariationsAndSpacing from './text-variations-and-spacing';
 import Colors from './colors';
 import Form from './controls-form';
+import FormHooks from './controls-form-hooks';
 import Toolbar from './layouts-toolbar';
 
 export default [
@@ -30,6 +31,7 @@ export default [
         component: ControlsAndStates,
       },
       { key: 'form', label: 'Form', component: Form },
+      { key: 'form-hooks', label: 'Form With Hooks', component: FormHooks },
     ],
   },
   {

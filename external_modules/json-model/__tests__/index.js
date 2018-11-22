@@ -15,8 +15,8 @@ describe('object-state-model', () => {
         },
       },
     });
-    expect(model.applyTo({}, { a: 'foobar' })).toEqual({ b: 'b' });
-    expect(model.applyTo({ a: 'b' }, {})).toEqual({ a: 'b', b: 'b' });
+    expect(model.apply({}, { a: 'foobar' })).toEqual({ b: 'b' });
+    expect(model.apply({ a: 'b' }, {})).toEqual({ a: 'b', b: 'b' });
   });
   test('array element assignment', () => {
     const model = new JsonModel({
@@ -37,12 +37,12 @@ describe('object-state-model', () => {
         },
       },
     });
-    expect(model.applyTo({}, {})).toEqual({ array: [] });
-    expect(() => model.applyTo({ array: ['some value'] }, {})).toThrow();
-    expect(model.applyTo({ array: [{}] }, {})).toEqual({ array: [{ a: 'default value' }] });
-    expect(() => model.applyTo({ array: { 0: 'some value' } }, {})).toThrow();
-    expect(model.applyTo({ array: { 0: {} } }, {})).toEqual({ array: { 0: { a: 'default value' } } });
-    expect(model.applyTo({ array: { 0: {} } }, { array: [] })).toEqual({ array: { 0: { a: 'default value' } } });
+    expect(model.apply({}, {})).toEqual({ array: [] });
+    expect(() => model.apply({ array: ['some value'] }, {})).toThrow();
+    expect(model.apply({ array: [{}] }, {})).toEqual({ array: [{ a: 'default value' }] });
+    expect(() => model.apply({ array: { 0: 'some value' } }, {})).toThrow();
+    expect(model.apply({ array: { 0: {} } }, {})).toEqual({ array: { 0: { a: 'default value' } } });
+    expect(model.apply({ array: { 0: {} } }, { array: [] })).toEqual({ array: { 0: { a: 'default value' } } });
   });
   test('array of arrays', () => {
     const model = new JsonModel({
@@ -65,7 +65,7 @@ describe('object-state-model', () => {
         },
       },
     });
-    expect(model.applyTo({ nestedArray: { 0: { 0: {} } } }, {})).toEqual({
+    expect(model.apply({ nestedArray: { 0: { 0: {} } } }, {})).toEqual({
       nestedArray: { 0: { 0: { foo: 'bar' } } },
     });
   });
@@ -107,15 +107,15 @@ describe('object-state-model', () => {
     });
 
     expect(() => {
-      model.applyTo({ stringKey: true });
+      model.apply({ stringKey: true });
     }).toThrow();
 
-    expect(model.applyTo({ objectKey: { anyKey: 'any value' } })).toEqual({
+    expect(model.apply({ objectKey: { anyKey: 'any value' } })).toEqual({
       stringKey: 'default string value',
       objectKey: { anyKey: 'any value' },
     });
 
-    expect(model.applyTo({ objectKey: { anyKey: 'any value' } }, { stringKey: 'some existing value' })).toEqual({
+    expect(model.apply({ objectKey: { anyKey: 'any value' } }, { stringKey: 'some existing value' })).toEqual({
       objectKey: { anyKey: 'any value' },
     });
   });
@@ -124,7 +124,7 @@ describe('object-state-model', () => {
       __type: 'object',
       __value: { '*': { __type: '*' }, number: { __type: 'number', __value: 0 } },
     });
-    expect(Object.keys(model.applyTo({}, { number: 0 }))).toEqual([]);
-    expect(model.applyTo({ foo: 'bar' }, {})).toEqual({ foo: 'bar', number: 0 });
+    expect(Object.keys(model.apply({}, { number: 0 }))).toEqual([]);
+    expect(model.apply({ foo: 'bar' }, {})).toEqual({ foo: 'bar', number: 0 });
   });
 });

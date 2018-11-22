@@ -1,5 +1,5 @@
 {
-  "plugins": ["import", "jsx-a11y", "react", "prettier"],
+  "plugins": ["import", "jsx-a11y", "react", "prettier", "react-hooks"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -113,6 +113,7 @@
       {
         "controlComponents": ["TextField"]
       }
-    ]
+    ],
+    "react-hooks/rules-of-hooks": "error"
   }
 }

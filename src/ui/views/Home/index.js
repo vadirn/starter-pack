@@ -1,12 +1,5 @@
 import React from 'react';
-import { withConsumer } from 'main';
 
-function Home() {
-  return <div />;
+export default function Home() {
+  return <div className="p-m">Homepage</div>;
 }
-
-function filter() {
-  return {};
-}
-
-export default withConsumer(Home, filter);

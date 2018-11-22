@@ -1,11 +1,11 @@
 import HomeView from 'views/Home';
 
-export default class Playground {
+export default class Home {
+  constructor(options = {}) {
+    Object.assign(this, options);
+  }
   get View() {
     return HomeView;
-  }
-  get actions() {
-    return {};
   }
   dispose() {}
 }
