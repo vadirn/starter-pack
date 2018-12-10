@@ -39,28 +39,37 @@ function html(
 `;
 }
 
-module.exports = async function render({ controllers, App }) {
+async function writePage(options = {}) {
+  const { stats = {}, content = '', filename = 'index.html' } = options;
+  const text = html(content, stats);
+  await fs.writeFile(path.join(distDir, 'pages', filename), text, 'utf-8');
+  console.log(`${path.join(distDir, 'pages', filename)} ready`);
+}
+
+async function render(options = {}) {
+  const { controllers = {}, App } = options;
   try {
     await fs.emptyDir(pagesDir);
     await fs.ensureFile(path.resolve(pagesDir, '.keep'));
+    const rawStats = await fs.readFile(path.join(distDir, 'assets', 'stats.json'), 'utf-8');
+    const stats = JSON.parse(rawStats);
     for (const controllerName of Object.keys(controllers)) {
       // const module = await controllers[controllerName]();
       // const Controller = module.default;
       // const controller = new Controller();
-      const rawStats = await fs.readFile(path.join(distDir, 'assets', 'stats.json'), 'utf-8');
-      const stats = JSON.parse(rawStats);
-      // Somehow this produces an error:
       // const text = html(
       //   renderToStaticMarkup(
       //     React.createElement(App, { initialController: controller }, React.createElement(controller.View))
       //   ),
       //   stats
       // );
-      const text = html('', stats);
-      await fs.writeFile(path.join(distDir, 'pages', `${controllerName.toLowerCase()}.html`), text, 'utf-8');
-      console.log(`${path.join(distDir, 'pages', `${controllerName.toLowerCase()}.html`)} ready`);
+      const content = '';
+      await writePage({ stats, content, filename: `${controllerName.toLowerCase()}.html` });
     }
+    await writePage({ stats, content: '' });
   } catch (err) {
     throw err;
   }
-};
+}
+
+module.exports = render;

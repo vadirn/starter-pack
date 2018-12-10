@@ -9,7 +9,27 @@ const contentDisposition = require('content-disposition');
 const stat = promisify(fs.stat);
 
 const ROOT_DIR = path.resolve(path.join('.', 'dist'));
+const ASSETS_DIR = path.resolve(path.join(ROOT_DIR, 'assets'));
 const PAGES_DIR = path.join(ROOT_DIR, 'pages');
+
+function getFilePath(relativePath) {
+  const type = mime.lookup(relativePath);
+  if (relativePath === '/') {
+    return path.join(PAGES_DIR, relativePath + 'home.html');
+  }
+  if (!type) {
+    // look for relative .html file
+    return path.join(PAGES_DIR, relativePath + '.html');
+  }
+  if (type === 'text/html') {
+    // handle implicitly requested .html files
+    return path.join(PAGES_DIR, relativePath);
+  }
+  if (relativePath.startsWith('/assets/')) {
+    return path.join(ROOT_DIR, relativePath);
+  }
+  return path.join(ASSETS_DIR, relativePath);
+}
 
 module.exports = async function app(req, res) {
   if (req.method !== 'GET' && req.method !== 'HEAD') {
@@ -25,34 +45,22 @@ module.exports = async function app(req, res) {
   // Avoid https://en.wikipedia.org/wiki/Directory_traversal_attack
   // e.g curl --path-as-is http://localhost:9000/../fileInDanger.txt
   // by limiting the path to current directory only
-  let sanitizedPath = path.normalize(parsedUrl.pathname).replace(/^(\.\.[/\\])+/, '');
-  const type = mime.lookup(sanitizedPath);
-
-  // figure out file path, .html files are stored in PAGES_DIR, everything else is in ASSETS_DIR
-  let filePath;
-  if (sanitizedPath === '/') {
-    sanitizedPath += 'home.html';
-    filePath = path.join(PAGES_DIR, sanitizedPath);
-  } else if (!type) {
-    sanitizedPath += '.html';
-    filePath = path.join(PAGES_DIR, sanitizedPath);
-  } else if (type === 'text/html') {
-    filePath = path.join(PAGES_DIR, sanitizedPath);
-  } else if (sanitizedPath.startsWith('/assets/')) {
-    filePath = path.join(ROOT_DIR, sanitizedPath);
-  } else {
-    res.statusCode = 404;
-    res.setHeader('Content-Length', 0);
-    res.end();
-    return;
-  }
+  const sanitizedPath = path.normalize(parsedUrl.pathname).replace(/^(\.\.[/\\])+/, '');
+  let filePath = getFilePath(sanitizedPath);
+  const indexPath = getFilePath('/index.html');
 
   let fileStats;
+  let indexStats;
   try {
+    indexStats = await stat(indexPath);
     fileStats = await stat(filePath);
   } catch (err) {
-    if (err.code !== 'ENOENT') {
+    if (filePath.endsWith('.html') && indexStats) {
+      fileStats = indexStats;
+      filePath = indexPath;
+    } else {
       res.statusCode = 404;
+      res.setHeader('Content-Type', 'text/plain');
       res.setHeader('Content-Length', 0);
       res.end();
       return;
@@ -83,17 +91,9 @@ module.exports = async function app(req, res) {
     }
   }
 
-  let stream;
-  try {
-    stream = fs.createReadStream(filePath, streamOpts);
-  } catch (err) {
-    res.statusCode = 500;
-    res.setHeader('Content-Length', 0);
-    res.end();
-    return;
-  }
-
+  const stream = fs.createReadStream(filePath, streamOpts);
   const headers = {};
+
   if (fileStats) {
     headers['Last-Modified'] = fileStats.mtime.toUTCString();
     headers['Content-Length'] = fileStats.size;
