@@ -1,11 +1,11 @@
-import HomeView from 'views/Home';
+import View from 'views/Home';
 
-export default class Home {
+export default class {
   constructor(options = {}) {
     Object.assign(this, options);
   }
   get View() {
-    return HomeView;
+    return View;
   }
   dispose() {}
 }

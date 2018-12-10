@@ -1,20 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import merge from 'lodash.merge';
-import controllerModules from './controllers';
-import serviceModules from './services';
-import supermodel from './supermodel';
 import { AppContext } from 'context';
 import log from 'pretty-log';
+import PropTypes from 'prop-types';
+import React from 'react';
+import controllerModules from './controllers';
+import serviceModules from './services';
+import { StateMutationAbortError } from 'utils/errors';
+
+// can put validation here
+function ensureValidAppState() {}
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     const { initialServices = {}, initialController = null } = props;
     this.state = {
-      // this will return default app state
-      appState: supermodel.apply({}, {}),
+      appState: {},
       controller: initialController,
+      _controllerKey: 0,
     };
 
     this._services = initialServices;
@@ -42,10 +44,7 @@ export default class App extends React.Component {
       }
     }
   }
-  async mountController(controllerName, appStateProducer = () => null) {
-    if (typeof appStateProducer !== 'function') {
-      throw new Error('State producer should be a function');
-    }
+  async mountController(controllerName, defaultPageState = {}) {
     try {
       const module = await controllerModules[controllerName]();
       const Controller = module.default;
@@ -54,45 +53,36 @@ export default class App extends React.Component {
         mountController: this.mountController,
         setAppState: this.setAppState,
         getServiceInstance: this.getServiceInstance,
+        defaultState: defaultPageState,
       });
 
       this.setState(state => {
         if (state.controller) {
           state.controller.dispose();
         }
-        const rawPatch = appStateProducer(state.appState);
-        if (!rawPatch) {
-          return { controller };
-        }
-        try {
-          const patch = supermodel.apply(rawPatch, state.appState);
-          // next recursively merge appState and patch
-          return { appState: merge(state.appState, patch), controller };
-        } catch (err) {
-          log(err, '❌ Error applying model');
-          return { controller };
-        }
+        state.controller = controller;
+        state._controllerKey += 1;
+        return state;
       });
     } catch (err) {
       log(err, '❌ Error');
       throw err;
     }
   }
-  setAppState(producer) {
-    if (typeof producer !== 'function') {
-      throw new Error('State producer should be a function');
+  setAppState(
+    mutateAppState = () => {
+      throw new StateMutationAbortError();
     }
+  ) {
     this.setState(state => {
-      const rawPatch = producer(state.appState);
-      if (!rawPatch) {
-        return null;
-      }
       try {
-        const patch = supermodel.apply(rawPatch, state.appState);
-        // next recursively merge appState and patch
-        return merge(state.appState, patch);
+        mutateAppState(state.appState); // doesn't return anything, but mutates the state variable
+        ensureValidAppState(state.appState); // makes sure that app state isn't messed up
+        return state;
       } catch (err) {
-        log(err, '❌ Error applying model');
+        if (err.name !== 'StateMutationAbortError') {
+          log(err, '❌ Error mutating state');
+        }
         return null;
       }
     });
@@ -103,7 +93,7 @@ export default class App extends React.Component {
       ...this.state,
       importService: this.importService,
       mountController: this.mountController,
-      setState: this.setAppState,
+      setAppState: this.setAppState,
       getServiceInstance: this.getServiceInstance,
     };
     return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;

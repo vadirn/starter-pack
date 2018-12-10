@@ -4,22 +4,23 @@ function fetchWrapper(method = 'GET', url, _options = {}) {
   const options = Object.assign({ headers: {} }, _options);
 
   const fetchOptions = {
-    headers: new window.Headers({
+    headers: {
       // add default headers here
-      'content-type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
       ...options.headers,
-    }),
-    body: options.body,
+    },
+    body: JSON.stringify(options.body),
     method,
     cache: 'no-cache',
     credentials: 'same-origin',
     signal,
   };
 
-  const response = window.fetch(fetchOptions);
+  const response = window.fetch(url, fetchOptions);
   response.abort = function abort() {
     abortController.abort();
   };
+
   return response;
 }
 
@@ -29,4 +30,8 @@ export function get(url, options) {
 
 export function post(url, options) {
   return fetchWrapper('POST', url, options);
+}
+
+export function remove(url, options) {
+  return fetchWrapper('DELETE', url, options);
 }

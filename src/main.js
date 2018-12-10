@@ -14,34 +14,25 @@ log(`Good luck, have fun ✌️\nv${APP_VERSION}`);
 
 export function Controller(props = {}) {
   const { prerenderedContent } = props;
-  const { getServiceInstance, controller, mountController } = useContext(AppContext);
+  const { getServiceInstance, controller, _controllerKey, mountController } = useContext(AppContext);
 
   useEffect(() => {
     const router = getServiceInstance('router');
-
     router.push(
       {
         name: 'playground',
         pattern: '/playground',
-        handler({ params, query }) {
-          let displayGrid = false;
-          if (query.grid === 'on') {
-            displayGrid = true;
-          }
-          const page = { name: 'playground', params, query };
-          mountController('Playground', () => ({ page, Playground: { displayGrid, component: '' } }));
+        handler({ params, query }, name) {
+          router.locationData = { name, params, query };
+          mountController('Playground');
         },
       },
       {
         name: 'playground-component',
         pattern: '/playground/:component',
-        handler({ params, query }) {
-          let displayGrid = false;
-          if (query.grid === 'on') {
-            displayGrid = true;
-          }
-          const page = { name: 'playground', params, query };
-          mountController('Playground', () => ({ page, Playground: { displayGrid, component: params.component } }));
+        handler({ params, query }, name) {
+          router.locationData = { name, params, query };
+          mountController('Playground');
         },
       },
       {
@@ -49,14 +40,6 @@ export function Controller(props = {}) {
         pattern: '/404',
         handler(url) {
           log(new Error(`No handler for "${url}"`), '❌ Error');
-        },
-      },
-      {
-        name: 'home',
-        pattern: '/',
-        handler({ params, query }) {
-          const page = { name: 'home', params, query };
-          mountController('Home', () => ({ page }));
         },
       }
     );
@@ -69,7 +52,7 @@ export function Controller(props = {}) {
   }, []);
 
   if (controller) {
-    return <controller.View />;
+    return <controller.View key={_controllerKey} />;
   }
 
   return prerenderedContent.value;

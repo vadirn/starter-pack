@@ -44,12 +44,19 @@ module.exports = async function render({ controllers, App }) {
     await fs.emptyDir(pagesDir);
     await fs.ensureFile(path.resolve(pagesDir, '.keep'));
     for (const controllerName of Object.keys(controllers)) {
-      const module = await controllers[controllerName]();
-      const Controller = module.default;
-      const controller = new Controller();
+      // const module = await controllers[controllerName]();
+      // const Controller = module.default;
+      // const controller = new Controller();
       const rawStats = await fs.readFile(path.join(distDir, 'assets', 'stats.json'), 'utf-8');
       const stats = JSON.parse(rawStats);
-      const text = html(renderToStaticMarkup(React.createElement(App, { initialController: controller })), stats);
+      // Somehow this produces an error:
+      // const text = html(
+      //   renderToStaticMarkup(
+      //     React.createElement(App, { initialController: controller }, React.createElement(controller.View))
+      //   ),
+      //   stats
+      // );
+      const text = html('', stats);
       await fs.writeFile(path.join(distDir, 'pages', `${controllerName.toLowerCase()}.html`), text, 'utf-8');
       console.log(`${path.join(distDir, 'pages', `${controllerName.toLowerCase()}.html`)} ready`);
     }

@@ -148,6 +148,8 @@ module.exports = function getConfig(options = {}) {
         APP_VERSION: JSON.stringify(version),
         IS_SERVER: JSON.stringify(isServer),
         IS_BROWSER: JSON.stringify(!isServer),
+        IS_DEV: JSON.stringify(mode === 'development'),
+        IS_PROD: JSON.stringify(mode === 'production'),
       }),
       new ExtractCSSPlugin({
         filename: `${filename}.css`,

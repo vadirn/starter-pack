@@ -7,20 +7,20 @@ export default class Playground {
   get View() {
     return PlaygroundView;
   }
-  toggleGrid(options = {}) {
-    const { checked, page } = options;
-    let grid = 'off';
-    if (checked) {
-      grid = 'on';
-    }
-    const router = this.getServiceInstance('router');
-    router.replaceLocation(
-      router.serializeLocationData(page.name, {
-        params: page.params,
-        query: Object.assign(page.query, { grid }),
-      })
-    );
-    this.setAppState(() => ({ Playground: { displayGrid: checked } }));
-  }
   dispose() {}
+  // toggleGrid(options = {}) {
+  //   const { checked, page } = options;
+  //   let grid = 'off';
+  //   if (checked) {
+  //     grid = 'on';
+  //   }
+  //   const router = this.getServiceInstance('router');
+  //   router.replaceLocation(
+  //     router.serializeLocationData(page.name, {
+  //       params: page.params,
+  //       query: Object.assign(page.query, { grid }),
+  //     })
+  //   );
+  //   this.setAppState(() => ({ Playground: { displayGrid: checked } }));
+  // }
 }

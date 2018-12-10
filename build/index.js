@@ -21,9 +21,6 @@ async function main() {
   const isServer = argv.server;
   try {
     if (isServer) {
-      // Copy serve configs
-      const serveConfigPath = path.join(rootDir, 'serve_configs', 'now.json');
-      await fs.copyFile(serveConfigPath, path.join(distDir, 'now.json'));
       await fs.emptyDir(path.resolve(distDir, 'node'));
       await fs.ensureFile(path.resolve(distDir, 'node', '.keep'));
       webpack(getConfig({ isServer, watch: argv.watch, production: argv.production }), (err, _stats) => {
@@ -51,8 +48,7 @@ async function main() {
           throw err;
         } else if (_stats.hasErrors()) {
           const stats = _stats.toJson({ assets: true });
-          const jsonStats = stats.toJson('errors-only');
-          for (const _err of jsonStats.errors) {
+          for (const _err of stats.errors) {
             console.log(_err);
           }
           process.exit(0);

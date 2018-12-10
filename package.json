@@ -5,56 +5,40 @@
   "license": "MIT",
   "description": "React app build configuration and design system starter",
   "scripts": {
-    "start": "serve ./dist",
+    "start": "node build/serve",
     "watch": "node build --watch",
     "html": "node build --server",
     "build": "yarn run clear && node build --production && node build --server",
     "clear": "rm -rf dist/**",
     "prettier": "prettier --config .prettierrc.json --write ./src/**/*.js ./external_modules/**/*.js",
     "lint": "eslint . --ext .js --quiet",
-    "test": "jest",
-    "commit": "git-cz"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --config .prettierrc.json --write",
-      "git add"
-    ],
-    "*.js": [
-      "eslint --quiet",
-      "git add"
-    ]
+    "test": "jest"
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "commitizen": "^3.0.4",
-    "eslint": "^5.9.0",
+    "eslint": "^5.10.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-react-hooks": "^0.0.0",
     "fs-extra": "^7.0.1",
-    "husky": "^1.2.0",
     "jest": "^23.6.0",
-    "prettier": "^1.15.2"
+    "prettier": "^1.15.3"
   },
   "dependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/preset-env": "^7.1.6",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
-    "autoprefixer": "^9.3.1",
+    "autoprefixer": "^9.4.2",
     "babel-loader": "^8.0.4",
     "classnames": "^2.2.6",
-    "css-loader": "^1.0.1",
+    "compression": "^1.7.3",
+    "content-disposition": "^0.5.2",
+    "css-loader": "^2.0.0",
     "cssnano": "^4.1.7",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "lint-staged": "^8.1.0",
@@ -66,10 +50,10 @@
     "postcss-preset-env": "^6.4.0",
     "postcss-smart-import": "^0.7.6",
     "prop-types": "^15.6.2",
+    "range-parser": "^1.2.0",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
-    "serve": "^10.1.1",
-    "webpack": "^4.26.0",
+    "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2"
   }
 }

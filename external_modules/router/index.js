@@ -63,7 +63,7 @@ export default class Router {
     // pass parsed location and action
     const route = findRoute(url, this._routes);
     if (route && route.handler) {
-      return route.handler.call(null, route.data);
+      return route.handler.call(null, route.data, route.name);
     } else {
       const notFound = findRouteByName('404', this._routes);
       if (notFound) {
