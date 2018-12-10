@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import s from './styles.css';
 
-export function Button({ children, className, left, right, look, ...props }) {
+export function Button(props = {}) {
+  const { children, className, left, right, look = 'default', ...etc } = props;
   return (
-    <button className={c('relative p-u-l p-u-r p-u-b p-u-t', className, s.container, s[look])} {...props}>
+    <button className={c('relative p-u-l p-u-r p-u-b p-u-t', className, s[look])} {...etc}>
       <div className={c('absolute top-0 left-0 right-0 bottom-0', s.backdrop)} />
       <div className="relative z1">
-        <Toolbar left={left} right={right} middle={<div className="p-u-l p-u-r">{children}</div>} />
+        <Toolbar left={left} right={right} middle={<div className={c('p-u-l p-u-r', s.content)}>{children}</div>} />
       </div>
     </button>
   );

@@ -1,19 +1,20 @@
-.backdrop {
+/* DEFAULT look */
+.default .backdrop {
   border: 1px solid currentColor;
   border-radius: inherit;
 }
-
-.container:hover:not(:disabled) .backdrop,
-.container:global(.--hover):not(:disabled) .backdrop {
+/* :hover */
+.default:hover:not(:disabled) .backdrop,
+.default:global(.--hover):not(:disabled) .backdrop {
   top: -1px;
   bottom: -1px;
   left: -1px;
   right: -1px;
   border-width: 2px;
 }
-
-:global(.with-focus-ring) .container:focus .backdrop,
-.container:global(.--focus) .backdrop {
+/* :focus */
+:global(.with-focus-ring) .default:focus .backdrop,
+.default:global(.--focus) .backdrop {
   background-color: var(--color-neutral-2);
   top: -1px;
   bottom: -1px;
@@ -21,13 +22,17 @@
   right: -1px;
   border-width: 2px;
 }
-
-.container:active:not(:disabled) .backdrop,
-.container:global(.--active):not(:disabled) .backdrop,
-:global(.with-focus-ring) .container:active .backdrop {
+/* :active */
+.default:active:not(:disabled) .backdrop,
+.default:global(.--active):not(:disabled) .backdrop {
   background-color: var(--color-neutral-1);
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  border-width: 2px;
 }
-
-.container:disabled {
+/* :disabled */
+.default:disabled {
   opacity: 0.3;
 }

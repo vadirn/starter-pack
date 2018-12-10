@@ -139,7 +139,7 @@ export default function Playground() {
         <Sidebar locationData={router.locationData} components={components} />
       </div>
       <div className={c(s.content, 'p-u')}>
-        <div className={c('bg-grid absolute top-0 left-0 right-0 bottom-0', { none: !state.displayGrid })} />
+        <div className={c('bg-grid absolute top-0 left-0 right-0 bottom-0 z999', { none: !state.displayGrid })} />
         <Component />
       </div>
     </div>
