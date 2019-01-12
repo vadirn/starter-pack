@@ -12,10 +12,11 @@ module.exports = class ExrtactCSSPlugin {
       filename = '[name].[chunkhash].css',
       isServer = false,
       postcssEnv = {
-        browsers: ['>0.25%', 'not ie 11', 'not op_mini all'],
+        browsers: ['> 0.5%', 'last 2 versions', 'Firefox ESR', 'not dead'],
         features: {
           'color-mod-function': { unresolved: 'warn' },
           'custom-media-queries': true,
+          'media-query-ranges': true,
         },
       },
     } = options;
@@ -55,7 +56,6 @@ module.exports = class ExrtactCSSPlugin {
             })
             .catch(err => {
               console.log(err);
-              process.exit(0);
             });
         }
       });

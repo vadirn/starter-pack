@@ -6,24 +6,32 @@
     'Helvetica Neue', sans-serif;
   --ff-mono: Hack, Consolas, 'Lucida Console', monospace;
 
-  /* Size units and font sizes */
-  --px: calc(1 / 16 * 1rem); /* 1 */
-  --u: calc(8 / 16 * 1rem); /* 8 */
+  /*
+    Size units and font sizes  
+  
+    Responsiveness achieved using this formula: 
+    const calc = ([minFs, maxFs], breakPoint) => `calc(${minFs / 16}rem + ${(maxFs - minFs) * 100 / breakPoint}vw)`;
 
-  --s: calc(2 * var(--u)); /* 16 */
-  --fs-s: calc(var(--s) - var(--u) / 2);
+    Sizes less than 16 were not touched
+  */
+  --px: 0.0625rem; /* 1 */
 
-  --m: calc(3 * var(--u)); /* 24 */
-  --fs-m: calc(var(--m) - var(--u));
+  --u: 0.5rem; /* 8 */
 
-  --l: calc(4 * var(--u)); /* 32 */
-  --fs-l: calc(var(--l) - var(--u));
+  --s: 1rem; /* 16 */
+  --fs-s: 0.875rem; /* 14 */
 
-  --xl: calc(5 * var(--u)); /* 40 */
-  --fs-xl: calc(var(--xl) - var(--u));
+  --m: calc(1.125rem + 0.5859375vw); /* 24 */
+  --fs-m: 1rem; /* 16 */
 
-  --xxl: calc(6 * var(--u)); /* 48 */
-  --fs-xxl: calc(var(--xxl) - var(--u));
+  --l: calc(1.25rem + 1.171875vw); /* 32 */
+  --fs-l: calc(1.125rem + 0.5859375vw); /* 24 */
+
+  --xl: calc(1.375rem + 1.7578125vw); /* 40 */
+  --fs-xl: calc(1.25rem + 1.171875vw); /* 32 */
+
+  --xxl: calc(1.5rem + 2.34375vw); /* 48 */
+  --fs-xxl: calc(1.375rem + 1.7578125vw); /* 40 */
 
   /* Colors */
   /* Neutrals: https://www.colorbox.io/#steps=6#hue_start=359#hue_end=359#hue_curve=easeInOutQuad#sat_start=0#sat_end=0#sat_curve=easeInOutQuad#sat_rate=130#lum_start=100#lum_end=16#lum_curve=easeOutQuad */
@@ -44,12 +52,34 @@
 
   /* Border radii */
   --radius-pill: 9999em;
+  --radius-input: 0;
+
+  /* break-points */
+  --bp-1: 320px;
+  --bp-2: 425px;
+  --bp-3: 768px;
+  --bp-4: 1024px;
+  --bp-5: 1440px;
 }
 
-@custom-media --mobile-s (min-width: 320px);
-@custom-media --mobile-m (min-width: 375px);
-@custom-media --mobile-l (min-width: 425px);
+@custom-media --mobile-1 (min-width: 320px);
+@custom-media --mobile-2 (min-width: 425px);
 @custom-media --tablet (min-width: 768px);
-@custom-media --laptop (min-width: 1024px);
-@custom-media --laptop-l (min-width: 1440px);
-@custom-media --4k (min-width: 2560px);
+@custom-media --laptop-1 (min-width: 1024px);
+@custom-media --laptop-2 (min-width: 1440px);
+
+@media (--laptop-1) {
+  :root {
+    --m: 1.5rem;
+    --fs-m: 1rem;
+
+    --l: 2rem; /* 32 */
+    --fs-l: 1.5rem; /* 24 */
+
+    --xl: 2.5rem; /* 40 */
+    --fs-xl: 2rem; /* 32 */
+
+    --xxl: 3rem; /* 48 */
+    --fs-xxl: 2.5rem; /* 40 */
+  }
+}

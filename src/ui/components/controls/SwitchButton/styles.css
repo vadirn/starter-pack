@@ -9,7 +9,7 @@
 
 .icon-container {
   cursor: default;
-  width: var(--xl);
+  width: calc(1.5 * var(--m));
   height: var(--m);
   background-color: var(--color-neutral-1);
   border: 1px solid var(--color-neutral-2);
@@ -28,7 +28,7 @@
   border: 1px solid var(--color-accent-1-dark);
 }
 .checkbox:checked + .label .icon {
-  transform: translateX(calc(var(--xl) - var(--m)));
+  transform: translateX(calc(0.5 * var(--m)));
 }
 
 .icon-backdrop {
