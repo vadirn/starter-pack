@@ -1,4 +1,3 @@
-/* global IS_BROWSER */
 import EventTarget from 'event-target';
 import getInstance from 'get-instance';
 
@@ -6,9 +5,7 @@ export class History extends EventTarget {
   constructor() {
     super();
     this._handlePopstate = this._handlePopstate.bind(this);
-    if (IS_BROWSER) {
-      window.addEventListener('popstate', this._handlePopstate);
-    }
+    window.addEventListener('popstate', this._handlePopstate);
   }
   _handlePopstate() {
     this.dispatchEvent(new CustomEvent('change', { detail: { url: new URL(window.location.href) } }));
@@ -19,14 +16,10 @@ export class History extends EventTarget {
     } else {
       this.dispatchEvent(new CustomEvent('change', { detail: { url: new URL(urlString) } }));
     }
-    if (IS_BROWSER) {
-      window.history.pushState(null, null, urlString);
-    }
+    window.history.pushState(null, null, urlString);
   }
   replace(urlString) {
-    if (IS_BROWSER) {
-      window.history.replaceState(null, null, urlString);
-    }
+    window.history.replaceState(null, null, urlString);
   }
 }
 
@@ -63,6 +56,7 @@ export default class Router {
     // pass parsed location and action
     const route = findRoute(url, this._routes);
     if (route && route.handler) {
+      this.locationData = { ...route.data, name: route.name };
       return route.handler.call(null, route.data, route.name);
     } else {
       const notFound = findRouteByName('404', this._routes);

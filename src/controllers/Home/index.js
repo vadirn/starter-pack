@@ -4,6 +4,9 @@ export default class {
   constructor(options = {}) {
     Object.assign(this, options);
   }
+  get meta() {
+    return {};
+  }
   get View() {
     return View;
   }

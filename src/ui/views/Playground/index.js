@@ -1,4 +1,3 @@
-/* global IS_SERVER */
 import c from 'classnames';
 import RouterLink from 'components/controls/RouterLink';
 import SwitchButton from 'components/controls/SwitchButton';
@@ -10,20 +9,6 @@ import s from './styles.css';
 
 function Sidebar(props = {}) {
   const { components, locationData } = props;
-  if (IS_SERVER) {
-    return (
-      <Fragment>
-        {components.map(group => {
-          return (
-            <Fragment key={group.key}>
-              <div className="text-caps text-medium color-neutral-4">{group.label}</div>
-              <div className="h-m bg-neutral-1 m-s-b" />
-            </Fragment>
-          );
-        })}
-      </Fragment>
-    );
-  }
   return (
     <Fragment>
       {components.map(group => {
@@ -120,9 +105,6 @@ export default function Playground() {
     }
   }
   let Component = () => 'Please select a component to display';
-  if (IS_SERVER) {
-    Component = () => null;
-  }
   if (item) {
     Component = item.component;
   }

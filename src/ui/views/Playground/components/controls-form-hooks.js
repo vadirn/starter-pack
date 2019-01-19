@@ -13,7 +13,7 @@ export default function FormHooks() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField className="m-s-b" placeholder="Text field" {...text} />
+      <TextField name="text" className="m-s-b" placeholder="Text field" {...text} />
       <Button type="submit">Submit</Button>
     </form>
   );

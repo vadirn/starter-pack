@@ -23,8 +23,8 @@ ol {
   list-style: none;
 }
 
-:global .ff-system {
-  font-family: var(--ff-system);
+:global .ff-body {
+  font-family: var(--ff-body);
 }
 
 :global .ff-heading {
@@ -54,7 +54,7 @@ ol {
 
 :global .text-body-1 {
   font-size: var(--fs-m);
-  line-height: var(--m);
+  line-height: var(--lh-m);
 }
 
 :global .text-caption {
@@ -64,7 +64,7 @@ ol {
 
 :global .text-caps {
   font-size: var(--fs-s);
-  line-height: var(--m);
+  line-height: var(--lh-m);
   text-transform: uppercase;
   letter-spacing: var(--px);
 }
@@ -78,7 +78,7 @@ ol {
 }
 
 :global .lh-m {
-  line-height: var(--m);
+  line-height: var(--lh-m);
 }
 
 :global .lh-s {
@@ -103,6 +103,9 @@ ol {
 }
 :global .text-bold {
   font-weight: 700;
+}
+:global .text-black {
+  font-weight: 900;
 }
 :global .text-regular {
   font-weight: normal;

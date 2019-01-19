@@ -5,6 +5,12 @@ import React from 'react';
 import controllerModules from './controllers';
 import serviceModules from './services';
 import { StateMutationAbortError } from 'utils/errors';
+import once from 'lodash/once';
+import resetPage from './utils/resetPage';
+
+function notifyPageReady() {
+  document.dispatchEvent(new CustomEvent('app:ready'));
+}
 
 // can put validation here
 function ensureValidAppState() {}
@@ -25,6 +31,7 @@ export default class App extends React.Component {
     this.importService = this.importService.bind(this);
     this.mountController = this.mountController.bind(this);
     this.setAppState = this.setAppState.bind(this);
+    this.notifyPageReady = once(notifyPageReady);
   }
   getServiceInstance(serviceName) {
     return this._services[serviceName];
@@ -60,9 +67,7 @@ export default class App extends React.Component {
         if (state.controller) {
           state.controller.dispose();
         }
-        state.controller = controller;
-        state._controllerKey += 1;
-        return state;
+        return { ...state, controller, _controllerKey: (state._controllerKey += 1) };
       });
     } catch (err) {
       log(err, '❌ Error');
@@ -76,9 +81,10 @@ export default class App extends React.Component {
   ) {
     this.setState(state => {
       try {
-        mutateAppState(state.appState); // doesn't return anything, but mutates the state variable
-        ensureValidAppState(state.appState); // makes sure that app state isn't messed up
-        return state;
+        const mutableState = { ...state.appState };
+        mutateAppState(mutableState); // doesn't return anything, but mutates the state variable
+        ensureValidAppState(mutableState); // makes sure that app state isn't messed up
+        return { ...state, appState: mutableState };
       } catch (err) {
         if (err.name !== 'StateMutationAbortError') {
           log(err, '❌ Error mutating state');
@@ -86,6 +92,12 @@ export default class App extends React.Component {
         return null;
       }
     });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.controller !== this.state.controller) {
+      resetPage(this.state.controller.meta);
+      this.notifyPageReady();
+    }
   }
   render() {
     const { children } = this.props;

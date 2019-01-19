@@ -1,4 +1,3 @@
-/* global IS_BROWSER */
 const TAB = 9;
 
 export default class FocusObserver {
@@ -6,12 +5,10 @@ export default class FocusObserver {
     this.className = className;
     this.onKeyDown = this.onKeyDown.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
-    if (IS_BROWSER) {
-      window.addEventListener('keydown', this.onKeyDown);
-    }
+    window.addEventListener('keydown', this.onKeyDown);
   }
   onKeyDown(evt, force = false) {
-    if (IS_BROWSER && (evt.keyCode === TAB || force)) {
+    if (evt.keyCode === TAB || force) {
       document.body.classList.add(this.className);
 
       window.removeEventListener('keydown', this.onKeyDown);
@@ -19,12 +16,10 @@ export default class FocusObserver {
     }
   }
   onMouseDown() {
-    if (IS_BROWSER) {
-      document.body.classList.remove(this.className);
+    document.body.classList.remove(this.className);
 
-      window.removeEventListener('mousedown', this.onMouseDown);
-      window.addEventListener('keydown', this.onKeyDown);
-    }
+    window.removeEventListener('mousedown', this.onMouseDown);
+    window.addEventListener('keydown', this.onKeyDown);
   }
   enableFocusRing() {
     this.onKeyDown({}, true);

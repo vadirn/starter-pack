@@ -1,12 +1,9 @@
-module.exports = function babelConfig(api, useCommonjs = false) {
+module.exports = function babelConfig(api) {
   if (api) {
     api.cache(true);
   }
 
-  let modules = false;
-  if (useCommonjs) {
-    modules = 'commonjs';
-  }
+  let modules = 'false';
 
   return {
     presets: [
@@ -16,7 +13,7 @@ module.exports = function babelConfig(api, useCommonjs = false) {
           useBuiltIns: 'usage',
           debug: false,
           targets: {
-            browsers: ['>0.25%', 'not ie 11', 'not op_mini all'],
+            browsers: ['> 0.5%', 'last 2 versions', 'Firefox ESR', 'not dead'],
           },
           modules,
           loose: true,
