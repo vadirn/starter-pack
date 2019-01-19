@@ -28,7 +28,6 @@ module.exports = stats => `<!DOCTYPE html>
   
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" href="/assets/favicon.svg" sizes="any" type="image/svg+xml">
-  <link rel="stylesheet" href="https://use.typekit.net/fqk8nrx.css">
   <link rel="stylesheet" href="${stats.publicPath}${stats.assets['bundle.css']}">
 </head>
 

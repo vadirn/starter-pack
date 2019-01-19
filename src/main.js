@@ -78,6 +78,7 @@ class Clearable {
 if (window.history && 'scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
 }
+
 getInstance('focus-observer', FocusObserver);
 const mountPoint = document.getElementById('mount-point');
 // prerendered content helps to avoid a flash of no content
