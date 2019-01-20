@@ -1,9 +1,9 @@
+import { Link } from 'components/controls/Link';
 import { AppContext } from 'context';
-import Link from 'components/controls/Link';
 import PropTypes from 'prop-types';
 import React, { useCallback, useContext } from 'react';
 
-export default function RouterLink(props = {}) {
+export function RouterLink(props = {}) {
   const { page, params, query, children, ...restProps } = props;
   const { getServiceInstance } = useContext(AppContext);
   const router = getServiceInstance('router');

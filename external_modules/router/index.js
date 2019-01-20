@@ -1,5 +1,5 @@
-import EventTarget from 'event-target';
-import getInstance from 'get-instance';
+import { EventTarget } from 'event-target';
+import { getInstance } from 'get-instance';
 
 export class History extends EventTarget {
   constructor() {
@@ -23,7 +23,7 @@ export class History extends EventTarget {
   }
 }
 
-export default class Router {
+export class Router {
   constructor(routes = []) {
     this._routes = routes;
     this._history = getInstance('history', History);

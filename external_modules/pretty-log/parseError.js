@@ -28,7 +28,7 @@ function normalizeOutput(props) {
   );
 }
 
-export default function parseError(error) {
+export function parseError(error) {
   if (typeof error.stacktrace !== 'undefined' || typeof error['opera#sourceloc'] !== 'undefined') {
     return parseOpera(error);
   } else if (error.stack && error.stack.match(CHROME_IE_STACK_REGEXP)) {

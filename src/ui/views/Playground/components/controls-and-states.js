@@ -1,13 +1,13 @@
+import { Button } from 'components/controls/Button';
+import { Checkbox } from 'components/controls/Checkbox';
+import { Link } from 'components/controls/Link';
+import { RadioButton } from 'components/controls/RadioButton';
+import { SwitchButton } from 'components/controls/SwitchButton';
+import { TextareaField } from 'components/controls/TextareaField';
+import { TextField } from 'components/controls/TextField';
 import React from 'react';
-import Button from 'components/controls/Button';
-import TextField from 'components/controls/TextField';
-import TextareaField from 'components/controls/TextareaField';
-import RadioButton from 'components/controls/RadioButton';
-import Checkbox from 'components/controls/Checkbox';
-import SwitchButton from 'components/controls/SwitchButton';
-import Link from 'components/controls/Link';
 
-export default function ControlsAndStates() {
+export function ControlsAndStates() {
   return (
     <div
       className="m-m-b"

@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 function Color({ name }) {
   return (
@@ -22,7 +22,7 @@ Color.propTypes = {
   name: PropTypes.string,
 };
 
-export default function Colors() {
+export function Colors() {
   return (
     <div className="m-m-b" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr', gridGap: '24px' }}>
       <Color name="neutral-0" />

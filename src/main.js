@@ -1,15 +1,15 @@
 /* global APP_VERSION */
 import 'assets/css/global.css';
-// import 'assets/icons/favicon.ico';
-// import 'assets/icons/favicon.svg';
+import 'assets/icons/favicon.ico';
+import 'assets/icons/favicon.svg';
 import { AppContext } from 'context';
-import FocusObserver from 'focus-observer';
-import getInstance from 'get-instance';
-import log from 'pretty-log';
+import { FocusObserver } from 'focus-observer';
+import { getInstance } from 'get-instance';
+import { log } from 'pretty-log';
 import React, { useContext, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import Router from 'router';
-import App from './app';
+import { Router } from 'router';
+import { App } from './app';
 
 log(`Good luck, have fun ✌️\nv${APP_VERSION}`);
 

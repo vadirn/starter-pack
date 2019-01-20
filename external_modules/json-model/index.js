@@ -1,4 +1,4 @@
-import get from 'lodash.get';
+import get from 'lodash/get';
 
 // get json type of an object
 // string, number, object, array, boolean, null
@@ -112,7 +112,7 @@ export function applyDescription(patch, description, path = [], shouldApplyDefau
   }
 }
 
-export default class JsonModel {
+export class JsonModel {
   constructor(description) {
     this._description = description;
   }

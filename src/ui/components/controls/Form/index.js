@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-export default class Form extends React.Component {
+export class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = props.defaultValues;

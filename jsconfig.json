@@ -9,7 +9,7 @@
       "views/*": ["src/ui/views/*"],
       "controllers/*": ["src/controllers/*"],
       "services/*": ["src/services/*"],
-      "main": ["src/main"]
+      "utils/*": ["src/utils/*"]
     }
   },
   "exclude": ["node_modules", "dist"]

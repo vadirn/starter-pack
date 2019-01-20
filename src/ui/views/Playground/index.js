@@ -1,10 +1,10 @@
 import c from 'classnames';
-import RouterLink from 'components/controls/RouterLink';
-import SwitchButton from 'components/controls/SwitchButton';
-import Toolbar from 'components/layouts/Toolbar';
+import { RouterLink } from 'components/controls/RouterLink';
+import { SwitchButton } from 'components/controls/SwitchButton';
+import { Toolbar } from 'components/layouts/Toolbar';
 import { AppContext } from 'context';
-import React, { Fragment, useCallback, useContext, useState, useEffect } from 'react';
-import components from './components';
+import React, { Fragment, useCallback, useContext, useEffect, useState } from 'react';
+import { components as localComponents } from './components';
 import s from './styles.css';
 
 function Sidebar(props = {}) {
@@ -39,7 +39,7 @@ function Sidebar(props = {}) {
   );
 }
 
-export default function Playground() {
+export function PlaygroundView() {
   const { getServiceInstance } = useContext(AppContext);
   const router = getServiceInstance('router');
 
@@ -97,7 +97,7 @@ export default function Playground() {
   });
 
   let item;
-  for (const group of components) {
+  for (const group of localComponents) {
     for (const _item of group.items) {
       if (_item.key === router.locationData.params.component) {
         item = _item;
@@ -118,7 +118,7 @@ export default function Playground() {
         right={<SwitchButton checked={state.displayGrid} onChange={toggleGrid} left="Grid" />}
       />
       <div className={c(s.sidebar, 'p-u', { none: !state.displaySidebar })}>
-        <Sidebar locationData={router.locationData} components={components} />
+        <Sidebar locationData={router.locationData} components={localComponents} />
       </div>
       <div className={c(s.content, 'p-u')}>
         <div className={c('bg-grid absolute top-0 left-0 right-0 bottom-0 z999', { none: !state.displayGrid })} />

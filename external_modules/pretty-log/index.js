@@ -1,7 +1,7 @@
 /* global USE_LOG */
-import parseError from './parseError';
+import { parseError } from './parseError';
 
-export default function log(_message, _label) {
+export function log(_message, _label) {
   const timestamp = new Date().getTime().toString(10);
   const readableTimestamp = `${timestamp.slice(0, 6)}_${timestamp.slice(6, 9)}_${timestamp.slice(9)}`;
   let logString = readableTimestamp;

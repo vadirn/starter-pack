@@ -1,10 +1,10 @@
 import c from 'classnames';
+import { Icon, ICONS } from 'components/other/Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
 import s from './styles.css';
-import Icon, { ICONS } from 'components/other/Icon';
 
-export function Checkbox({ value: _value, label, className, ...props }) {
+export function PureCheckbox({ value: _value, label, className, ...props }) {
   let value = '';
   if (_value) {
     value = _value;
@@ -24,7 +24,7 @@ export function Checkbox({ value: _value, label, className, ...props }) {
   );
 }
 
-Checkbox.propTypes = {
+PureCheckbox.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
@@ -32,4 +32,4 @@ Checkbox.propTypes = {
   className: PropTypes.string,
 };
 
-export default React.memo(Checkbox);
+export const Checkbox = React.memo(PureCheckbox);

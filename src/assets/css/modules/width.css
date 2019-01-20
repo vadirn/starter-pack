@@ -25,3 +25,11 @@
 :global .w-xxl {
   width: var(--xxl);
 }
+
+:global .w-100 {
+  width: 100%;
+}
+
+:global .minvw-100 {
+  min-width: 100vw;
+}

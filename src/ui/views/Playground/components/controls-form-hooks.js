@@ -1,9 +1,9 @@
-import React from 'react';
+import { Button } from 'components/controls/Button';
+import { TextField } from 'components/controls/TextField';
 import { useFormInput } from 'form-hooks';
-import TextField from 'components/controls/TextField';
-import Button from 'components/controls/Button';
+import React from 'react';
 
-export default function FormHooks() {
+export function FormHooks() {
   const text = useFormInput('');
 
   function handleSubmit(evt) {

@@ -58,7 +58,7 @@ function bytesToUuid(buf, offset) {
   );
 }
 
-export default function uuid(options = {}, buf, offset) {
+export function uuid(options = {}, buf, offset) {
   let i = (buf && offset) || 0;
 
   let rnds = options.random || (options.rng || rng)();

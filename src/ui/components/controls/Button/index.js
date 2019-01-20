@@ -1,10 +1,10 @@
 import c from 'classnames';
-import Toolbar from 'components/layouts/Toolbar';
+import { Toolbar } from 'components/layouts/Toolbar';
 import PropTypes from 'prop-types';
 import React from 'react';
 import s from './styles.css';
 
-export function Button(props = {}) {
+export function PureButton(props = {}) {
   const { children, className, left, right, look = 'default', ...etc } = props;
   return (
     <button className={c('relative p-u-l p-u-r p-u-b p-u-t', className, s[look])} {...etc}>
@@ -16,7 +16,7 @@ export function Button(props = {}) {
   );
 }
 
-Button.propTypes = {
+PureButton.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   left: PropTypes.node,
@@ -24,4 +24,4 @@ Button.propTypes = {
   look: PropTypes.string,
 };
 
-export default React.memo(Button);
+export const Button = React.memo(PureButton);

@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import c from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 import s from './styles.css';
 
-export function Link({ onClick, href, children, className, rel, download }) {
+export function PureLink({ onClick, href, children, className, rel, download }) {
   return (
     <a className={c(s.container, className)} href={href} onClick={onClick} rel={rel} download={download}>
       {children}
@@ -11,7 +11,7 @@ export function Link({ onClick, href, children, className, rel, download }) {
   );
 }
 
-Link.propTypes = {
+PureLink.propTypes = {
   onClick: PropTypes.func,
   href: PropTypes.string.isRequired,
   children: PropTypes.node,
@@ -20,4 +20,4 @@ Link.propTypes = {
   download: PropTypes.string,
 };
 
-export default React.memo(Link);
+export const Link = React.memo(PureLink);

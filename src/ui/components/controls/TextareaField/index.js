@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import c from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 import s from './styles.css';
 
-export function TextareaField({ value: val, className, ...props }) {
+export function PureTextareaField({ value: val, className, ...props }) {
   let value = '';
   if (val) {
     value = val;
@@ -16,10 +16,11 @@ export function TextareaField({ value: val, className, ...props }) {
   );
 }
 
-TextareaField.propTypes = {
+PureTextareaField.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
-export default React.memo(TextareaField);
+export const TextareaField = React.memo(PureTextareaField);

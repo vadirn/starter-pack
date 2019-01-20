@@ -1,8 +1,8 @@
 import c from 'classnames';
-import React from 'react';
-import s from './styles.css';
 import { getJsonType } from 'json-model';
-import { paths, dimensions } from './icons.js';
+import React from 'react';
+import { dimensions, paths } from './icons.js';
+import s from './styles.css';
 
 function getValueAtPath(source, path) {
   const [key, ...nextPath] = path;
@@ -16,7 +16,7 @@ function getValueAtPath(source, path) {
   return;
 }
 
-export default class Icon extends React.PureComponent {
+export class Icon extends React.PureComponent {
   render() {
     const { path, size = 'm', className, stroke = 0, ...props } = this.props;
     let fillColor = 'transparent';

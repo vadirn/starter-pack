@@ -1,11 +1,11 @@
-import ControlsAndStates from './controls-and-states';
-import VariationsAndSpacing from './text-variations-and-spacing';
-import Colors from './colors';
-import Form from './controls-form';
-import FormHooks from './controls-form-hooks';
-import Toolbar from './layouts-toolbar';
+import { Colors } from './colors';
+import { ControlsAndStates } from './controls-and-states';
+import { PlaygroundForm } from './controls-form';
+import { FormHooks } from './controls-form-hooks';
+import { LayoutsToolbar } from './layouts-toolbar';
+import { VariationsAndSpacing } from './text-variations-and-spacing';
 
-export default [
+export const components = [
   {
     key: 'colors',
     label: 'Colors',
@@ -14,7 +14,7 @@ export default [
   {
     key: 'layouts',
     label: 'Layouts',
-    items: [{ key: 'toolbar', label: 'Toolbar', component: Toolbar }],
+    items: [{ key: 'toolbar', label: 'Toolbar', component: LayoutsToolbar }],
   },
   {
     key: 'text',
@@ -30,7 +30,7 @@ export default [
         label: 'Controls and states',
         component: ControlsAndStates,
       },
-      { key: 'form', label: 'Form', component: Form },
+      { key: 'form', label: 'Form', component: PlaygroundForm },
       { key: 'form-hooks', label: 'Form With Hooks', component: FormHooks },
     ],
   },

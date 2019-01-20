@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import c from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 import s from './styles.css';
 
-export default class Errors extends React.PureComponent {
+export class Errors extends React.PureComponent {
   render() {
     const { value, className } = this.props;
     if (value === undefined || (value && value.length === 0)) {

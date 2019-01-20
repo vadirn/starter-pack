@@ -1,6 +1,6 @@
 const TAB = 9;
 
-export default class FocusObserver {
+export class FocusObserver {
   constructor(className = 'with-focus-ring') {
     this.className = className;
     this.onKeyDown = this.onKeyDown.bind(this);

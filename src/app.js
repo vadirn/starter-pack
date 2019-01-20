@@ -1,12 +1,12 @@
 import { AppContext } from 'context';
-import log from 'pretty-log';
+import once from 'lodash/once';
+import { log } from 'pretty-log';
 import PropTypes from 'prop-types';
 import React from 'react';
-import controllerModules from './controllers';
-import serviceModules from './services';
 import { StateMutationAbortError } from 'utils/errors';
-import once from 'lodash/once';
-import resetPage from './utils/resetPage';
+import { controllers as controllerModules } from './controllers';
+import { services as serviceModules } from './services';
+import { resetPage } from './utils/resetPage';
 
 function notifyPageReady() {
   document.dispatchEvent(new CustomEvent('app:ready'));
@@ -15,7 +15,7 @@ function notifyPageReady() {
 // can put validation here
 function ensureValidAppState() {}
 
-export default class App extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props);
     const { initialServices = {}, initialController = null } = props;

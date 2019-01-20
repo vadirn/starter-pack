@@ -1,4 +1,4 @@
-import JsonModel from '../index.js';
+import { JsonModel } from '../index.js';
 
 describe('object-state-model', () => {
   test('skips default values for keys that already exist in state', () => {

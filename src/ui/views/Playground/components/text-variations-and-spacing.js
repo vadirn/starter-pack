@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function VariationsAndSpacing() {
+export function VariationsAndSpacing() {
   return (
     <div className="m-m-b" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '40px 24px' }}>
       <div>

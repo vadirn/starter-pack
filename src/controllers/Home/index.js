@@ -1,14 +1,17 @@
-import View from 'views/Home';
+import { meta } from 'assets/meta';
+import { HomeView } from 'views/Home';
 
 export default class {
   constructor(options = {}) {
     Object.assign(this, options);
   }
   get meta() {
-    return {};
+    return {
+      title: `Home - ${meta.title}`,
+    };
   }
   get View() {
-    return View;
+    return HomeView;
   }
   dispose() {}
 }

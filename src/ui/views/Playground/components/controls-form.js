@@ -1,12 +1,12 @@
-import React from 'react';
-import Form from 'components/controls/Form';
-import TextField from 'components/controls/TextField';
-import TextareaField from 'components/controls/TextareaField';
-import RadioButton from 'components/controls/RadioButton';
-import Checkbox from 'components/controls/Checkbox';
-import Button from 'components/controls/Button';
-import Errors from 'components/lists/Errors';
 import c from 'classnames';
+import { Button } from 'components/controls/Button';
+import { Checkbox } from 'components/controls/Checkbox';
+import { Form } from 'components/controls/Form';
+import { RadioButton } from 'components/controls/RadioButton';
+import { TextareaField } from 'components/controls/TextareaField';
+import { TextField } from 'components/controls/TextField';
+import { Errors } from 'components/lists/Errors';
+import React from 'react';
 
 class ExampleForm extends Form {
   constructor(props) {
@@ -89,7 +89,7 @@ class ExampleForm extends Form {
   }
 }
 
-export default function PlaygroundItem() {
+export function PlaygroundForm() {
   return (
     <ExampleForm
       defaultValues={{ text: '', textarea: '', radio: '', 'checkbox[one]': false, 'checkbox[two]': true }}

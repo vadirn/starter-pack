@@ -3,7 +3,7 @@ import c from 'classnames';
 import PropTypes from 'prop-types';
 import s from './styles.css';
 
-export default function Toolbar({ className, left, middle, right }) {
+export function Toolbar({ className, left, middle, right }) {
   return (
     <div className={c('flex flex-ycenter', s.container, className)}>
       <div className="flex flex-grow-1">{left}</div>

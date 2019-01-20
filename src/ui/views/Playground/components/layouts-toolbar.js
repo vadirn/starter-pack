@@ -1,7 +1,7 @@
+import { Toolbar } from 'components/layouts/Toolbar';
 import React from 'react';
-import Toolbar from 'components/layouts/Toolbar';
 
-export default function LayoutsToolbar() {
+export function LayoutsToolbar() {
   return (
     <div className="m-m-b">
       <div className="text-caption color-neutral-4">Container 50% width</div>

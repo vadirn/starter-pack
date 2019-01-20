@@ -1,6 +1,6 @@
-import log from 'pretty-log';
+import { log } from 'pretty-log';
 
-export default function resetPage(meta = {}) {
+export function resetPage(meta = {}) {
   const { title = window.location.hostname, description, thumbnail, url } = meta;
 
   window.scrollTo(0, 0);

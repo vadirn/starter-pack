@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import c from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 import s from './styles.css';
 
-export function SwitchButton({ left, right, className, ...props }) {
+export function PureSwitchButton({ left, right, className, ...props }) {
   return (
     <label className={c('block w-content relative', className, s.container)}>
       <input className={s.checkbox} type="checkbox" value="" {...props} />
@@ -25,10 +25,11 @@ export function SwitchButton({ left, right, className, ...props }) {
   );
 }
 
-SwitchButton.propTypes = {
+PureSwitchButton.propTypes = {
   left: PropTypes.node,
   right: PropTypes.node,
   onChange: PropTypes.func,
+  className: PropTypes.string,
 };
 
-export default React.memo(SwitchButton);
+export const SwitchButton = React.memo(PureSwitchButton);

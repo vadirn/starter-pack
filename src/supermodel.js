@@ -1,7 +1,7 @@
 // Global state description
 import JSONModel from 'json-model';
 
-export default new JSONModel({
+export const supermodel = new JSONModel({
   __type: 'object',
   __value: {
     isLoading: { __type: 'boolean', __value: false },

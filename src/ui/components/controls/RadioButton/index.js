@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import c from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 import s from './styles.css';
 
-export function RadioButton({ value: _value, label, className, ...props }) {
+export function PureRadioButton({ value: _value, label, className, ...props }) {
   let value = '';
   if (_value) {
     value = _value;
@@ -22,11 +22,12 @@ export function RadioButton({ value: _value, label, className, ...props }) {
   );
 }
 
-RadioButton.propTypes = {
+PureRadioButton.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
-export default React.memo(RadioButton);
+export const RadioButton = React.memo(PureRadioButton);

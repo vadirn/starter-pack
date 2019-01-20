@@ -1,4 +1,4 @@
-export default class EventTarget {
+export class EventTarget {
   constructor() {
     this._eventListeners = new Map();
   }
