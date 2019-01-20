@@ -1,6 +1,6 @@
 {
   "name": "starter-pack",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "index.js",
   "license": "MIT",
   "description": "React app build configuration and design system starter",
