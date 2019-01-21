@@ -9,13 +9,13 @@ select {
   height: auto;
   border: 0;
   border-radius: inherit;
-  background-color: transparent;
+  background: transparent;
   color: inherit;
   text-decoration: none;
   font: inherit;
   font-weight: inherit;
   line-height: inherit;
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 input,

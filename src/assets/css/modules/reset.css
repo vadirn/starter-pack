@@ -9,3 +9,8 @@ body {
   font-family: var(--ff-body);
   line-height: var(--m);
 }
+
+img {
+  object-fit: cover;
+  max-width: 100%;
+}

@@ -69,6 +69,10 @@ ol {
   letter-spacing: var(--px);
 }
 
+:global .text-0 {
+  font-size: 0;
+}
+
 :global .lh-xl {
   line-height: var(--xl);
 }
@@ -161,6 +165,15 @@ ol {
 }
 :global .text-nowrap {
   white-space: nowrap;
+}
+
+:global .text-break {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 :global .text-truncate {

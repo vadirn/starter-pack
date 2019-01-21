@@ -38,6 +38,14 @@
   overflow: hidden;
 }
 
+:global .overflow-yauto {
+  overflow-y: auto;
+}
+
+:global .overflow-xauto {
+  overflow-x: auto;
+}
+
 :global .clear-both {
   clear: both;
 }
