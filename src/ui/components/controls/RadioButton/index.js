@@ -11,13 +11,13 @@ export function PureRadioButton({ value: _value, label, className, ...props }) {
   return (
     <label className={c('block w-content relative', className, s.container)}>
       <input className={s.radio} type="radio" value={value} {...props} />
-      <div className={c('relative z1', s.label)}>
+      <div className={c('relative z-1', s.label)}>
         <div className={c('inline-block w-m h-m relative m-u-r', s.icon)}>
-          <div className={c('absolute top-0 left-0 right-0 bottom-0', s['icon-backdrop'])} />
+          <div className={c('absolute-fill', s['icon-backdrop'])} />
         </div>
         {label}
       </div>
-      <div className={c('absolute top-0 left-0 right-0 bottom-0', s.backdrop)} />
+      <div className={c('absolute-fill', s.backdrop)} />
     </label>
   );
 }

@@ -10,8 +10,8 @@ export function PureTextField({ value: val, className, ...props }) {
   }
   return (
     <div className={c('relative', className)}>
-      <input className="relative z1 p-u" type="text" value={value} {...props} />
-      <div className={c('absolute top-0 left-0 right-0 bottom-0', s.backdrop)} />
+      <input className="relative z-1 p-u" type="text" value={value} {...props} />
+      <div className={c('absolute-fill', s.backdrop)} />
     </div>
   );
 }

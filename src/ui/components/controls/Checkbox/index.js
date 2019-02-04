@@ -12,14 +12,14 @@ export function PureCheckbox({ value: _value, label, className, ...props }) {
   return (
     <label className={c('block w-content relative', className, s.container)}>
       <input className={s.checkbox} type="checkbox" value={value} {...props} />
-      <div className={c('relative z1', s.label)}>
+      <div className={c('relative z-1', s.label)}>
         <div className={c('inline-block relative m-u-r', s.icon)}>
-          <div className={c('absolute top-0 left-0 right-0 bottom-0', s['icon-backdrop'])} />
+          <div className={c('absolute-fill', s['icon-backdrop'])} />
           <Icon className="relative" path={ICONS.M.CHECKMARK} stroke={2} />
         </div>
         {label}
       </div>
-      <div className={c('absolute top-0 left-0 right-0 bottom-0', s.backdrop)} />
+      <div className={c('absolute-fill', s.backdrop)} />
     </label>
   );
 }

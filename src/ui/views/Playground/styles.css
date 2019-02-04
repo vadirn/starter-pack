@@ -1,26 +1,22 @@
 .container {
-  display: grid;
-  width: 100vw;
-  height: 100vh;
-  grid-template-rows: auto 1fr;
-  grid-template-columns: auto 1fr;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .heading {
-  grid-row: 1 / span 1;
-  grid-column: 1 / -1;
+  width: 100%;
+  flex: none;
   border-bottom: 1px solid var(--color-neutral-2);
 }
 
 .sidebar {
-  width: 256px;
-  background-color: var(--color-neutral-1);
-  grid-row: 2 / span 1;
-  grid-column: 1 / span 1;
+  flex-basis: 256px;
+  flex-grow: 1;
 }
 
 .content {
-  position: relative;
-  grid-row: 2 / span 1;
-  grid-column: 2 / -1;
+  min-width: 50%;
+  flex-basis: 0;
+  flex-grow: 999;
+  overflow: hidden;
 }

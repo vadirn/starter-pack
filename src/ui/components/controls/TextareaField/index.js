@@ -10,8 +10,8 @@ export function PureTextareaField({ value: val, className, ...props }) {
   }
   return (
     <div className={c('relative', className)}>
-      <textarea rows="3" className={c('relative z1 p-u', s.textarea)} value={value} {...props} />
-      <div className={c('absolute top-0 left-0 right-0 bottom-0', s.backdrop)} />
+      <textarea rows="3" className={c('relative z-1 p-u', s.textarea)} value={value} {...props} />
+      <div className={c('absolute-fill', s.backdrop)} />
     </div>
   );
 }

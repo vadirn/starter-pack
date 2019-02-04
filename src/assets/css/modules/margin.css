@@ -1,3 +1,10 @@
+:global .m-u {
+  margin: var(--u);
+}
+:global .nega-m-u-x {
+  margin-left: calc(-1 * var(--u));
+  margin-right: calc(-1 * var(--u));
+}
 :global .m-u-b {
   margin-bottom: var(--u);
 }
@@ -11,6 +18,9 @@
   margin-left: var(--u);
 }
 
+:global .m-s {
+  margin: var(--s);
+}
 :global .m-s-b {
   margin-bottom: var(--s);
 }
@@ -24,6 +34,9 @@
   margin-left: var(--s);
 }
 
+:global .m-m {
+  margin: var(--m);
+}
 :global .m-m-b {
   margin-bottom: var(--m);
 }
@@ -37,6 +50,9 @@
   margin-left: var(--m);
 }
 
+:global .m-l {
+  margin: var(--l);
+}
 :global .m-l-b {
   margin-bottom: var(--l);
 }
@@ -50,6 +66,9 @@
   margin-left: var(--l);
 }
 
+:global .m-xl {
+  margin: var(--xl);
+}
 :global .m-xl-b {
   margin-bottom: var(--xl);
 }

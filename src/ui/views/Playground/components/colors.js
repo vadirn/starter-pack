@@ -3,13 +3,9 @@ import React from 'react';
 
 function Color({ name }) {
   return (
-    <div className="relative">
-      <div className="absolute top-0 left-0 right-0 bottom-0 b" />
-      <div
-        className="relative bg-neutral-5 color-neutral-0 text-caption p-u-l p-u-r text-truncate"
-        style={{ minWidth: '120px' }}>
-        {name}
-      </div>
+    <div className="relative m-u" style={{ flexBasis: '128px' }}>
+      <div className="absolute-fill b" />
+      <div className="relative bg-neutral-5 color-neutral-0 text-caption p-u-l p-u-r text-truncate">{name}</div>
       <div style={{ display: 'grid' }}>
         <svg viewBox="0 0 1 1" style={{ gridArea: '1 / 1 / 2 / 2' }} />
         <div className={`bg-${name}`} style={{ gridArea: '1 / 1 / 2 / 2' }} />
@@ -24,7 +20,7 @@ Color.propTypes = {
 
 export function Colors() {
   return (
-    <div className="m-m-b" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr', gridGap: '24px' }}>
+    <div className="m-m-b flex flex-wrap flext-start nega-m-u-x">
       <Color name="neutral-0" />
       <Color name="neutral-1" />
       <Color name="neutral-2" />
