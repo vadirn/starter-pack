@@ -1,12 +1,12 @@
 .container {
   color: inherit;
   text-decoration: none;
-  background-image: linear-gradient(to top, color-mod(var(--color-neutral-5) alpha(30%)) 1px, transparent 1px);
+  background-image: linear-gradient(to top, currentColor 1px, transparent 1px);
 }
 
 .container:hover,
 .container:global(.--hover) {
-  background-image: linear-gradient(to top, color-mod(var(--color-neutral-5) alpha(100%)) 1px, transparent 1px);
+  background-image: linear-gradient(to top, currentColor 2px, transparent 2px);
 }
 
 .container:focus {
@@ -16,5 +16,5 @@
 :global(.with-focus-ring) .container:focus,
 .container:global(.--focus) {
   background-color: var(--color-neutral-2);
-  background-image: linear-gradient(to top, color-mod(var(--color-neutral-5) alpha(100%)) 1px, transparent 1px);
+  background-image: linear-gradient(to top, currentColor 2px, transparent 2px);
 }

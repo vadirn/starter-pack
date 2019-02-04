@@ -76,27 +76,14 @@ ol {
 :global .lh-xl {
   line-height: var(--xl);
 }
-
 :global .lh-l {
   line-height: var(--l);
 }
-
 :global .lh-m {
   line-height: var(--lh-m);
 }
-
 :global .lh-s {
   line-height: var(--s);
-}
-
-:global .list-dash {
-  margin-left: 3ch;
-}
-
-:global .list-dash li:before {
-  content: '\2014';
-  position: absolute;
-  margin-left: -3ch;
 }
 
 :global .text-light {
@@ -186,17 +173,28 @@ ol {
 :global .text-valign-top {
   vertical-align: top;
 }
-
 :global .text-valign-middle {
   vertical-align: middle;
 }
-
 :global .text-valign-bottom {
   vertical-align: bottom;
+}
+
+:global .text-numeric {
+  font-variant-numeric: tabular-nums;
 }
 
 :global .text-reset {
   letter-spacing: initial;
   text-transform: initial;
   font-weight: initial;
+}
+
+:global .list-dash {
+  margin-left: 3ch;
+}
+:global .list-dash li:before {
+  content: '\2014';
+  position: absolute;
+  margin-left: -3ch;
 }

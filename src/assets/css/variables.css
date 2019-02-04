@@ -12,7 +12,7 @@
     Responsiveness achieved using this formula: 
     const calc = ([minFs, maxFs], breakPoint) => `calc(${minFs / 16}rem + ${(maxFs - minFs) * 100 / breakPoint}vw)`;
 
-    Sizes less than 16 were not touched
+    Sizes less than 16 are not modified
   */
   --px: 0.0625rem; /* 1 */
 
@@ -36,24 +36,22 @@
 
   /* Colors */
   /* Neutrals: https://www.colorbox.io/#steps=6#hue_start=359#hue_end=359#hue_curve=easeInOutQuad#sat_start=0#sat_end=0#sat_curve=easeInOutQuad#sat_rate=130#lum_start=100#lum_end=16#lum_curve=easeOutQuad */
-  --color-neutral-0: #ffffff;
-  --color-neutral-1: #f5f5f5;
-  --color-neutral-2: #dfdfdf;
-  --color-neutral-3: #b7b7b7;
-  --color-neutral-4: #787878;
-  --color-neutral-5: #292929;
+  --color-neutral-0: rgba(255, 255, 255, 1);
+  --color-neutral-1: rgba(245, 245, 245, 1);
+  --color-neutral-2: rgba(223, 223, 223, 1);
+  --color-neutral-3: rgba(183, 183, 183, 1);
+  --color-neutral-4: rgba(120, 120, 120, 1);
+  --color-neutral-5: rgba(41, 41, 41, 1);
 
   /* Accent-1: https://www.colorbox.io/#steps=3#hue_start=4#hue_end=4#hue_curve=easeOutQuad#sat_start=50#sat_end=100#sat_curve=easeOutQuad#sat_rate=130#lum_start=100#lum_end=80#lum_curve=easeOutQuad */
-  --color-accent-1-light: #ff6459;
-  --color-accent-1: #f31000;
-  --color-accent-1-dark: #cc0e00;
-
-  /* Shadows */
-  --shadow-1: 0 2px 4px 1px rgba(0, 0, 0, 0.4);
+  --color-accent-1-light: rgba(255, 100, 89, 1);
+  --color-accent-1: rgba(243, 16, 0, 1);
+  --color-accent-1-op-20: rgba(243, 16, 0, 0.2);
+  --color-accent-1-dark: rgba(204, 14, 0, 1);
 
   /* Border radii */
   --radius-pill: 9999em;
-  --radius-input: 0;
+  --radius-circle: 50%;
 
   /* break-points */
   --bp-1: 320px;

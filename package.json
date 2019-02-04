@@ -49,7 +49,7 @@
     "minimist": "^1.2.0",
     "normalize.css": "^8.0.1",
     "postcss-loader": "^3.0.0",
-    "postcss-preset-env": "^6.4.0",
+    "postcss-preset-env": "^6.5.0",
     "postcss-smart-import": "^0.7.6",
     "prop-types": "^15.6.2",
     "range-parser": "^1.2.0",

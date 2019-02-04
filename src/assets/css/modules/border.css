@@ -22,10 +22,6 @@
   border-color: transparent;
 }
 
-:global .r-m {
-  border-radius: var(--radius-input);
-}
-
 :global .r-inherit {
   border-radius: inherit;
 }
