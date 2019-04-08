@@ -1,0 +1,14 @@
+language: node_js
+
+node_js:
+  - "10"
+  - "11"
+env:
+  - NODE_ENV='test'
+
+install:
+  - yarn install
+  - node build
+
+script:
+  - yarn test
