@@ -17,6 +17,7 @@ module.exports = function babelConfig(api) {
           },
           modules,
           loose: true,
+          corejs: 3,
         },
       ],
       '@babel/preset-react',
