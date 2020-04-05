@@ -47,7 +47,7 @@
     "lint-staged": "^8.1.5",
     "lodash.get": "^4.4.2",
     "lodash.merge": "^4.6.1",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "normalize.css": "^8.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.6.0",
