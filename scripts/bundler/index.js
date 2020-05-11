@@ -5,6 +5,7 @@ const WebpackDevServer = require('webpack-dev-server');
 const { BUILD_CONFIG, resolve, watch } = require('./env');
 const { infoFmt, errorFmt, warningFmt } = require('./utils');
 const { watchRoutes } = require('./watch-routes');
+const { createCss } = require('./create-css');
 const webpackConfig = require('../../webpack.config');
 
 console.log(infoFmt(`Clearing ${chalk.bold('__app__')}`));
@@ -16,6 +17,7 @@ watchRoutes(
   resolve('src', 'node_modules', '@app'),
   resolve('src', 'routes')
 );
+createCss(resolve('src', 'node_modules', '@app'));
 
 const compiler = webpack(webpackConfig);
 const webpackCallback = (err, stats) => {

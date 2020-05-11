@@ -1,0 +1,10 @@
+@import "normalize.css";
+@import "../node_modules/@app/utils.css";
+
+body {
+  height: 100%;
+  color: var(--color-neutral-2);
+  font-size: var(--font-size-1);
+  font-family: var(--ff-body);
+  line-height: var(--size-5);
+}
