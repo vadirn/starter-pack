@@ -1,0 +1,9 @@
+/__app__
+
+/node_modules
+!/src/node_modules
+/src/node_modules/@app
+
+.DS_Store
+
+.idea

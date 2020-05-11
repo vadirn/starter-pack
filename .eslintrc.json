@@ -1,0 +1,22 @@
+{
+  "plugins": ["prettier", "babel", "svelte3"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.svelte"],
+      "processor": "svelte3/svelte3"
+    }
+  ],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "rules": {}
+}
